@@ -9,11 +9,9 @@ highlighter: rouge
 # so be sure to set them if your theme uses them.
 #
 title : open the cloud
-<<<<<<< HEAD
 tagline: little bit more about cloud
 =======
 tagline: opensource and cloud, what could be better?
->>>>>>> 2a0827703d9df2d729452edd5dffd9716d2903ab
 author :
   name : Samuel Tauil
   email : samueltauil@gmail.com
