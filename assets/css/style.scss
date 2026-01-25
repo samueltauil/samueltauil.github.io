@@ -1,0 +1,736 @@
+---
+---
+
+// GitHub Copilot Color Palette
+$bg-primary: #0d1117;
+$bg-secondary: #161b22;
+$bg-tertiary: #21262d;
+$bg-card: #1c2128;
+
+$text-primary: #f0f6fc;
+$text-secondary: #8b949e;
+$text-muted: #6e7681;
+
+$accent-purple: #a371f7;
+$accent-blue: #58a6ff;
+$accent-green: #3fb950;
+$accent-gradient: linear-gradient(135deg, #a371f7 0%, #58a6ff 50%, #3fb950 100%);
+$copilot-gradient: linear-gradient(135deg, #6e40c9 0%, #238636 100%);
+
+$border-color: #30363d;
+$border-highlight: #484f58;
+
+$link-color: #58a6ff;
+$link-hover: #a371f7;
+
+// Base styles
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+  background: $bg-primary;
+  color: $text-primary;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  color: $text-primary;
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: 2.5rem;
+  background: $accent-gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h2 {
+  font-size: 1.75rem;
+  border-bottom: 1px solid $border-color;
+  padding-bottom: 0.3em;
+}
+
+h3 {
+  font-size: 1.25rem;
+  color: $text-secondary;
+}
+
+p {
+  margin-bottom: 1em;
+  color: $text-secondary;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $link-hover;
+    text-decoration: underline;
+  }
+}
+
+strong {
+  color: $text-primary;
+}
+
+// Header
+.site-header {
+  background: $bg-secondary;
+  border-bottom: 1px solid $border-color;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  background: rgba(22, 27, 34, 0.95);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: $accent-gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    opacity: 0.9;
+  }
+}
+
+.site-nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+
+  a {
+    color: $text-secondary;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $text-primary;
+      text-decoration: none;
+    }
+
+    &.active {
+      color: $text-primary;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: $accent-gradient;
+        border-radius: 2px;
+      }
+    }
+  }
+}
+
+// Mobile menu
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: $text-primary;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: $bg-secondary;
+    flex-direction: column;
+    padding: 1rem 2rem;
+    gap: 0.5rem;
+    border-bottom: 1px solid $border-color;
+
+    &.active {
+      display: flex;
+    }
+
+    a {
+      padding: 0.75rem 0;
+    }
+  }
+}
+
+// Main content
+.page-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  min-height: calc(100vh - 200px);
+}
+
+// Hero section
+.hero {
+  text-align: center;
+  padding: 4rem 0;
+  margin-bottom: 3rem;
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .tagline {
+    font-size: 1.25rem;
+    color: $text-secondary;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+// Badges
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: $bg-tertiary;
+  border: 1px solid $border-color;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  color: $text-secondary;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: $accent-purple;
+    color: $text-primary;
+    text-decoration: none;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+// Cards
+.card {
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: $border-highlight;
+    transform: translateY(-2px);
+  }
+
+  h3 {
+    margin-top: 0;
+    color: $text-primary;
+
+    a {
+      color: inherit;
+
+      &:hover {
+        color: $link-color;
+      }
+    }
+  }
+
+  .card-meta {
+    font-size: 0.875rem;
+    color: $text-muted;
+    margin-bottom: 0.5rem;
+  }
+}
+
+// Post list
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin-bottom: 0;
+  }
+}
+
+.post-link {
+  color: $text-primary;
+  font-size: 1.25rem;
+  font-weight: 600;
+
+  &:hover {
+    color: $link-color;
+  }
+}
+
+.post-meta {
+  font-size: 0.875rem;
+  color: $text-muted;
+}
+
+// Sections
+.section {
+  margin-bottom: 3rem;
+
+  &-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+
+    h2 {
+      margin: 0;
+      border: none;
+      padding: 0;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      color: $accent-purple;
+    }
+  }
+}
+
+// Skills grid
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.skill-card {
+  background: $bg-tertiary;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+
+  h4 {
+    margin: 0 0 0.5rem;
+    font-size: 0.875rem;
+    color: $accent-purple;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  p {
+    margin: 0;
+    color: $text-secondary;
+    font-size: 0.9375rem;
+  }
+}
+
+// Timeline (for experience)
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: $border-color;
+  }
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 2rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 0.5rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: $accent-purple;
+    border: 2px solid $bg-primary;
+    transform: translateX(-5px);
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  h3 {
+    margin-top: 0;
+    color: $text-primary;
+  }
+
+  .company {
+    color: $accent-blue;
+    font-weight: 500;
+  }
+
+  .period {
+    color: $text-muted;
+    font-size: 0.875rem;
+  }
+
+  ul {
+    margin: 0.75rem 0 0;
+    padding-left: 1.25rem;
+
+    li {
+      color: $text-secondary;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+// Certifications
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.cert-card {
+  background: $bg-tertiary;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+
+  .cert-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: $copilot-gradient;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: white;
+    }
+  }
+
+  .cert-info {
+    h4 {
+      margin: 0 0 0.25rem;
+      font-size: 0.9375rem;
+      color: $text-primary;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.8125rem;
+      color: $text-muted;
+    }
+  }
+}
+
+// Code blocks
+pre, code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.875rem;
+}
+
+code {
+  background: $bg-tertiary;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  color: $accent-purple;
+}
+
+pre {
+  background: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+
+  code {
+    background: none;
+    padding: 0;
+    color: $text-primary;
+  }
+}
+
+// Lists
+ul, ol {
+  padding-left: 1.5rem;
+
+  li {
+    margin-bottom: 0.5rem;
+    color: $text-secondary;
+  }
+}
+
+// Blockquotes
+blockquote {
+  border-left: 4px solid $accent-purple;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  background: $bg-tertiary;
+  border-radius: 0 8px 8px 0;
+
+  p {
+    margin: 0;
+    font-style: italic;
+  }
+}
+
+// Tables
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+
+  th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid $border-color;
+  }
+
+  th {
+    color: $text-primary;
+    font-weight: 600;
+    background: $bg-tertiary;
+  }
+
+  td {
+    color: $text-secondary;
+  }
+
+  tr:hover td {
+    background: $bg-secondary;
+  }
+}
+
+// Horizontal rule
+hr {
+  border: none;
+  height: 1px;
+  background: $border-color;
+  margin: 2rem 0;
+}
+
+// Footer
+.site-footer {
+  background: $bg-secondary;
+  border-top: 1px solid $border-color;
+  padding: 2rem;
+  text-align: center;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+
+  a {
+    color: $text-muted;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $accent-purple;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.footer-text {
+  color: $text-muted;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+// Copilot sparkle effect
+.copilot-sparkle {
+  position: relative;
+  display: inline-block;
+
+  &::before {
+    content: '✨';
+    position: absolute;
+    top: -0.5rem;
+    right: -1rem;
+    font-size: 0.75rem;
+    animation: sparkle 2s ease-in-out infinite;
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+// Gradient text utility
+.gradient-text {
+  background: $accent-gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Glowing border effect
+.glow {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: $accent-gradient;
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+// Page transitions
+.page-content {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Post page styles
+.post-header {
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+
+  .post-meta {
+    margin-top: 0.5rem;
+  }
+}
+
+.post-content {
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1rem 0;
+  }
+}
+
+// Responsive images
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Selection
+::selection {
+  background: rgba(163, 113, 247, 0.3);
+  color: $text-primary;
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-primary;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $border-color;
+  border-radius: 4px;
+
+  &:hover {
+    background: $border-highlight;
+  }
+}
+
+// Print styles
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .site-header,
+  .site-footer {
+    display: none;
+  }
+}

@@ -2,8 +2,8 @@
 title: Samuel Tauil
 email: samueltauil@gmail.com
 description: >-
-  Personal site and blog by Samuel Tauil - Cloud architecture, 
-  containers, Kubernetes, and open source technologies.
+  Senior Solution Engineer at Microsoft focused on Developer Experience — 
+  GitHub Copilot, VS Code, Codespaces, and cloud-native technologies.
 
 baseurl: ""
 url: "https://samueltauil.github.io"
@@ -15,18 +15,9 @@ linkedin_username: samueltauil
 
 # Build settings
 markdown: kramdown
-theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-
-# Minima theme settings
-minima:
-  skin: auto
-  social_links:
-    - { platform: github, user_url: "https://github.com/samueltauil" }
-    - { platform: twitter, user_url: "https://twitter.com/samueltauil" }
-    - { platform: linkedin, user_url: "https://linkedin.com/in/samueltauil" }
 
 # SEO
 author:
@@ -40,3 +31,5 @@ exclude:
   - README.md
   - .gitignore
   - .github/
+  - node_modules/
+  - vendor/

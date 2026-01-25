@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  
+  <!-- SEO -->
+  {% seo %}
+  
+  <!-- Feed -->
+  {% feed_meta %}
+</head>
+<body>
+  {% include header.html %}
+  
+  <main class="page-content" aria-label="Content">
+    {{ content }}
+  </main>
+  
+  {% include footer.html %}
+  
+  <script>
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('.site-nav');
+      
+      if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+          nav.classList.toggle('active');
+          this.setAttribute('aria-expanded', nav.classList.contains('active'));
+        });
+      }
+    });
+  </script>
+</body>
+</html>

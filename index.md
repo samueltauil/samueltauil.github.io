@@ -3,19 +3,23 @@ layout: home
 title: Home
 ---
 
-## Welcome
-
-I'm **Samuel Tauil**, a Senior Solution Engineer at Microsoft focused on Developer Experience — helping teams unlock productivity with GitHub Copilot, VS Code, Codespaces, and GitHub Enterprise.
-
-With 15+ years in cloud-native technologies, I specialize in GitOps, Kubernetes, and AI-powered development workflows.
-
-### What I Do
-
-- **Developer Experience** — GitHub Copilot, VS Code, Codespaces
-- **Cloud Native** — Kubernetes, OpenShift, GitOps, DevSecOps
-- **AI for Developers** — MLOps, LLM Platform Enablement
-- **Open Source** — GitOpsCon & ArgoCon Program Committee Member
-
----
-
-## Latest Posts
+<section class="section">
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h4>Developer Tools</h4>
+      <p>GitHub Copilot, VS Code, Codespaces, GitHub Enterprise</p>
+    </div>
+    <div class="skill-card">
+      <h4>Cloud Native</h4>
+      <p>Kubernetes, OpenShift, GitOps, DevSecOps</p>
+    </div>
+    <div class="skill-card">
+      <h4>AI for Developers</h4>
+      <p>MLOps, LLM Platform Enablement, AI Workflows</p>
+    </div>
+    <div class="skill-card">
+      <h4>Open Source</h4>
+      <p>GitOpsCon & ArgoCon Program Committee Member</p>
+    </div>
+  </div>
+</section>
