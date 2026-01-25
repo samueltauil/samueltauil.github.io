@@ -4,17 +4,15 @@ title: Photography
 permalink: /photography/
 ---
 
-# Photography
-
 <p class="tagline" style="font-size: 1.1rem; color: #8b949e; margin-bottom: 2rem;">
-Analog photography enthusiast capturing moments on expired film and vintage Polaroids.
+Analog photography enthusiast capturing moments on instant film and vintage cameras.
 </p>
 
 ---
 
 ## Expired Emulsions
 
-I shoot exclusively on **expired instant film** — Polaroid, Instax, and other analog formats. There's something magical about the unpredictable colors, light leaks, and imperfections that come from film past its prime.
+My Instagram dedicated to **instant photography** — Polaroid, Instax, and other analog formats. The name comes from my love for experimenting with expired film, which produces unpredictable colors, light leaks, and beautiful imperfections.
 
 <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 2rem 0;">
   <a href="https://instagram.com/expiredemulsions" class="badge" target="_blank" rel="noopener" style="padding: 0.75rem 1.25rem; font-size: 1rem;">
