@@ -57,32 +57,6 @@ title: Home
   </div>
 </section>
 
-<section class="section">
-  <div class="section-title">
-    <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242l-.914.305-.968-.968 5.293-5.293a1 1 0 0 0 0-1.414l-2-2a1 1 0 0 0-1.414 0L6.586 4.586l-.293-.293a1 1 0 0 0-.707-.293h-.07a1 1 0 0 1-.815-.419L2.586 1H1Zm10.5 4a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0ZM3 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z"/></svg>
-    <h2>Featured Projects</h2>
-  </div>
-  
-  <div class="projects-grid">
-    <a href="https://github.com/samueltauil/transcription-services-demo" class="project-card" target="_blank" rel="noopener">
-      <div class="project-icon">
-        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/><path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z"/></svg>
-      </div>
-      <h4>HealthTranscribe</h4>
-      <p>Azure AI-powered medical transcription with GPT-4o and Whisper</p>
-      <span class="project-badge">Azure AI</span>
-    </a>
-    <a href="https://github.com/samueltauil" class="project-card" target="_blank" rel="noopener">
-      <div class="project-icon" style="background: linear-gradient(135deg, #3fb950, #238636);">
-        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-      </div>
-      <h4>Open Source Projects</h4>
-      <p>Explore all my repositories and contributions</p>
-      <span class="project-badge">GitHub</span>
-    </a>
-  </div>
-</section>
-
 <style>
 .skill-icon {
   width: 48px;
@@ -117,58 +91,5 @@ title: Home
 .skill-logos img:hover {
   opacity: 1;
   filter: grayscale(0%);
-}
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-.project-card {
-  display: block;
-  background: rgba(22, 27, 34, 0.6);
-  border: 1px solid #30363d;
-  border-radius: 12px;
-  padding: 1.5rem;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-.project-card:hover {
-  border-color: #a371f7;
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(163, 113, 247, 0.2);
-}
-.project-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #58a6ff, #a371f7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-.project-icon svg {
-  width: 24px;
-  height: 24px;
-  fill: white;
-}
-.project-card h4 {
-  color: #f0f6fc;
-  margin: 0 0 0.5rem 0;
-  font-size: 1.1rem;
-}
-.project-card p {
-  color: #8b949e;
-  margin: 0 0 1rem 0;
-  font-size: 0.9rem;
-}
-.project-badge {
-  display: inline-block;
-  background: rgba(163, 113, 247, 0.2);
-  color: #a371f7;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 500;
 }
 </style>
