@@ -10,28 +10,6 @@ permalink: /posts/
 
 ---
 
-## By Category
-
-{% assign categories = site.posts | map: "categories" | uniq %}
-{% for category in site.categories %}
-<section class="section">
-  <h3 id="{{ category[0] | slugify }}">{{ category[0] | capitalize }}</h3>
-  <ul class="post-list">
-    {% for post in category[1] %}
-    <li class="card" style="margin-bottom: 1rem;">
-      <span class="card-meta">{{ post.date | date: "%B %d, %Y" }}</span>
-      <h4 style="margin: 0.5rem 0;"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h4>
-      {% if post.excerpt %}
-      <p style="margin: 0; font-size: 0.9rem;">{{ post.excerpt | strip_html | truncate: 120 }}</p>
-      {% endif %}
-    </li>
-    {% endfor %}
-  </ul>
-</section>
-{% endfor %}
-
----
-
 ## All Posts
 
 <ul class="post-list">
@@ -39,6 +17,9 @@ permalink: /posts/
   <li class="card" style="margin-bottom: 1rem;">
     <span class="card-meta">{{ post.date | date: "%B %d, %Y" }}</span>
     <h4 style="margin: 0.5rem 0;"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h4>
+    {% if post.excerpt %}
+    <p style="margin: 0.5rem 0; font-size: 0.9rem; color: #8b949e;">{{ post.excerpt | strip_html | truncate: 160 }}</p>
+    {% endif %}
     {% if post.categories.size > 0 %}
     <div style="margin-top: 0.5rem;">
       {% for cat in post.categories %}
