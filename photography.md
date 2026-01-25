@@ -61,6 +61,18 @@ My film photography portfolio on Lomography — **179 photos** since 2011, featu
   <a href="https://www.lomography.com/homes/samueltauil/photos/28438926" target="_blank" rel="noopener">
     <img src="https://cdn.assets.lomography.com/eb/50cc4a337c21355c76d5d7b6c8db4de3d99ecc/1040x1268x2.jpg?auth=9c03b6ea86e61b22bf828a9510b05bc2c01e4213" alt="Jaguar - Polaroid I-2" loading="lazy">
   </a>
+  <a href="https://www.lomography.com/homes/samueltauil/photos/28436373" target="_blank" rel="noopener">
+    <img src="https://cdn.assets.lomography.com/c8/7e3929df0595491b62f0f5f29b846daa3c8d87/1043x1272x2.jpg?auth=838b1168f2dd749be38893f0df2b60149449310e" alt="Helena - Polaroid I-2" loading="lazy">
+  </a>
+  <a href="https://www.lomography.com/homes/samueltauil/photos/28318931" target="_blank" rel="noopener">
+    <img src="https://cdn.assets.lomography.com/1e/b3e5a6dee36ba864a872cf7479c098157b2d6a/1031x1262x2.jpg?auth=f2672e6c231a44550c5f9690be55f3c3f24b5eb5" alt="Peonies - MiNT SLR670-X" loading="lazy">
+  </a>
+  <a href="https://www.lomography.com/homes/samueltauil/photos/28292145" target="_blank" rel="noopener">
+    <img src="https://cdn.assets.lomography.com/70/315770849800329fe7d5ad26240dba614259b2/1034x1267x2.jpg?auth=8644dee50197d2126b8975b02e7ee7975f098e3f" alt="Street art - Polaroid I-2" loading="lazy">
+  </a>
+  <a href="https://www.lomography.com/homes/samueltauil/photos/28289537" target="_blank" rel="noopener">
+    <img src="https://cdn.assets.lomography.com/f8/205cf62a17a9708202d4a463bae6ef99b08bef/1035x1265x2.jpg?auth=cbf51d24b54b217501dd1ac4e0e5bb3b65f42abc" alt="Peonies with filter - MiNT SLR670-X" loading="lazy">
+  </a>
 </div>
 
 <style>
@@ -97,24 +109,91 @@ My film photography portfolio on Lomography — **179 photos** since 2011, featu
 
 A collection of vintage and Lomography cameras I shoot with:
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
-  <div class="skill-card">
-    <h4>Polaroid</h4>
-    <p>SLR 680se, SX-70 Sonar, I-2, SX-70 Model 2</p>
+<div class="camera-grid">
+  <div class="camera-card">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Polaroid-SX-70-Sonar-02.jpg/220px-Polaroid-SX-70-Sonar-02.jpg" alt="Polaroid SX-70 Sonar" loading="lazy">
+    <div class="camera-info">
+      <h4>Polaroid SX-70 Sonar</h4>
+      <p>The iconic folding SLR instant camera with autofocus sonar system</p>
+    </div>
   </div>
-  <div class="skill-card">
-    <h4>Lomography</h4>
-    <p>LC-A, LC-A 120, LC-Wide, Diana F+, Fisheye No. 2</p>
+  <div class="camera-card">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Polaroid_SLR_680_SE.jpg/220px-Polaroid_SLR_680_SE.jpg" alt="Polaroid SLR 680se" loading="lazy">
+    <div class="camera-info">
+      <h4>Polaroid SLR 680se</h4>
+      <p>Built-in flash and sonar autofocus for 600 film</p>
+    </div>
   </div>
-  <div class="skill-card">
-    <h4>Classic 35mm</h4>
-    <p>Canon AE-1 Program, Pentax K1000, Olympus XA2</p>
+  <div class="camera-card">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Lomo_Kompakt_Automat_%28LC-A%29_%2811%29.jpg/220px-Lomo_Kompakt_Automat_%28LC-A%29_%2811%29.jpg" alt="Lomo LC-A" loading="lazy">
+    <div class="camera-info">
+      <h4>Lomo LC-A</h4>
+      <p>The legendary Russian camera that started the Lomography movement</p>
+    </div>
   </div>
-  <div class="skill-card">
-    <h4>Medium Format</h4>
-    <p>Mamiya RB67</p>
+  <div class="camera-card">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Canon_AE-1_Program.jpg/220px-Canon_AE-1_Program.jpg" alt="Canon AE-1 Program" loading="lazy">
+    <div class="camera-info">
+      <h4>Canon AE-1 Program</h4>
+      <p>Classic 35mm SLR, the best-selling camera of its era</p>
+    </div>
+  </div>
+  <div class="camera-card">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Pentax_K1000_in_combination_with_flash_and_Tamron_80-210_F3.8-4_lens.jpg/220px-Pentax_K1000_in_combination_with_flash_and_Tamron_80-210_F3.8-4_lens.jpg" alt="Pentax K1000" loading="lazy">
+    <div class="camera-info">
+      <h4>Pentax K1000</h4>
+      <p>The quintessential fully mechanical 35mm SLR</p>
+    </div>
+  </div>
+  <div class="camera-card">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Mamiya_RB67_Pro-S.jpg/220px-Mamiya_RB67_Pro-S.jpg" alt="Mamiya RB67" loading="lazy">
+    <div class="camera-info">
+      <h4>Mamiya RB67</h4>
+      <p>Professional medium format beast with rotating back</p>
+    </div>
   </div>
 </div>
+
+<style>
+.camera-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+.camera-card {
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.camera-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(163, 113, 247, 0.2);
+  border-color: #a371f7;
+}
+.camera-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background: #0d1117;
+  padding: 1rem;
+}
+.camera-info {
+  padding: 1rem;
+}
+.camera-info h4 {
+  margin: 0 0 0.5rem 0;
+  color: #f0f6fc;
+  font-size: 1.1rem;
+}
+.camera-info p {
+  margin: 0;
+  color: #8b949e;
+  font-size: 0.9rem;
+}
+</style>
 
 ---
 

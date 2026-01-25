@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 LOMOGRAPHY_USERNAME = "samueltauil"
 LOMOGRAPHY_PROFILE_URL = f"https://www.lomography.com/homes/{LOMOGRAPHY_USERNAME}/photos?order=recent"
 PHOTOGRAPHY_MD_PATH = "photography.md"
-NUM_PHOTOS_TO_FETCH = 8
+NUM_PHOTOS_TO_FETCH = 12
 
 
 def fetch_recent_photo_ids():
