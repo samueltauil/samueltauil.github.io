@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 Script to fetch the latest photos from Lomography profile and update photography.md
+Ensures no duplicate photos are added to the gallery.
 """
 
 import re
@@ -11,6 +12,22 @@ LOMOGRAPHY_USERNAME = "samueltauil"
 LOMOGRAPHY_PROFILE_URL = f"https://www.lomography.com/homes/{LOMOGRAPHY_USERNAME}/photos?order=recent"
 PHOTOGRAPHY_MD_PATH = "photography.md"
 NUM_PHOTOS_TO_FETCH = 12
+
+
+def get_existing_photo_ids():
+    """Extract photo IDs that are already in the photography.md file."""
+    try:
+        with open(PHOTOGRAPHY_MD_PATH, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # Find all photo IDs already in the file
+        existing_ids = re.findall(
+            rf'/homes/{LOMOGRAPHY_USERNAME}/photos/(\d+)',
+            content
+        )
+        return set(existing_ids)
+    except FileNotFoundError:
+        return set()
 
 
 def fetch_recent_photo_ids():
@@ -76,10 +93,18 @@ def fetch_photo_title(photo_id):
 
 
 def generate_photo_gallery_html(photos):
-    """Generate the HTML for the photo gallery."""
+    """Generate the HTML for the photo gallery. Ensures no duplicate photos."""
     html_lines = ['<div class="photo-gallery">']
     
+    # Track IDs to prevent any duplicates in output
+    seen_ids = set()
+    
     for photo in photos:
+        # Skip if we've already added this photo
+        if photo['id'] in seen_ids:
+            continue
+        seen_ids.add(photo['id'])
+        
         html_lines.append(f'  <a href="https://www.lomography.com/homes/{LOMOGRAPHY_USERNAME}/photos/{photo["id"]}" target="_blank" rel="noopener">')
         html_lines.append(f'    <img src="{photo["cdn_url"]}" alt="{photo["title"]}" loading="lazy">')
         html_lines.append('  </a>')
@@ -136,13 +161,34 @@ def update_photography_md(new_gallery_html):
 
 
 def main():
-    print("Fetching recent photo IDs from Lomography...")
-    photo_ids = fetch_recent_photo_ids()
-    print(f"Found {len(photo_ids)} recent photos: {photo_ids}")
+    print("Reading existing photo IDs from photography.md...")
+    existing_ids = get_existing_photo_ids()
+    print(f"Found {len(existing_ids)} existing photos in file")
     
+    print("\nFetching recent photo IDs from Lomography...")
+    recent_photo_ids = fetch_recent_photo_ids()
+    print(f"Found {len(recent_photo_ids)} recent photos on Lomography: {recent_photo_ids}")
+    
+    # Find new photos that aren't already in the file
+    new_photo_ids = [pid for pid in recent_photo_ids if pid not in existing_ids]
+    
+    if not new_photo_ids:
+        print("\nNo new photos to add. All recent photos are already in the gallery.")
+        return
+    
+    print(f"\nFound {len(new_photo_ids)} new photos to add: {new_photo_ids}")
+    
+    # Fetch details for ALL photos (to rebuild the gallery with correct order)
     photos = []
-    for photo_id in photo_ids:
-        print(f"Fetching details for photo {photo_id}...")
+    seen_ids = set()  # Extra safety: track IDs we've already processed
+    
+    for photo_id in recent_photo_ids:
+        if photo_id in seen_ids:
+            print(f"Skipping duplicate photo {photo_id}")
+            continue
+        seen_ids.add(photo_id)
+        
+        print(f"Fetching details for photo {photo_id}{'  [NEW]' if photo_id in new_photo_ids else ''}...")
         cdn_url = fetch_photo_cdn_url(photo_id)
         if cdn_url:
             title = fetch_photo_title(photo_id)
@@ -158,14 +204,22 @@ def main():
         else:
             print(f"  -> Could not find CDN URL, skipping")
     
-    if photos:
-        print(f"\nGenerating gallery HTML for {len(photos)} photos...")
-        gallery_html = generate_photo_gallery_html(photos)
+    # Final deduplication check on photos list
+    final_photos = []
+    final_ids = set()
+    for photo in photos:
+        if photo['id'] not in final_ids:
+            final_ids.add(photo['id'])
+            final_photos.append(photo)
+    
+    if final_photos:
+        print(f"\nGenerating gallery HTML for {len(final_photos)} unique photos...")
+        gallery_html = generate_photo_gallery_html(final_photos)
         
         print("Updating photography.md...")
         update_photography_md(gallery_html)
         
-        print("\nDone! Photos updated successfully.")
+        print(f"\nDone! Added {len(new_photo_ids)} new photos. Gallery now has {len(final_photos)} photos.")
     else:
         print("\nNo photos found to update.")
 
