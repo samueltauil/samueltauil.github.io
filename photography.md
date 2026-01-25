@@ -40,22 +40,22 @@ My film photography portfolio on Lomography — **179 photos** since 2011, featu
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.5rem; margin: 1.5rem 0;">
   <a href="https://www.lomography.com/homes/samueltauil/photos/28979520" target="_blank" rel="noopener" class="card" style="padding: 0; overflow: hidden; aspect-ratio: 1;">
-    <img src="https://assets.lomography.com/photos/28979520/800x800" alt="Photo 1" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/d7/aed0f18a2a136ee82da551b90e35436ba2d447/1034x1261x2.jpg?auth=55bd328e05f9aabf9391fe400a731330436bb3b2" alt="Barn - Polaroid SX-70" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
   </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28976794" target="_blank" rel="noopener" class="card" style="padding: 0; overflow: hidden; aspect-ratio: 1;">
-    <img src="https://assets.lomography.com/photos/28976794/800x800" alt="Photo 2" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/36/b7339b0e38fa7c4235e32caf2eb37fb9738285/1029x1262x2.jpg?auth=99c88595e5043bf0631a6cad4edc58a3eed245f5" alt="Moments of being - Polaroid I-2" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
   </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28968482" target="_blank" rel="noopener" class="card" style="padding: 0; overflow: hidden; aspect-ratio: 1;">
-    <img src="https://assets.lomography.com/photos/28968482/800x800" alt="Photo 3" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/5a/574b0d1279d83a017796e1ebb5b3111a04adc1/1032x1269x2.jpg?auth=7f8896fd5b39db9e2e31c4c543ca259ae9651fb2" alt="Vintage car - Polaroid SX-70" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
   </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28701975" target="_blank" rel="noopener" class="card" style="padding: 0; overflow: hidden; aspect-ratio: 1;">
-    <img src="https://assets.lomography.com/photos/28701975/800x800" alt="Photo 4" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/4e/0446a13ae4eda702986c1ca56411e559e3ca98/1032x1267x2.jpg?auth=32df333923fe865e77c52600d816177c5fde2eea" alt="Thunderbird - Polaroid SX-70" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
   </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28613790" target="_blank" rel="noopener" class="card" style="padding: 0; overflow: hidden; aspect-ratio: 1;">
-    <img src="https://assets.lomography.com/photos/28613790/800x800" alt="Photo 5" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/36/81eb877b84f1c1f7d9051e4f724ca37ccf90c5/1022x1266x2.jpg?auth=87fc886c812e2889a48774abe790e6d7f3b64858" alt="Flying sausages - Polaroid SX-70" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
   </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28611800" target="_blank" rel="noopener" class="card" style="padding: 0; overflow: hidden; aspect-ratio: 1;">
-    <img src="https://assets.lomography.com/photos/28611800/800x800" alt="Photo 6" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/3f/cb8abeb4df1815e4718c95b59870f19507e692/1025x1267x2.jpg?auth=b698f5e128bf44ff10ddc648ee066a4671ab384a" alt="A thousand flowers - Polaroid SX-70" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
   </a>
 </div>
 
