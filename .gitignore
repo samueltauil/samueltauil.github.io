@@ -1,10 +1,33 @@
-_site/*
-_theme_packages/*
+# Jekyll
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+_theme_packages/
 
-Thumbs.db
+# Ruby
+*.gem
+.bundle/
+vendor/
+Gemfile.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
 .DS_Store
+Thumbs.db
 
-!.gitkeep
-
+# Ruby version managers
 .rbenv-version
 .rvmrc
+.ruby-version
+
+# Local development
+.env
+
+!.gitkeep

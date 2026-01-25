@@ -1,13 +1,22 @@
 ---
 layout: page
-title: about
+title: About
 permalink: /about/
 ---
 
-<!-- You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jekyll" %} /
-[minima](https://github.com/jekyll/minima)
+## About Me
 
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll) -->
+I'm Samuel Tauil, a cloud architect and technologist passionate about containers, Kubernetes, and open source technologies.
+
+### What I Do
+
+- Cloud architecture and infrastructure design
+- Container orchestration and Kubernetes
+- DevOps and platform engineering
+- Open source advocacy
+
+### Connect
+
+- [GitHub](https://github.com/samueltauil)
+- [Twitter](https://twitter.com/samueltauil)
+- [LinkedIn](https://linkedin.com/in/samueltauil)
