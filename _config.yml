@@ -9,7 +9,6 @@ baseurl: ""
 url: "https://samueltauil.github.io"
 
 # Social
-twitter_username: samueltauil
 github_username: samueltauil
 linkedin_username: samueltauil
 
@@ -22,7 +21,6 @@ plugins:
 # SEO
 author:
   name: Samuel Tauil
-  twitter: samueltauil
 
 # Exclude from build
 exclude:
