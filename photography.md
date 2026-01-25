@@ -25,27 +25,86 @@ I shoot exclusively on **expired instant film** — Polaroid, Instax, and other 
 
 ---
 
-## Lomography
+## Lomography Portfolio
 
-My film photography portfolio on Lomography — featuring shots from various analog cameras and experimental techniques.
+My film photography portfolio on Lomography — **179 photos** since 2011, featuring shots from various analog cameras and experimental techniques.
 
 <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 2rem 0;">
   <a href="https://www.lomography.com/homes/samueltauil" class="badge" target="_blank" rel="noopener" style="padding: 0.75rem 1.25rem; font-size: 1rem;">
     <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" style="margin-right: 0.5rem;"><path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/></svg>
-    Lomography Profile
+    View All Photos on Lomography
   </a>
+</div>
+
+### Trending Photos
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.5rem; margin: 1.5rem 0;">
+  <a href="https://www.lomography.com/homes/samueltauil/photos/28979520" target="_blank" rel="noopener" class="card" style="padding: 0; overflow: hidden; aspect-ratio: 1;">
+    <img src="https://assets.lomography.com/photos/28979520/800x800" alt="Photo 1" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+  </a>
+  <a href="https://www.lomography.com/homes/samueltauil/photos/28976794" target="_blank" rel="noopener" class="card" style="padding: 0; overflow: hidden; aspect-ratio: 1;">
+    <img src="https://assets.lomography.com/photos/28976794/800x800" alt="Photo 2" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+  </a>
+  <a href="https://www.lomography.com/homes/samueltauil/photos/28968482" target="_blank" rel="noopener" class="card" style="padding: 0; overflow: hidden; aspect-ratio: 1;">
+    <img src="https://assets.lomography.com/photos/28968482/800x800" alt="Photo 3" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+  </a>
+  <a href="https://www.lomography.com/homes/samueltauil/photos/28701975" target="_blank" rel="noopener" class="card" style="padding: 0; overflow: hidden; aspect-ratio: 1;">
+    <img src="https://assets.lomography.com/photos/28701975/800x800" alt="Photo 4" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+  </a>
+  <a href="https://www.lomography.com/homes/samueltauil/photos/28613790" target="_blank" rel="noopener" class="card" style="padding: 0; overflow: hidden; aspect-ratio: 1;">
+    <img src="https://assets.lomography.com/photos/28613790/800x800" alt="Photo 5" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+  </a>
+  <a href="https://www.lomography.com/homes/samueltauil/photos/28611800" target="_blank" rel="noopener" class="card" style="padding: 0; overflow: hidden; aspect-ratio: 1;">
+    <img src="https://assets.lomography.com/photos/28611800/800x800" alt="Photo 6" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+  </a>
+</div>
+
+<a href="https://www.lomography.com/homes/samueltauil/photos?order=trending" class="badge" target="_blank" rel="noopener" style="margin-top: 1rem;">View More →</a>
+
+---
+
+## My Cameras
+
+A collection of vintage and Lomography cameras I shoot with:
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+  <div class="skill-card">
+    <h4>Polaroid</h4>
+    <p>SLR 680se, SX-70 Sonar, I-2, SX-70 Model 2</p>
+  </div>
+  <div class="skill-card">
+    <h4>Lomography</h4>
+    <p>LC-A, LC-A 120, LC-Wide, Diana F+, Fisheye No. 2</p>
+  </div>
+  <div class="skill-card">
+    <h4>Classic 35mm</h4>
+    <p>Canon AE-1 Program, Pentax K1000, Olympus XA2</p>
+  </div>
+  <div class="skill-card">
+    <h4>Medium Format</h4>
+    <p>Mamiya RB67</p>
+  </div>
 </div>
 
 ---
 
-## About the Craft
+## Films I Love
 
-Film photography forces you to slow down. With limited exposures and no instant preview, every shot becomes intentional. I'm particularly drawn to:
+- **Polaroid 600** — Color, B&W, Round Frame Edition
+- **Polaroid SX-70** — Color, Paul Giambarba Spectrum Edition
+- **Polaroid i-Type** — Color, Golden Moments, MoMA Edition
+- **LomoChrome Purple** — Surreal color shifts
+- **LomoChrome Turquoise** — Cool, dreamy tones
+- **Kodak Ektachrome 100** — Classic slide film
+- **Fuji Pro 400H** — Beautiful skin tones (RIP)
+- **Ilford Delta 100** — Crisp black & white
 
-- **Expired Polaroid film** — The color shifts and unpredictable results
-- **Instant photography** — The tangible, one-of-a-kind prints
-- **Lomography cameras** — Embracing imperfection and happy accidents
-- **Vintage cameras** — The mechanical precision of classic gear
+---
+
+## Locations
+
+Photos captured in:
+**Boston** • **Cambridge** • **Salem** • **Gloucester** • **Rockport** • **Ogunquit, Maine** • **Porto, Portugal** • **São Paulo, Brazil**
 
 ---
 
