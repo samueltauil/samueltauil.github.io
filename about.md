@@ -95,15 +95,15 @@ Innovative and results-driven technology leader with 15+ years of experience lea
 ## Certifications
 
 ### Microsoft & GitHub
-- Azure Developer Associate (Nov 2025)
-- Azure Data Fundamentals (Nov 2025)
-- Azure AI Fundamentals (Nov 2025)
-- Azure Fundamentals (Nov 2025)
-- GitHub Administration (Oct 2025)
-- GitHub Advanced Security (Oct 2025)
-- GitHub Actions (Oct 2025)
-- GitHub Copilot (Oct 2025)
-- GitHub Foundations (Sep 2025)
+- [Azure Developer Associate](https://learn.microsoft.com/en-us/users/samueltauil/credentials/d55151c890b340a5) (Nov 2025)
+- [Azure Data Fundamentals](https://learn.microsoft.com/en-us/users/samueltauil/credentials/5c27abf4a208685) (Nov 2025)
+- [Azure AI Fundamentals](https://learn.microsoft.com/en-us/users/samueltauil/credentials/7cb304d4df61dc67) (Nov 2025)
+- [Azure Fundamentals](https://learn.microsoft.com/en-us/users/samueltauil/credentials/9aeac221429b63e3) (Nov 2025)
+- [GitHub Administration](https://learn.microsoft.com/en-us/users/samueltauil/credentials/bee31c5a54dae90e) (Oct 2025)
+- [GitHub Advanced Security](https://learn.microsoft.com/en-us/users/samueltauil/credentials/8e12a225f8f859ab) (Oct 2025)
+- [GitHub Actions](https://learn.microsoft.com/en-us/users/samueltauil/credentials/37d1b6a0e0fc21e7) (Oct 2025)
+- [GitHub Copilot](https://learn.microsoft.com/en-us/users/samueltauil/credentials/65b5b04d7abcef30) (Oct 2025)
+- [GitHub Foundations](https://learn.microsoft.com/en-us/users/samueltauil/credentials/12cd7f0b2aef195b) (Sep 2025)
 
 ### Cloud & Kubernetes
 - Red Hat Certified OpenShift Administrator (Dec 2023)
@@ -116,7 +116,7 @@ Innovative and results-driven technology leader with 15+ years of experience lea
 - VMware vSphere: Install, Configure, Manage (Mar 2021)
 
 ### AI & Machine Learning
-- Machine Learning – Stanford Online (Nov 2022)
+- [Machine Learning – Stanford Online](https://coursera.org/verify/N2HE5GQT68FZ) (Nov 2022)
 
 ---
 
