@@ -106,13 +106,13 @@ Innovative and results-driven technology leader with 15+ years of experience lea
 - [GitHub Foundations](https://learn.microsoft.com/en-us/users/samueltauil/credentials/12cd7f0b2aef195b) (Sep 2025)
 
 ### Cloud & Kubernetes
-- Red Hat Certified OpenShift Administrator (Dec 2023)
-- AWS Certified Cloud Practitioner (Oct 2022)
-- Red Hat Certified Specialist in Containers and Kubernetes
+- [Red Hat Certified OpenShift Administrator](https://www.credly.com/badges/1dd5bb5f-8a4a-4541-8c08-002b92214177/public_url) (Dec 2023)
+- [AWS Certified Cloud Practitioner](https://www.credly.com/badges/225300fb-f32c-431f-95f9-2408969aff01/public_url) (Oct 2022)
+- [Red Hat Certified Specialist in Containers and Kubernetes](https://www.credly.com/badges/f841d45d-8ce9-49f7-a1e7-befceec7b4c4/public_url)
 
 ### GitOps & DevOps
-- GitOps at Scale – Codefresh (Oct 2023)
-- GitOps Fundamentals – Codefresh (Jun 2022)
+- [GitOps at Scale – Codefresh](https://www.credly.com/badges/af19ff90-86a1-43a0-8456-bb100f84d8de/public_url) (Oct 2023)
+- [GitOps Fundamentals – Codefresh](https://www.credly.com/badges/19f1ba58-460e-487e-92da-29a2f3a64efa/public_url) (Jun 2022)
 - VMware vSphere: Install, Configure, Manage (Mar 2021)
 
 ### AI & Machine Learning
@@ -124,8 +124,12 @@ Innovative and results-driven technology leader with 15+ years of experience lea
 
 I'm an active contributor to the open source community:
 
-- **Program Committee Member** – GitOpsCon NA & EU (2022–2024), The Linux Foundation
-- **Program Committee Member** – ArgoCon NA & EU (2024), The Linux Foundation
-- **Exam Contributor** – Certified GitOps Associate (CGA), Linux Foundation (2024)
+- [**Program Committee Member** – ArgoCon NA 2024](https://www.credly.com/badges/aca918e2-bb10-44ee-8b2b-d599645bd214/public_url), The Linux Foundation
+- [**Program Committee Member** – ArgoCon Europe 2024](https://www.credly.com/badges/dfc5e335-0ce4-4ec4-a2f9-f61eb4d1f5f3/public_url), The Linux Foundation
+- [**Program Committee Member** – GitOpsCon NA 2024](https://www.credly.com/badges/42188f52-e0e2-4e06-975c-d395ecbc3d90/public_url), The Linux Foundation
+- [**Program Committee Member** – GitOpsCon Europe 2023](https://www.credly.com/badges/367ee5d1-e4ad-457e-b26a-b361ab0fc877/public_url), The Linux Foundation
+- [**Program Committee Member** – GitOpsCon NA 2022](https://www.credly.com/badges/be3ed6f5-2697-4150-a186-fac1518e5671/public_url), The Linux Foundation
+- [**Program Committee Member** – GitOpsCon 2023](https://www.credly.com/badges/125d5e0a-6b65-44d5-a6d1-9603f9688833/public_url), The Linux Foundation
+- [**Exam Contributor** – Certified GitOps Associate (CGA)](https://www.credly.com/badges/5dad758d-08ba-4ce4-b762-f217165824c1/public_url), Linux Foundation (2024)
 - **Lead Architect & Facilitator** – Modern Application Development Roadshow (2022–Present)
 - **Speaker** – Red Hat User Groups, Meetups, and Industry Panels across the Americas
