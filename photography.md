@@ -8,8 +8,6 @@ permalink: /photography/
 Analog photography enthusiast capturing moments on instant film and vintage cameras.
 </p>
 
----
-
 ## Expired Emulsions
 
 My Instagram dedicated to **instant photography** — Polaroid, Instax, and other analog formats. The name comes from my love for experimenting with expired film, which produces unpredictable colors, light leaks, and beautiful imperfections.
@@ -20,8 +18,6 @@ My Instagram dedicated to **instant photography** — Polaroid, Instax, and othe
     @expiredemulsions
   </a>
 </div>
-
----
 
 ## Lomography Portfolio
 
@@ -103,50 +99,60 @@ My film photography portfolio on Lomography — **179 photos** since 2011, featu
 
 <a href="https://www.lomography.com/homes/samueltauil/photos?order=trending" class="badge" target="_blank" rel="noopener" style="margin-top: 1rem;">View More →</a>
 
----
-
 ## My Cameras
 
 A collection of vintage and Lomography cameras I shoot with:
 
 <div class="camera-grid">
   <div class="camera-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Polaroid-SX-70-Sonar-02.jpg/220px-Polaroid-SX-70-Sonar-02.jpg" alt="Polaroid SX-70 Sonar" loading="lazy">
+    <div class="camera-img-wrapper">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Polaroid-SX-70-Sonar-02.jpg/220px-Polaroid-SX-70-Sonar-02.jpg" alt="Polaroid SX-70 Sonar" loading="lazy">
+    </div>
     <div class="camera-info">
       <h4>Polaroid SX-70 Sonar</h4>
       <p>The iconic folding SLR instant camera with autofocus sonar system</p>
     </div>
   </div>
   <div class="camera-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Polaroid_SLR_680_SE.jpg/220px-Polaroid_SLR_680_SE.jpg" alt="Polaroid SLR 680se" loading="lazy">
+    <div class="camera-img-wrapper">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Polaroid_SLR_680_SE.jpg/220px-Polaroid_SLR_680_SE.jpg" alt="Polaroid SLR 680se" loading="lazy">
+    </div>
     <div class="camera-info">
       <h4>Polaroid SLR 680se</h4>
       <p>Built-in flash and sonar autofocus for 600 film</p>
     </div>
   </div>
   <div class="camera-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Lomo_Kompakt_Automat_%28LC-A%29_%2811%29.jpg/220px-Lomo_Kompakt_Automat_%28LC-A%29_%2811%29.jpg" alt="Lomo LC-A" loading="lazy">
+    <div class="camera-img-wrapper">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Lomo_Kompakt_Automat_%28LC-A%29_%2811%29.jpg/220px-Lomo_Kompakt_Automat_%28LC-A%29_%2811%29.jpg" alt="Lomo LC-A" loading="lazy">
+    </div>
     <div class="camera-info">
       <h4>Lomo LC-A</h4>
       <p>The legendary Russian camera that started the Lomography movement</p>
     </div>
   </div>
   <div class="camera-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Canon_AE-1_Program.jpg/220px-Canon_AE-1_Program.jpg" alt="Canon AE-1 Program" loading="lazy">
+    <div class="camera-img-wrapper">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Canon_AE-1_Program.jpg/220px-Canon_AE-1_Program.jpg" alt="Canon AE-1 Program" loading="lazy">
+    </div>
     <div class="camera-info">
       <h4>Canon AE-1 Program</h4>
       <p>Classic 35mm SLR, the best-selling camera of its era</p>
     </div>
   </div>
   <div class="camera-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Pentax_K1000_in_combination_with_flash_and_Tamron_80-210_F3.8-4_lens.jpg/220px-Pentax_K1000_in_combination_with_flash_and_Tamron_80-210_F3.8-4_lens.jpg" alt="Pentax K1000" loading="lazy">
+    <div class="camera-img-wrapper">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Pentax_K1000_in_combination_with_flash_and_Tamron_80-210_F3.8-4_lens.jpg/220px-Pentax_K1000_in_combination_with_flash_and_Tamron_80-210_F3.8-4_lens.jpg" alt="Pentax K1000" loading="lazy">
+    </div>
     <div class="camera-info">
       <h4>Pentax K1000</h4>
       <p>The quintessential fully mechanical 35mm SLR</p>
     </div>
   </div>
   <div class="camera-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Mamiya_RB67_Pro-S.jpg/220px-Mamiya_RB67_Pro-S.jpg" alt="Mamiya RB67" loading="lazy">
+    <div class="camera-img-wrapper">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Mamiya_RB67_Pro-S.jpg/220px-Mamiya_RB67_Pro-S.jpg" alt="Mamiya RB67" loading="lazy">
+    </div>
     <div class="camera-info">
       <h4>Mamiya RB67</h4>
       <p>Professional medium format beast with rotating back</p>
@@ -173,12 +179,19 @@ A collection of vintage and Lomography cameras I shoot with:
   box-shadow: 0 8px 25px rgba(163, 113, 247, 0.2);
   border-color: #a371f7;
 }
-.camera-card img {
+.camera-img-wrapper {
   width: 100%;
   height: 200px;
-  object-fit: contain;
-  background: #0d1117;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #161b22;
   padding: 1rem;
+}
+.camera-card img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 .camera-info {
   padding: 1rem;
@@ -195,8 +208,6 @@ A collection of vintage and Lomography cameras I shoot with:
 }
 </style>
 
----
-
 ## Films I Love
 
 - **Polaroid 600** — Color, B&W, Round Frame Edition
@@ -208,13 +219,11 @@ A collection of vintage and Lomography cameras I shoot with:
 - **Fuji Pro 400H** — Beautiful skin tones (RIP)
 - **Ilford Delta 100** — Crisp black & white
 
----
-
 ## Locations
 
 Photos captured in:
 **Boston** • **Cambridge** • **Salem** • **Gloucester** • **Rockport** • **Ogunquit, Maine** • **Porto, Portugal** • **São Paulo, Brazil**
 
----
-
-*"Photography is the story I fail to put into words."* — Destin Sparks
+<p style="margin-top: 3rem; font-style: italic; color: #6e7681;">
+"Photography is the story I fail to put into words." — Destin Sparks
+</p>
