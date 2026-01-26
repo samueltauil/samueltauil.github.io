@@ -14,42 +14,55 @@ title: Home
       <span class="filename">SAMUEL.md</span>
     </div>
     <div class="code-content">
-<pre class="agent-code"><span class="md-hr">---</span>
-<span class="md-frontmatter-key">name:</span> <span class="md-frontmatter-value">Samuel Tauil</span>
-<span class="md-frontmatter-key">role:</span> <span class="md-frontmatter-value">Principal Solutions Engineer @ GitHub</span>
-<span class="md-frontmatter-key">location:</span> <span class="md-frontmatter-value">São Paulo, Brazil</span>
-<span class="md-frontmatter-key">focus:</span> <span class="md-frontmatter-value">[AI, DevTools, Cloud Native]</span>
-<span class="md-hr">---</span>
+<pre class="agent-code"><span style="color:#30363d">---</span>
+<span style="color:#58a6ff">name:</span> <span style="color:#ffa657">Samuel Tauil</span>
+<span style="color:#58a6ff">role:</span> <span style="color:#ffa657">Principal Solutions Engineer</span>
+<span style="color:#58a6ff">company:</span> <span style="color:#ffa657">GitHub</span>
+<span style="color:#58a6ff">location:</span> <span style="color:#ffa657">São Paulo, Brazil</span>
+<span style="color:#30363d">---</span>
 
-<span class="md-comment">&lt;!-- Agent Definition --&gt;</span>
+<span style="color:#a371f7;font-weight:600"># Developer Tools</span>
 
-<span class="md-h1"># Developer Tools</span>
-<span class="md-blockquote">&gt; Enabling developers to build faster with AI-powered workflows</span>
+<span style="color:#7ee787;font-style:italic">&gt; Enabling developers to build faster with AI-powered workflows</span>
 
-<span class="md-list">-</span> <span class="md-code">`GitHub Copilot`</span> <span class="md-list">-</span> <span class="md-code">`VS Code`</span> <span class="md-list">-</span> <span class="md-code">`Codespaces`</span>
-<span class="md-list">-</span> <span class="md-code">`GitHub Enterprise`</span> <span class="md-list">-</span> <span class="md-code">`GitHub Actions`</span>
+I help organizations adopt modern developer tools and practices:
 
-<span class="md-h1"># Cloud Native</span>
-<span class="md-blockquote">&gt; Building scalable, resilient infrastructure</span>
+<span style="color:#58a6ff">-</span> <span style="color:#ffa657;background:rgba(255,166,87,0.1);padding:0 4px;border-radius:3px">GitHub Copilot</span> AI pair programming for code generation and chat
+<span style="color:#58a6ff">-</span> <span style="color:#ffa657;background:rgba(255,166,87,0.1);padding:0 4px;border-radius:3px">VS Code</span> Extensions, customization, and productivity
+<span style="color:#58a6ff">-</span> <span style="color:#ffa657;background:rgba(255,166,87,0.1);padding:0 4px;border-radius:3px">Codespaces</span> Cloud development environments
+<span style="color:#58a6ff">-</span> <span style="color:#ffa657;background:rgba(255,166,87,0.1);padding:0 4px;border-radius:3px">GitHub Actions</span> CI/CD pipelines and automation
 
-<span class="md-list">-</span> <span class="md-bold">**Platforms:**</span> <span class="md-link">[Kubernetes]()</span>, <span class="md-link">[OpenShift]()</span>
-<span class="md-list">-</span> <span class="md-bold">**Practices:**</span> <span class="md-code">`GitOps`</span>, <span class="md-code">`DevSecOps`</span>
+<span style="color:#a371f7;font-weight:600"># Cloud Native</span>
 
-<span class="md-h1"># AI for Developers</span>
-<span class="md-blockquote">&gt; Integrating intelligence into the development lifecycle</span>
+<span style="color:#7ee787;font-style:italic">&gt; Building scalable, resilient infrastructure at scale</span>
 
-<span class="md-list">-</span> <span class="md-code">`MLOps`</span> <span class="md-text">pipelines &amp; automation</span>
-<span class="md-list">-</span> <span class="md-code">`LLM`</span> <span class="md-text">platform enablement</span>
-<span class="md-list">-</span> <span class="md-code">`AI Workflows`</span> <span class="md-text">&amp; agent orchestration</span>
+Deep expertise in container orchestration and platform engineering:
 
-<span class="md-h1"># Open Source</span>
-<span class="md-blockquote">&gt; Contributing to the community</span>
+<span style="color:#58a6ff">-</span> <span style="color:#ffa657;background:rgba(255,166,87,0.1);padding:0 4px;border-radius:3px">Kubernetes</span> Production clusters, operators, and ecosystem
+<span style="color:#58a6ff">-</span> <span style="color:#ffa657;background:rgba(255,166,87,0.1);padding:0 4px;border-radius:3px">OpenShift</span> Enterprise container platform
+<span style="color:#58a6ff">-</span> <span style="color:#ffa657;background:rgba(255,166,87,0.1);padding:0 4px;border-radius:3px">GitOps</span> ArgoCD, Flux, declarative infrastructure
+<span style="color:#58a6ff">-</span> <span style="color:#ffa657;background:rgba(255,166,87,0.1);padding:0 4px;border-radius:3px">DevSecOps</span> Security scanning, policy enforcement
 
-<span class="md-list">-</span> <span class="md-emoji">🎯</span> <span class="md-link">[GitOpsCon]()</span> <span class="md-text">Program Committee</span>
-<span class="md-list">-</span> <span class="md-emoji">🎯</span> <span class="md-link">[ArgoCon]()</span> <span class="md-text">Program Committee</span>
+<span style="color:#a371f7;font-weight:600"># AI for Developers</span>
 
-<span class="md-hr">---</span>
-<span class="md-comment">&lt;!-- Always learning, always building --&gt;</span></pre>
+<span style="color:#7ee787;font-style:italic">&gt; Integrating intelligence into the development lifecycle</span>
+
+Bringing AI capabilities to development teams:
+
+<span style="color:#58a6ff">-</span> <span style="color:#ffa657;background:rgba(255,166,87,0.1);padding:0 4px;border-radius:3px">MLOps</span> Model training pipelines and deployment
+<span style="color:#58a6ff">-</span> <span style="color:#ffa657;background:rgba(255,166,87,0.1);padding:0 4px;border-radius:3px">LLM Platforms</span> RAG, fine-tuning, prompt engineering
+<span style="color:#58a6ff">-</span> <span style="color:#ffa657;background:rgba(255,166,87,0.1);padding:0 4px;border-radius:3px">AI Agents</span> Copilot extensions and custom agents
+
+<span style="color:#a371f7;font-weight:600"># Open Source</span>
+
+<span style="color:#7ee787;font-style:italic">&gt; Contributing to the community</span>
+
+Active in the cloud native open source ecosystem:
+
+<span style="color:#58a6ff">-</span> <span style="color:#58a6ff;text-decoration:underline">GitOpsCon</span> Program Committee Member
+<span style="color:#58a6ff">-</span> <span style="color:#58a6ff;text-decoration:underline">ArgoCon</span> Program Committee Member
+
+<span style="color:#6e7681;font-style:italic">&lt;!-- Always learning, always building --&gt;</span></pre>
     </div>
   </div>
 </section>
