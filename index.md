@@ -17,9 +17,9 @@ title: Home
 <pre class="agent-code"><span style="color:#30363d">---</span>
 <span style="color:#58a6ff">name:</span> <span style="color:#ffa657">Samuel Tauil</span>
 <span style="color:#58a6ff">description:</span> <span style="color:#ffa657">Developer advocate, cloud native enthusiast, analog photographer</span>
-<span style="color:#58a6ff">role:</span> <span style="color:#ffa657">Principal Solutions Engineer</span>
-<span style="color:#58a6ff">company:</span> <span style="color:#ffa657">GitHub</span>
-<span style="color:#58a6ff">location:</span> <span style="color:#ffa657">São Paulo, Brazil</span>
+<span style="color:#58a6ff">role:</span> <span style="color:#ffa657">Senior Solution Engineer - Developer Experience</span>
+<span style="color:#58a6ff">company:</span> <span style="color:#ffa657">Microsoft</span>
+<span style="color:#58a6ff">location:</span> <span style="color:#ffa657">Greater Boston Area</span>
 <span style="color:#58a6ff">version:</span> <span style="color:#ffa657">2026.1</span>
 <span style="color:#30363d">---</span>
 
