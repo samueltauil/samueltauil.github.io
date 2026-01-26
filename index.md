@@ -11,7 +11,7 @@ title: Home
         <span class="dot yellow"></span>
         <span class="dot green"></span>
       </div>
-      <span class="filename">SAMUEL.md</span>
+      <span class="filename">.github/samuel-tauil.agent.md</span>
     </div>
     <div class="code-content">
 <pre class="agent-code"><span style="color:#30363d">---</span>
