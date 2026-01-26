@@ -198,7 +198,7 @@ strong {
 
 // Main content
 .page-content {
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 3rem 2rem;
   min-height: calc(100vh - 200px);
@@ -227,6 +227,142 @@ strong {
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+  }
+}
+
+// Compact hero for two-column layout
+.hero-compact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid $border-color;
+
+  .hero-info {
+    h1 {
+      font-size: 2rem;
+      margin: 0 0 0.25rem;
+    }
+
+    .tagline {
+      font-size: 1rem;
+      color: $text-secondary;
+      margin: 0;
+    }
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 0.75rem;
+  }
+}
+
+// Two-column home grid
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
+  align-items: start;
+}
+
+.home-main {
+  min-width: 0;
+
+  .section {
+    margin-bottom: 0;
+  }
+}
+
+.home-sidebar {
+  position: sticky;
+  top: 80px;
+}
+
+.sidebar-section {
+  background: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  padding: 1.25rem;
+
+  h2 {
+    font-size: 1rem;
+    margin: 0 0 1rem;
+    padding: 0;
+    border: none;
+    color: $text-primary;
+  }
+}
+
+.sidebar-posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid $border-color;
+    margin: 0;
+
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    a {
+      display: block;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: $text-primary;
+      line-height: 1.4;
+      margin-bottom: 0.25rem;
+
+      &:hover {
+        color: $accent-purple;
+      }
+    }
+
+    .post-date {
+      font-size: 0.8125rem;
+      color: $text-muted;
+    }
+  }
+}
+
+.view-all {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: $accent-blue;
+  font-weight: 500;
+
+  &:hover {
+    color: $accent-purple;
+  }
+}
+
+@media (max-width: 900px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-sidebar {
+    position: static;
+  }
+
+  .hero-compact {
+    flex-direction: column;
+    text-align: center;
+
+    .hero-info {
+      text-align: center;
+    }
   }
 }
 
