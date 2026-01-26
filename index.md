@@ -14,7 +14,14 @@ title: Home
       <span class="filename">SAMUEL.md</span>
     </div>
     <div class="code-content">
-<pre class="agent-code"><span class="md-comment">&lt;!-- Agent Definition --&gt;</span>
+<pre class="agent-code"><span class="md-hr">---</span>
+<span class="md-frontmatter-key">name:</span> <span class="md-frontmatter-value">Samuel Tauil</span>
+<span class="md-frontmatter-key">role:</span> <span class="md-frontmatter-value">Principal Solutions Engineer @ GitHub</span>
+<span class="md-frontmatter-key">location:</span> <span class="md-frontmatter-value">São Paulo, Brazil</span>
+<span class="md-frontmatter-key">focus:</span> <span class="md-frontmatter-value">[AI, DevTools, Cloud Native]</span>
+<span class="md-hr">---</span>
+
+<span class="md-comment">&lt;!-- Agent Definition --&gt;</span>
 
 <span class="md-h1"># Developer Tools</span>
 <span class="md-blockquote">&gt; Enabling developers to build faster with AI-powered workflows</span>

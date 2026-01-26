@@ -850,6 +850,14 @@ img {
   color: $border-color;
 }
 
+.md-frontmatter-key {
+  color: $accent-blue;
+}
+
+.md-frontmatter-value {
+  color: #ffa657;
+}
+
 // Print styles
 @media print {
   body {
