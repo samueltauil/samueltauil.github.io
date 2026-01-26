@@ -12,14 +12,10 @@ title: Home
   <div class="skills-grid">
     <div class="skill-card">
       <div class="skill-icon">
-        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443 2.89a.5.5 0 0 0-.114.09L1.846 5.5 8 8.061l6.154-2.561-5.483-2.19a.5.5 0 0 0-.114-.09z"/></svg>
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
       </div>
       <h4>Developer Tools</h4>
       <p>GitHub Copilot, VS Code, Codespaces, GitHub Enterprise</p>
-      <div class="skill-logos">
-        <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub" title="GitHub">
-        <img src="https://code.visualstudio.com/assets/images/code-stable.png" alt="VS Code" title="VS Code">
-      </div>
     </div>
     <div class="skill-card">
       <div class="skill-icon" style="background: linear-gradient(135deg, #326CE5, #00D4AA);">
@@ -27,10 +23,6 @@ title: Home
       </div>
       <h4>Cloud Native</h4>
       <p>Kubernetes, OpenShift, GitOps, DevSecOps</p>
-      <div class="skill-logos">
-        <img src="https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png" alt="Kubernetes" title="Kubernetes">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/OpenShift-LogoType.svg" alt="OpenShift" title="OpenShift">
-      </div>
     </div>
     <div class="skill-card">
       <div class="skill-icon" style="background: linear-gradient(135deg, #a371f7, #58a6ff);">
@@ -38,10 +30,6 @@ title: Home
       </div>
       <h4>AI for Developers</h4>
       <p>MLOps, LLM Platform Enablement, AI Workflows</p>
-      <div class="skill-logos">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/OpenAI_Logo.svg/200px-OpenAI_Logo.svg.png" alt="OpenAI" title="OpenAI">
-        <img src="https://azure.microsoft.com/svghandler/azure-openai-service/?width=40&height=40" alt="Azure AI" title="Azure AI">
-      </div>
     </div>
     <div class="skill-card">
       <div class="skill-icon" style="background: linear-gradient(135deg, #3fb950, #58a6ff);">
@@ -49,47 +37,6 @@ title: Home
       </div>
       <h4>Open Source</h4>
       <p>GitOpsCon & ArgoCon Program Committee Member</p>
-      <div class="skill-logos">
-        <img src="https://cncf-branding.netlify.app/img/projects/argo/icon/color/argo-icon-color.png" alt="Argo" title="Argo">
-        <img src="https://www.cncf.io/wp-content/uploads/2022/07/cncf-color.svg" alt="CNCF" title="CNCF">
-      </div>
     </div>
   </div>
 </section>
-
-<style>
-.skill-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #a371f7, #58a6ff);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-.skill-icon svg {
-  width: 24px;
-  height: 24px;
-  fill: white;
-}
-.skill-logos {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid #30363d;
-}
-.skill-logos img {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-  opacity: 0.7;
-  transition: opacity 0.2s ease;
-  filter: grayscale(30%);
-}
-.skill-logos img:hover {
-  opacity: 1;
-  filter: grayscale(0%);
-}
-</style>
