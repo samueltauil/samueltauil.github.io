@@ -815,6 +815,41 @@ img {
   font-style: italic;
 }
 
+.md-blockquote {
+  color: #7ee787;
+  font-style: italic;
+}
+
+.md-list {
+  color: $accent-blue;
+  font-weight: bold;
+}
+
+.md-code {
+  color: #ffa657;
+  background: rgba(255, 166, 87, 0.1);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+.md-bold {
+  color: $text-primary;
+  font-weight: 600;
+}
+
+.md-link {
+  color: $accent-blue;
+  text-decoration: underline;
+}
+
+.md-emoji {
+  font-style: normal;
+}
+
+.md-hr {
+  color: $border-color;
+}
+
 // Print styles
 @media print {
   body {
