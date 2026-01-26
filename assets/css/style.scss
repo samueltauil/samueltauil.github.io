@@ -791,6 +791,30 @@ img {
   color: $accent-blue;
 }
 
+// Agent/Markdown code styling
+.agent-code {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.8;
+}
+
+.md-h1 {
+  color: $accent-purple;
+  font-weight: 600;
+}
+
+.md-text {
+  color: $text-secondary;
+}
+
+.md-comment {
+  color: $text-muted;
+  font-style: italic;
+}
+
 // Print styles
 @media print {
   body {

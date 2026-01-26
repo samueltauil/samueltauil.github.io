@@ -11,31 +11,24 @@ title: Home
         <span class="dot yellow"></span>
         <span class="dot green"></span>
       </div>
-      <span class="filename">skills.yaml</span>
+      <span class="filename">SAMUEL.md</span>
     </div>
     <div class="code-content">
-<pre class="yaml-code"><span class="yaml-comment"># What I Do</span>
-<span class="yaml-key">developer_tools</span>:
-  <span class="yaml-key">focus</span>: <span class="yaml-string">"GitHub Copilot, VS Code, Codespaces"</span>
-  <span class="yaml-key">enterprise</span>: <span class="yaml-bool">true</span>
+<pre class="agent-code"><span class="md-comment">&lt;!-- What I Do --&gt;</span>
 
-<span class="yaml-key">cloud_native</span>:
-  <span class="yaml-key">platforms</span>:
-    - <span class="yaml-string">Kubernetes</span>
-    - <span class="yaml-string">OpenShift</span>
-  <span class="yaml-key">practices</span>: <span class="yaml-string">"GitOps, DevSecOps"</span>
+<span class="md-h1"># Developer Tools</span>
+<span class="md-text">GitHub Copilot, VS Code, Codespaces, GitHub Enterprise</span>
 
-<span class="yaml-key">ai_for_developers</span>:
-  <span class="yaml-key">areas</span>:
-    - <span class="yaml-string">MLOps</span>
-    - <span class="yaml-string">LLM Platform Enablement</span>
-    - <span class="yaml-string">AI Workflows</span>
+<span class="md-h1"># Cloud Native</span>
+<span class="md-text">Kubernetes, OpenShift, GitOps, DevSecOps</span>
 
-<span class="yaml-key">open_source</span>:
-  <span class="yaml-key">roles</span>:
-    - <span class="yaml-string">"GitOpsCon Program Committee"</span>
-    - <span class="yaml-string">"ArgoCon Program Committee"</span>
-  <span class="yaml-key">contributor</span>: <span class="yaml-bool">true</span></pre>
+<span class="md-h1"># AI for Developers</span>
+<span class="md-text">MLOps, LLM Platform Enablement, AI Workflows</span>
+
+<span class="md-h1"># Open Source</span>
+<span class="md-text">GitOpsCon &amp; ArgoCon Program Committee Member</span>
+
+<span class="md-comment">&lt;!-- Always learning, always building --&gt;</span></pre>
     </div>
   </div>
 </section>
