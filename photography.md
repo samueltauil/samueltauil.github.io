@@ -106,7 +106,7 @@ A collection of vintage and Lomography cameras I shoot with:
 <div class="camera-grid">
   <div class="camera-card">
     <div class="camera-img-wrapper">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Polaroid-SX-70-Sonar-02.jpg/220px-Polaroid-SX-70-Sonar-02.jpg" alt="Polaroid SX-70 Sonar" loading="lazy">
+      <img src="https://cdn.shopify.com/s/files/1/0276/4929/2626/products/polaroid-sx-70-original-silver-instant-camera-used-553943_1000x.jpg" alt="Polaroid SX-70" loading="lazy" referrerpolicy="no-referrer">
     </div>
     <div class="camera-info">
       <h4>Polaroid SX-70 Sonar</h4>
@@ -115,7 +115,7 @@ A collection of vintage and Lomography cameras I shoot with:
   </div>
   <div class="camera-card">
     <div class="camera-img-wrapper">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Polaroid_SLR_680_SE.jpg/220px-Polaroid_SLR_680_SE.jpg" alt="Polaroid SLR 680se" loading="lazy">
+      <img src="https://cdn.shopify.com/s/files/1/0276/4929/2626/products/polaroid-680-slr-instant-camera-used-392704_1000x.jpg" alt="Polaroid SLR 680se" loading="lazy" referrerpolicy="no-referrer">
     </div>
     <div class="camera-info">
       <h4>Polaroid SLR 680se</h4>
@@ -124,7 +124,7 @@ A collection of vintage and Lomography cameras I shoot with:
   </div>
   <div class="camera-card">
     <div class="camera-img-wrapper">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Lomo_Kompakt_Automat_%28LC-A%29_%2811%29.jpg/220px-Lomo_Kompakt_Automat_%28LC-A%29_%2811%29.jpg" alt="Lomo LC-A" loading="lazy">
+      <img src="https://cdn.lomography.com/49/7b20f5d4e85c80b2a31a86ec33883a56d7fb48/330x330xp.jpg" alt="Lomo LC-A" loading="lazy" referrerpolicy="no-referrer">
     </div>
     <div class="camera-info">
       <h4>Lomo LC-A</h4>
@@ -133,7 +133,7 @@ A collection of vintage and Lomography cameras I shoot with:
   </div>
   <div class="camera-card">
     <div class="camera-img-wrapper">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Canon_AE-1_Program.jpg/220px-Canon_AE-1_Program.jpg" alt="Canon AE-1 Program" loading="lazy">
+      <img src="https://cdn.shopify.com/s/files/1/0605/1509/6498/products/canonae1program01_800x.jpg" alt="Canon AE-1 Program" loading="lazy" referrerpolicy="no-referrer">
     </div>
     <div class="camera-info">
       <h4>Canon AE-1 Program</h4>
@@ -142,7 +142,7 @@ A collection of vintage and Lomography cameras I shoot with:
   </div>
   <div class="camera-card">
     <div class="camera-img-wrapper">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Pentax_K1000_in_combination_with_flash_and_Tamron_80-210_F3.8-4_lens.jpg/220px-Pentax_K1000_in_combination_with_flash_and_Tamron_80-210_F3.8-4_lens.jpg" alt="Pentax K1000" loading="lazy">
+      <img src="https://cdn.shopify.com/s/files/1/0605/1509/6498/products/pentaxk100001_800x.jpg" alt="Pentax K1000" loading="lazy" referrerpolicy="no-referrer">
     </div>
     <div class="camera-info">
       <h4>Pentax K1000</h4>
@@ -151,7 +151,7 @@ A collection of vintage and Lomography cameras I shoot with:
   </div>
   <div class="camera-card">
     <div class="camera-img-wrapper">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Mamiya_RB67_Pro-S.jpg/220px-Mamiya_RB67_Pro-S.jpg" alt="Mamiya RB67" loading="lazy">
+      <img src="https://cdn.shopify.com/s/files/1/0605/1509/6498/products/mamiyarb6701_800x.jpg" alt="Mamiya RB67" loading="lazy" referrerpolicy="no-referrer">
     </div>
     <div class="camera-info">
       <h4>Mamiya RB67</h4>
