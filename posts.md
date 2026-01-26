@@ -8,8 +8,6 @@ permalink: /posts/
   <p class="tagline" style="color: #8b949e;">Technical articles, tutorials, and insights on cloud-native technologies, AI, and developer tools.</p>
 </section>
 
----
-
 ## All Posts
 
 <ul class="post-list">
