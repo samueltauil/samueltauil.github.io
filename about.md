@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-# Samuel Tauil
+<h2 style="margin-top: 0; font-size: 1.75rem;">Samuel Tauil</h2>
 
 <p class="tagline" style="font-size: 1.1rem; color: #8b949e; margin-bottom: 1.5rem;">
 Senior Solution Engineer • GitHub Copilot • VS Code • Codespaces • Open Source Advocate
@@ -13,21 +13,15 @@ Senior Solution Engineer • GitHub Copilot • VS Code • Codespaces • Open 
 Greater Boston Area  
 [samueltauil@gmail.com](mailto:samueltauil@gmail.com) • [LinkedIn](https://linkedin.com/in/samueltauil) • [GitHub](https://github.com/samueltauil)
 
----
-
 ## About Me
 
 I'm a Senior Solution Engineer at **Microsoft** focused on Developer Experience — helping enterprise teams unlock productivity with **GitHub Copilot**, **VS Code**, **Codespaces**, and **GitHub Enterprise**.
 
 With 15+ years of experience in cloud-native technologies, I specialize in bridging the gap between development, operations, and business outcomes through open source innovation.
 
----
-
 ## Professional Summary
 
 Innovative and results-driven technology leader with 15+ years of experience leading strategic cloud-native transformation projects. Currently at Microsoft empowering enterprise development teams through GitHub Enterprise, Visual Studio Code, Codespaces, and GitHub Copilot. Previously at Red Hat specializing in OpenShift, GitOps, and DevOps automation. Active contributor to the GitOps ecosystem and known for bridging the gap between development, operations, and business outcomes by leveraging open source innovation.
-
----
 
 ## Core Competencies
 
@@ -39,8 +33,6 @@ Innovative and results-driven technology leader with 15+ years of experience lea
 - **Infrastructure as Code**: Ansible, Terraform, Helm, Kustomize
 - **Event-Driven**: Kafka, Serverless, Knative
 - **Observability**: Jaeger, Grafana Tempo, Prometheus
-
----
 
 ## Professional Experience
 
@@ -82,15 +74,11 @@ Innovative and results-driven technology leader with 15+ years of experience lea
 **Groupon Brasil** — Java Architect (2012)  
 **GPTI, Atech, Getronics, Control Consultoria, BuscaPé** — Senior Java Developer & Architect
 
----
-
 ## Education
 
 - **Master of Computer Applications** – UFSCar, Distributed Systems (coursework completed)
 - **Bachelor's in Computer Science** – Santa Cecília University, Brazil
 - **Data Processing Technician** – CEFET, Brazil
-
----
 
 ## Certifications
 
@@ -117,8 +105,6 @@ Innovative and results-driven technology leader with 15+ years of experience lea
 
 ### AI & Machine Learning
 - [Machine Learning – Stanford Online](https://coursera.org/verify/N2HE5GQT68FZ) (Nov 2022)
-
----
 
 ## Community & Notable Engagements
 
