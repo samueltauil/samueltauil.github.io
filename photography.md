@@ -103,106 +103,81 @@ My film photography portfolio on Lomography — **179 photos** since 2011, featu
 
 A collection of vintage and Lomography cameras I shoot with:
 
-<div class="camera-grid">
-  <div class="camera-card">
-    <div class="camera-img-wrapper">
-      <img src="https://cdn.shopify.com/s/files/1/0276/4929/2626/products/polaroid-sx-70-original-silver-instant-camera-used-553943_1000x.jpg" alt="Polaroid SX-70" loading="lazy" referrerpolicy="no-referrer">
-    </div>
-    <div class="camera-info">
-      <h4>Polaroid SX-70 Sonar</h4>
-      <p>The iconic folding SLR instant camera with autofocus sonar system</p>
+<div class="camera-list">
+  <div class="camera-item">
+    <span class="camera-icon">📷</span>
+    <div>
+      <strong>Polaroid SX-70 Sonar</strong>
+      <span>The iconic folding SLR instant camera with autofocus sonar system</span>
     </div>
   </div>
-  <div class="camera-card">
-    <div class="camera-img-wrapper">
-      <img src="https://cdn.shopify.com/s/files/1/0276/4929/2626/products/polaroid-680-slr-instant-camera-used-392704_1000x.jpg" alt="Polaroid SLR 680se" loading="lazy" referrerpolicy="no-referrer">
-    </div>
-    <div class="camera-info">
-      <h4>Polaroid SLR 680se</h4>
-      <p>Built-in flash and sonar autofocus for 600 film</p>
+  <div class="camera-item">
+    <span class="camera-icon">📷</span>
+    <div>
+      <strong>Polaroid SLR 680se</strong>
+      <span>Built-in flash and sonar autofocus for 600 film</span>
     </div>
   </div>
-  <div class="camera-card">
-    <div class="camera-img-wrapper">
-      <img src="https://cdn.lomography.com/49/7b20f5d4e85c80b2a31a86ec33883a56d7fb48/330x330xp.jpg" alt="Lomo LC-A" loading="lazy" referrerpolicy="no-referrer">
-    </div>
-    <div class="camera-info">
-      <h4>Lomo LC-A</h4>
-      <p>The legendary Russian camera that started the Lomography movement</p>
+  <div class="camera-item">
+    <span class="camera-icon">📷</span>
+    <div>
+      <strong>Lomo LC-A</strong>
+      <span>The legendary Russian camera that started the Lomography movement</span>
     </div>
   </div>
-  <div class="camera-card">
-    <div class="camera-img-wrapper">
-      <img src="https://cdn.shopify.com/s/files/1/0605/1509/6498/products/canonae1program01_800x.jpg" alt="Canon AE-1 Program" loading="lazy" referrerpolicy="no-referrer">
-    </div>
-    <div class="camera-info">
-      <h4>Canon AE-1 Program</h4>
-      <p>Classic 35mm SLR, the best-selling camera of its era</p>
+  <div class="camera-item">
+    <span class="camera-icon">📷</span>
+    <div>
+      <strong>Canon AE-1 Program</strong>
+      <span>Classic 35mm SLR, the best-selling camera of its era</span>
     </div>
   </div>
-  <div class="camera-card">
-    <div class="camera-img-wrapper">
-      <img src="https://cdn.shopify.com/s/files/1/0605/1509/6498/products/pentaxk100001_800x.jpg" alt="Pentax K1000" loading="lazy" referrerpolicy="no-referrer">
-    </div>
-    <div class="camera-info">
-      <h4>Pentax K1000</h4>
-      <p>The quintessential fully mechanical 35mm SLR</p>
+  <div class="camera-item">
+    <span class="camera-icon">📷</span>
+    <div>
+      <strong>Pentax K1000</strong>
+      <span>The quintessential fully mechanical 35mm SLR</span>
     </div>
   </div>
-  <div class="camera-card">
-    <div class="camera-img-wrapper">
-      <img src="https://cdn.shopify.com/s/files/1/0605/1509/6498/products/mamiyarb6701_800x.jpg" alt="Mamiya RB67" loading="lazy" referrerpolicy="no-referrer">
-    </div>
-    <div class="camera-info">
-      <h4>Mamiya RB67</h4>
-      <p>Professional medium format beast with rotating back</p>
+  <div class="camera-item">
+    <span class="camera-icon">📷</span>
+    <div>
+      <strong>Mamiya RB67</strong>
+      <span>Professional medium format beast with rotating back</span>
     </div>
   </div>
 </div>
 
 <style>
-.camera-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+.camera-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   margin: 1.5rem 0;
 }
-.camera-card {
+.camera-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
   background: rgba(22, 27, 34, 0.6);
   border: 1px solid #30363d;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
 }
-.camera-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(163, 113, 247, 0.2);
+.camera-item:hover {
   border-color: #a371f7;
 }
-.camera-img-wrapper {
-  width: 100%;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #161b22;
-  padding: 1rem;
+.camera-icon {
+  font-size: 1.5rem;
+  line-height: 1;
 }
-.camera-card img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-.camera-info {
-  padding: 1rem;
-}
-.camera-info h4 {
-  margin: 0 0 0.5rem 0;
+.camera-item strong {
   color: #f0f6fc;
-  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 0.25rem;
 }
-.camera-info p {
-  margin: 0;
+.camera-item span:last-child {
   color: #8b949e;
   font-size: 0.9rem;
 }
