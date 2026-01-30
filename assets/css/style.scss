@@ -947,6 +947,9 @@ img {
   margin: 0;
   font-size: 0.9375rem;
   line-height: 1.8;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-x: hidden;
 }
 
 .md-h1 {
