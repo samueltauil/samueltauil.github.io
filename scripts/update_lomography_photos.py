@@ -5,6 +5,7 @@ Ensures no duplicate photos are added to the gallery.
 """
 
 import re
+import time
 import requests
 from bs4 import BeautifulSoup
 
@@ -12,6 +13,20 @@ LOMOGRAPHY_USERNAME = "samueltauil"
 LOMOGRAPHY_PROFILE_URL = f"https://www.lomography.com/homes/{LOMOGRAPHY_USERNAME}/photos?order=recent"
 PHOTOGRAPHY_MD_PATH = "photography.md"
 NUM_PHOTOS_TO_FETCH = 12
+
+# Use a realistic browser User-Agent to avoid 403 blocks
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
+}
+
+# Create a session for consistent cookies/headers
+session = requests.Session()
+session.headers.update(HEADERS)
 
 
 def get_existing_photo_ids():
@@ -32,7 +47,7 @@ def get_existing_photo_ids():
 
 def fetch_recent_photo_ids():
     """Fetch the most recent photo IDs from Lomography profile."""
-    response = requests.get(LOMOGRAPHY_PROFILE_URL, timeout=30)
+    response = session.get(LOMOGRAPHY_PROFILE_URL, timeout=30)
     response.raise_for_status()
     
     # Extract photo IDs from the page
@@ -54,7 +69,8 @@ def fetch_recent_photo_ids():
 def fetch_photo_cdn_url(photo_id):
     """Fetch the CDN URL for a specific photo."""
     photo_url = f"https://www.lomography.com/homes/{LOMOGRAPHY_USERNAME}/photos/{photo_id}"
-    response = requests.get(photo_url, timeout=30)
+    time.sleep(1)  # Rate limiting: wait 1 second between requests
+    response = session.get(photo_url, timeout=30)
     response.raise_for_status()
     
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -79,7 +95,8 @@ def fetch_photo_cdn_url(photo_id):
 def fetch_photo_title(photo_id):
     """Fetch the title/description for a specific photo."""
     photo_url = f"https://www.lomography.com/homes/{LOMOGRAPHY_USERNAME}/photos/{photo_id}"
-    response = requests.get(photo_url, timeout=30)
+    time.sleep(0.5)  # Rate limiting
+    response = session.get(photo_url, timeout=30)
     response.raise_for_status()
     
     soup = BeautifulSoup(response.text, 'html.parser')
