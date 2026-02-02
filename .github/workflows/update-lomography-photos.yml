@@ -24,7 +24,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests beautifulsoup4
+          pip install cloudscraper beautifulsoup4
 
       - name: Fetch and update Lomography photos
         run: |
