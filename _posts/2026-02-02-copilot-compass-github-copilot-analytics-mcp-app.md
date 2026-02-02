@@ -181,7 +181,32 @@ Generate a Copilot report for organization "my-team" from 2024-01-01 to 2024-01-
 
 The application follows a typical MCP Apps pattern with tool-UI binding:
 
-![Copilot Compass Architecture](https://mermaid.ink/img/pako:eNp1kk1uwzAMhK9CaJ0cwAu3i3bVRYGiQLoSvGBkOhYqS4Ykp02D3L2ynfwU9c7kfBwOyQNTRiIL2c5ZldNWYIWVsfjMbQ4l6LVxHs6g8FoE7sMbhQVS9_N6ATds8JPLClQFl_EB4QVfLDoa3bCYI3tCMNw7u4MvbvActhXPueYkqMZ6wL1vShvhFCfg1jnU4DlyXyqsbQNBQkM_4q1bxEmNhqKNNKHhxmGJb4QPMCrxDSrLkcN-yE_Ixwkl-h5vxBlp6SoeGxphHmY--z8mT9idKdHRBdDiThjMeiprXoD7RQv5NxQ9TG4UdfjHgj_1P2V1X6DvutSzlxp9dXEwZoOFJoFspKkCLVk4Qv9eEb3ALmOuUlizqvP6EI5kvSqpZGHYUKpIJKPJa-PybSrjXpZsSgT_prB2uo2FV-z_ACwsq-0)
+<pre style="background: #161b22; padding: 20px; border-radius: 8px; overflow-x: auto; font-family: monospace; line-height: 1.6;">
+<span style="color: #8b949e;">┌─────────────────────────────────────────────────────────────────┐</span>
+<span style="color: #8b949e;">│</span>          <span style="color: #58a6ff; font-weight: bold;">MCP Host (VS Code / Claude Desktop)</span>                   <span style="color: #8b949e;">│</span>
+<span style="color: #8b949e;">│                                                                 │</span>
+<span style="color: #8b949e;">│</span>   <span style="color: #7ee787;">User</span> ──► <span style="color: #7ee787;">AI Model</span> ──► <span style="color: #ffa657;">Copilot Compass Server</span>               <span style="color: #8b949e;">│</span>
+<span style="color: #8b949e;">│</span>     ▲          │              │                                <span style="color: #8b949e;">│</span>
+<span style="color: #8b949e;">│</span>     │          │              ├──► <span style="color: #a371f7;">React Dashboard</span>             <span style="color: #8b949e;">│</span>
+<span style="color: #8b949e;">│</span>     │          │              │     • useApp() hook             <span style="color: #8b949e;">│</span>
+<span style="color: #8b949e;">│</span>     │          │              │     • Chart.js visualizations  <span style="color: #8b949e;">│</span>
+<span style="color: #8b949e;">│</span>     │          ▼              │                                <span style="color: #8b949e;">│</span>
+<span style="color: #8b949e;">│</span>     └──── <span style="color: #7ee787;">Summary</span>             │                                <span style="color: #8b949e;">│</span>
+<span style="color: #8b949e;">└─────────────────────────────────┼─────────────────────────────────┘</span>
+                                  │
+                                  ▼
+                        <span style="color: #8b949e;">┌─────────────────┐</span>
+                        <span style="color: #8b949e;">│</span>   <span style="color: #58a6ff;">GitHub API</span>    <span style="color: #8b949e;">│</span>
+                        <span style="color: #8b949e;">│</span> /copilot/metrics<span style="color: #8b949e;">│</span>
+                        <span style="color: #8b949e;">└─────────────────┘</span>
+</pre>
+
+**Data Flow:**
+1. User requests a Copilot report via natural language
+2. AI Model calls the `generate_copilot_report` tool
+3. Server fetches metrics from GitHub API
+4. Server returns JSON data to the AI and renders the React dashboard
+5. AI summarizes insights while the dashboard displays interactive visualizations
 
 ### Key Components
 

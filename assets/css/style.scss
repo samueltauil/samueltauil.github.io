@@ -651,6 +651,50 @@ pre {
   }
 }
 
+// Rouge syntax highlighting (GitHub dark theme)
+.highlight {
+  background: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  margin: 1rem 0;
+  
+  pre {
+    margin: 0;
+    border: none;
+  }
+  
+  // Comments
+  .c, .c1, .cm, .cs { color: #8b949e; font-style: italic; }
+  // Keywords
+  .k, .kc, .kd, .kn, .kp, .kr, .kt { color: #ff7b72; }
+  // Strings
+  .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sr, .ss, .sx { color: #a5d6ff; }
+  // Numbers
+  .m, .mf, .mh, .mi, .mo, .il { color: #79c0ff; }
+  // Names/Variables
+  .n, .na, .nb, .nc, .nd, .ne, .nf, .ni, .nl, .nn, .no, .nt, .nv { color: #c9d1d9; }
+  // Functions
+  .nf, .fm { color: #d2a8ff; }
+  // Classes/Types
+  .nc, .ne { color: #ffa657; }
+  // Operators
+  .o, .ow { color: #ff7b72; }
+  // Punctuation
+  .p { color: #c9d1d9; }
+  // Constants
+  .kc { color: #79c0ff; }
+  // Attributes
+  .na { color: #79c0ff; }
+  // Tags (HTML/XML)
+  .nt { color: #7ee787; }
+  // Property names (JSON/YAML)
+  .nl { color: #79c0ff; }
+  // Language variable (this, self)
+  .bp { color: #79c0ff; }
+  // Error
+  .err { color: #f85149; }
+}
+
 // Lists
 ul, ol {
   padding-left: 1.5rem;
