@@ -181,36 +181,7 @@ Generate a Copilot report for organization "my-team" from 2024-01-01 to 2024-01-
 
 The application follows a typical MCP Apps pattern with tool-UI binding:
 
-```mermaid
-flowchart TB
-    subgraph Host["MCP Host (VS Code, Claude Desktop)"]
-        User([User]) --> Model[AI Model]
-        Model -->|Tool Call| Server
-        Server -->|JSON Report| Model
-        Model -->|Summary| Response([Response])
-        
-        subgraph Dashboard["React Dashboard"]
-            useApp["useApp() hook"]
-            Charts["Chart.js Visualizations"]
-        end
-    end
-    
-    subgraph Server["Copilot Compass Server"]
-        Tools["registerAppTool()"]
-        Resources["registerAppResource()"]
-        Tools --> Resources
-    end
-    
-    Resources -->|HTML Bundle| Dashboard
-    Server -->|ontoolresult| useApp
-    
-    subgraph GitHub["GitHub API"]
-        API["/copilot/metrics"]
-    end
-    
-    Server -->|Fetch| API
-    API -->|Metrics Data| Server
-```
+![Copilot Compass Architecture](https://mermaid.ink/img/pako:eNp1kk1uwzAMhK9CaJ0cwAu3i3bVRYGiQLoSvGBkOhYqS4Ykp02D3L2ynfwU9c7kfBwOyQNTRiIL2c5ZldNWYIWVsfjMbQ4l6LVxHs6g8FoE7sMbhQVS9_N6ATds8JPLClQFl_EB4QVfLDoa3bCYI3tCMNw7u4MvbvActhXPueYkqMZ6wL1vShvhFCfg1jnU4DlyXyqsbQNBQkM_4q1bxEmNhqKNNKHhxmGJb4QPMCrxDSrLkcN-yE_Ixwkl-h5vxBlp6SoeGxphHmY--z8mT9idKdHRBdDiThjMeiprXoD7RQv5NxQ9TG4UdfjHgj_1P2V1X6DvutSzlxp9dXEwZoOFJoFspKkCLVk4Qv9eEb3ALmOuUlizqvP6EI5kvSqpZGHYUKpIJKPJa-PybSrjXpZsSgT_prB2uo2FV-z_ACwsq-0)
 
 ### Key Components
 
@@ -289,7 +260,21 @@ MCP Apps SDK support is expected to ship in VS Code Stable in a future release. 
 
 ## Exposing Publicly with Cloudflare Tunnel
 
-For remote access or sharing, you can expose the local server using Cloudflare Tunnel:
+For remote access or sharing, you can expose the local server using Cloudflare Tunnel.
+
+### Quick Method
+
+The project includes a convenience script that starts both the server and tunnel:
+
+```bash
+npm run public
+```
+
+This command builds the project, starts the MCP server, and creates a Cloudflare tunnel in one step.
+
+### Manual Method
+
+If you prefer to run the steps separately:
 
 ```bash
 # Install cloudflared
@@ -315,6 +300,19 @@ Cloudflared outputs a public URL like `https://random-words.trycloudflare.com`. 
   }
 }
 ```
+
+### Configuring in VS Code via Command Palette
+
+Once you have the tunnel URL, you can add the MCP server directly from VS Code:
+
+1. Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS) to open the Command Palette
+2. Type **"MCP: Add Server"** and select it
+3. Choose **"HTTP"** as the server type
+4. Enter a name for the server: `copilot-compass`
+5. Paste your tunnel URL with the `/mcp` path: `https://random-words.trycloudflare.com/mcp`
+6. Press Enter to confirm
+
+VS Code will add the server to your MCP configuration and it will be available in GitHub Copilot Chat immediately.
 
 ## Demo Mode
 
