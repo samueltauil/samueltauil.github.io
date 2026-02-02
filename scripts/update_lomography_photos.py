@@ -6,29 +6,89 @@ Ensures no duplicate photos are added to the gallery.
 
 import re
 import time
-try:
-    import cloudscraper
-    scraper = cloudscraper.create_scraper(
-        browser={
-            'browser': 'chrome',
-            'platform': 'windows',
-            'desktop': True
-        }
-    )
-except ImportError:
-    # Fallback to requests if cloudscraper not available
-    import requests
-    scraper = requests.Session()
-    scraper.headers.update({
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    })
-
+import subprocess
+import random
 from bs4 import BeautifulSoup
 
 LOMOGRAPHY_USERNAME = "samueltauil"
 LOMOGRAPHY_PROFILE_URL = f"https://www.lomography.com/homes/{LOMOGRAPHY_USERNAME}/photos?order=recent"
 PHOTOGRAPHY_MD_PATH = "photography.md"
 NUM_PHOTOS_TO_FETCH = 12
+MAX_RETRIES = 3
+
+# User agents to rotate
+USER_AGENTS = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0",
+]
+
+
+def fetch_with_curl(url):
+    """Fetch URL using curl as a fallback (often works better with Cloudflare)."""
+    user_agent = random.choice(USER_AGENTS)
+    try:
+        result = subprocess.run(
+            [
+                "curl", "-s", "-L",
+                "-H", f"User-Agent: {user_agent}",
+                "-H", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+                "-H", "Accept-Language: en-US,en;q=0.5",
+                "-H", "Accept-Encoding: gzip, deflate, br",
+                "-H", "Connection: keep-alive",
+                "-H", "Upgrade-Insecure-Requests: 1",
+                "--compressed",
+                url
+            ],
+            capture_output=True,
+            text=True,
+            timeout=60
+        )
+        if result.returncode == 0 and result.stdout:
+            return result.stdout
+    except Exception as e:
+        print(f"  curl failed: {e}")
+    return None
+
+
+def fetch_url(url, retries=MAX_RETRIES):
+    """Fetch URL with retry logic, trying curl first then cloudscraper."""
+    last_error = None
+    
+    for attempt in range(retries):
+        if attempt > 0:
+            wait_time = (2 ** attempt) + random.uniform(0, 1)
+            print(f"  Retry {attempt}/{retries-1}, waiting {wait_time:.1f}s...")
+            time.sleep(wait_time)
+        
+        # Try curl first (often bypasses Cloudflare better)
+        print(f"  Attempt {attempt + 1}: trying curl...")
+        content = fetch_with_curl(url)
+        if content and len(content) > 1000:  # Sanity check for valid response
+            return content
+        
+        # Try cloudscraper as fallback
+        try:
+            import cloudscraper
+            scraper = cloudscraper.create_scraper(
+                browser={
+                    'browser': 'chrome',
+                    'platform': 'linux',
+                    'desktop': True
+                },
+                delay=10
+            )
+            print(f"  Attempt {attempt + 1}: trying cloudscraper...")
+            response = scraper.get(url, timeout=30)
+            if response.status_code == 200:
+                return response.text
+            last_error = f"HTTP {response.status_code}"
+        except Exception as e:
+            last_error = str(e)
+            print(f"  cloudscraper failed: {e}")
+    
+    raise Exception(f"Failed to fetch {url} after {retries} attempts. Last error: {last_error}")
 
 
 def get_existing_photo_ids():
@@ -49,13 +109,12 @@ def get_existing_photo_ids():
 
 def fetch_recent_photo_ids():
     """Fetch the most recent photo IDs from Lomography profile."""
-    response = scraper.get(LOMOGRAPHY_PROFILE_URL, timeout=30)
-    response.raise_for_status()
+    content = fetch_url(LOMOGRAPHY_PROFILE_URL)
     
     # Extract photo IDs from the page
     photo_ids = re.findall(
         rf'/homes/{LOMOGRAPHY_USERNAME}/photos/(\d+)',
-        response.text
+        content
     )
     # Remove duplicates while preserving order
     seen = set()
@@ -72,10 +131,9 @@ def fetch_photo_cdn_url(photo_id):
     """Fetch the CDN URL for a specific photo."""
     photo_url = f"https://www.lomography.com/homes/{LOMOGRAPHY_USERNAME}/photos/{photo_id}"
     time.sleep(1)  # Rate limiting: wait 1 second between requests
-    response = scraper.get(photo_url, timeout=30)
-    response.raise_for_status()
+    content = fetch_url(photo_url)
     
-    soup = BeautifulSoup(response.text, 'html.parser')
+    soup = BeautifulSoup(content, 'html.parser')
     
     # Find the main image - look for img tags with cdn.assets.lomography.com
     img_tags = soup.find_all('img')
@@ -98,10 +156,9 @@ def fetch_photo_title(photo_id):
     """Fetch the title/description for a specific photo."""
     photo_url = f"https://www.lomography.com/homes/{LOMOGRAPHY_USERNAME}/photos/{photo_id}"
     time.sleep(0.5)  # Rate limiting
-    response = scraper.get(photo_url, timeout=30)
-    response.raise_for_status()
+    content = fetch_url(photo_url)
     
-    soup = BeautifulSoup(response.text, 'html.parser')
+    soup = BeautifulSoup(content, 'html.parser')
     
     # Try to find the photo description
     og_title = soup.find('meta', property='og:title')
