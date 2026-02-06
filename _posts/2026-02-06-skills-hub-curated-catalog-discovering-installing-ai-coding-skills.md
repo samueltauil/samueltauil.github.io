@@ -27,13 +27,13 @@ As the ecosystem of GitHub Copilot skills has grown, a few challenges have emerg
 
 Skills Hub is a curated, open-source catalog website for discovering, browsing, and installing GitHub Copilot agent skills. It aggregates skills from multiple sources into a single searchable hub with one-click download.
 
-The site currently catalogs **55+ skills** from **3 source repositories**, organized into **10+ categories**.
+The site currently catalogs **51 skills** from **3 source repositories**, organized into **8 categories**.
 
 ## Key Features
 
 ### Unified Skill Catalog
 
-Skills from `github/awesome-copilot`, `anthropics/skills`, and `modelcontextprotocol/ext-apps` are aggregated into a single browsable interface. Each skill displays its description, category, source repository, file count, and all included files.
+Skills from `github/awesome-copilot`, `anthropics/skills`, and `modelcontextprotocol/ext-apps` are aggregated into a single browsable interface. Only skills with redistributable licenses (MIT, Apache-2.0, BSD, ISC, CC-BY-4.0) are included. Each skill displays its description, category, source repository, file count, and all included files.
 
 ### Category-Based Browsing
 
@@ -51,6 +51,8 @@ Skills are organized into categories that cover the full development lifecycle:
 | DevOps & CI/CD | Pipelines, Docker, Kubernetes |
 | Security | Audits, vulnerabilities, secure coding |
 | Data & Analytics | Data pipelines, SQL, analytics |
+| Office Documents | Word, Excel, PowerPoint, PDF |
+| MCP Development | Model Context Protocol development |
 
 Each category has its own page with filtered listings, and the homepage features visual category cards for quick navigation.
 
@@ -114,7 +116,8 @@ const SOURCES = [
     path: path.join(SOURCES_DIR, 'awesome-copilot', 'skills'),
     repo: 'https://github.com/github/awesome-copilot',
     author: 'github',
-    defaultLicense: 'MIT'
+    defaultLicense: 'MIT',
+    licenseNotice: 'MIT License — Copyright GitHub, Inc.'
   },
   {
     id: 'anthropics-skills',
@@ -122,7 +125,8 @@ const SOURCES = [
     path: path.join(SOURCES_DIR, 'anthropics-skills', 'skills'),
     repo: 'https://github.com/anthropics/skills',
     author: 'anthropic',
-    defaultLicense: 'Proprietary'
+    defaultLicense: 'Apache-2.0',
+    licenseNotice: 'Licensed under the Apache License, Version 2.0.'
   },
   {
     id: 'mcp-ext-apps',
@@ -130,7 +134,8 @@ const SOURCES = [
     path: path.join(SOURCES_DIR, 'mcp-ext-apps', 'plugins', 'mcp-apps', 'skills'),
     repo: 'https://github.com/modelcontextprotocol/ext-apps',
     author: 'modelcontextprotocol',
-    defaultLicense: 'MIT'
+    defaultLicense: 'MIT',
+    licenseNotice: 'Licensed under Apache-2.0 (new contributions) / MIT (prior contributions).'
   }
 ];
 ```
@@ -139,9 +144,11 @@ For each skill folder, the script:
 
 1. Reads and parses the SKILL.md file (frontmatter + content)
 2. Recursively collects all files in the skill folder
-3. Auto-categorizes the skill based on keywords in its name and description
-4. Generates tags from the content
-5. Builds a structured skill object with all metadata and file contents
+3. Detects the license from LICENSE files in the skill folder
+4. Skips skills with non-redistributable licenses (e.g., proprietary or "all rights reserved")
+5. Auto-categorizes the skill based on keywords in its name and description
+6. Generates tags from the content
+7. Builds a structured skill object with all metadata and file contents
 
 The output is a single `skills.json` file that Astro uses to generate all pages at build time.
 
@@ -151,15 +158,18 @@ Skills are automatically categorized using keyword matching:
 
 ```javascript
 const CATEGORY_KEYWORDS = {
-  'git-version-control': ['git', 'commit', 'branch', 'github', 'version control'],
-  'code-quality': ['refactor', 'lint', 'quality', 'review', 'clean code'],
-  'documentation': ['doc', 'readme', 'prd', 'requirements', 'markdown'],
-  'testing': ['test', 'e2e', 'unit test', 'qa', 'playwright'],
-  'api-backend': ['api', 'rest', 'graphql', 'backend', 'sdk'],
-  'frontend-ui': ['frontend', 'ui', 'react', 'css', 'design'],
-  'devops-cicd': ['deploy', 'ci', 'cd', 'docker', 'kubernetes', 'terraform'],
+  'git-version-control': ['git', 'commit', 'branch', 'github', 'version control', 'gh-cli', 'contribution'],
+  'code-quality': ['refactor', 'lint', 'quality', 'review', 'clean code', 'vscode-ext'],
+  'documentation': ['doc', 'readme', 'prd', 'requirements', 'markdown', 'meeting', 'internal-comms'],
+  'diagrams': ['diagram', 'excalidraw', 'plantuml', 'mermaid', 'visualization', 'circuit'],
+  'testing': ['test', 'e2e', 'unit test', 'qa', 'playwright', 'chrome-devtools', 'webapp-testing'],
+  'api-backend': ['api', 'rest', 'graphql', 'backend', 'sdk', 'nuget'],
+  'frontend-ui': ['frontend', 'ui', 'react', 'css', 'design', 'canvas', 'image', 'brand', 'theme'],
+  'devops-cicd': ['deploy', 'ci', 'cd', 'docker', 'kubernetes', 'terraform', 'azure', 'appinsights'],
   'security': ['security', 'auth', 'rbac', 'role', 'permission'],
-  // ... more categories
+  'data-analytics': ['data', 'analytics', 'sql', 'powerbi', 'snowflake'],
+  'office-documents': ['docx', 'xlsx', 'pptx', 'pdf', 'word', 'excel', 'powerpoint'],
+  'mcp-development': ['mcp', 'model context protocol', 'skill-creator', 'make-skill']
 };
 ```
 
