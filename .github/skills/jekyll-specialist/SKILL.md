@@ -110,7 +110,7 @@ See [styling reference](references/STYLING.md) for full color palette and CSS cl
 ### Add a new certification
 Add to `about.md` under appropriate category:
 ```markdown
-- [Certification Name](credly-or-verify-url) (Month Year)
+- [Certification Name](https://www.credly.com) (Month Year)
 ```
 
 ### Update navigation
