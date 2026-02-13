@@ -903,6 +903,15 @@ img {
   height: auto;
 }
 
+// Inline icon for headings
+.inline-icon {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: middle;
+  margin-right: 0.3em;
+  display: inline-block;
+}
+
 // Selection
 ::selection {
   background: rgba(163, 113, 247, 0.3);
