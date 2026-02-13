@@ -651,6 +651,66 @@ pre {
   }
 }
 
+// Rouge syntax highlighting (GitHub dark theme)
+// Target GitHub Pages generated structure: .highlighter-rouge > .highlight > pre.highlight > code
+.highlighter-rouge,
+.highlight {
+  background: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  margin: 1rem 0;
+  overflow-x: auto;
+  
+  .highlight {
+    background: transparent;
+    border: none;
+    margin: 0;
+  }
+  
+  pre,
+  pre.highlight {
+    margin: 0;
+    padding: 1rem;
+    border: none;
+    background: transparent;
+    overflow-x: auto;
+  }
+  
+  code {
+    background: transparent;
+    padding: 0;
+  }
+  
+  // Comments
+  .c, .c1, .cm, .cs, .cp { color: #8b949e; font-style: italic; }
+  // Keywords
+  .k, .kc, .kd, .kn, .kp, .kr, .kt { color: #ff7b72; }
+  // Strings
+  .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sr, .ss, .sx { color: #a5d6ff; }
+  // Numbers
+  .m, .mf, .mh, .mi, .mo, .il { color: #79c0ff; }
+  // Names/Variables
+  .n, .nb, .nd, .ni, .nn, .no, .nv, .vc, .vg, .vi { color: #c9d1d9; }
+  // Functions
+  .nf, .fm { color: #d2a8ff; }
+  // Classes/Types
+  .nc, .ne { color: #ffa657; }
+  // Operators
+  .o, .ow { color: #ff7b72; }
+  // Punctuation
+  .p { color: #c9d1d9; }
+  // Attributes
+  .na { color: #79c0ff; }
+  // Tags (HTML/XML)
+  .nt { color: #7ee787; }
+  // Property names (JSON/YAML)
+  .nl { color: #79c0ff; }
+  // Language variable (this, self)
+  .bp { color: #79c0ff; }
+  // Error
+  .err { color: #f85149; background: transparent; }
+}
+
 // Lists
 ul, ol {
   padding-left: 1.5rem;
@@ -875,6 +935,7 @@ img {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 100%;
 }
 
 .code-header {
@@ -910,6 +971,13 @@ img {
 
 .code-content {
   padding: 1.5rem;
+  overflow-x: hidden;
+  max-width: 100%;
+  
+  pre {
+    margin: 0;
+    overflow: hidden;
+  }
 }
 
 .yaml-code {
@@ -946,6 +1014,9 @@ img {
   margin: 0;
   font-size: 0.9375rem;
   line-height: 1.8;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-x: hidden;
 }
 
 .md-h1 {
