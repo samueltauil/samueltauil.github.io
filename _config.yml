@@ -24,10 +24,17 @@ kramdown:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-polyglot
 
 # SEO
 author:
   name: Samuel Tauil
+
+# Polyglot i18n
+languages: ["en", "pt-br"]
+default_lang: "en"
+exclude_from_localization: ["assets", "scripts", "images"]
+parallel_localization: true
 
 # Exclude from build
 exclude:

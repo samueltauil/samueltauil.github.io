@@ -7,8 +7,9 @@ layout: default
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{ page.date | date: "%B %d, %Y" }}
+        {% if site.active_lang == 'pt-br' %}{{ page.date | date: "%d de %B de %Y" }}{% else %}{{ page.date | date: "%B %d, %Y" }}{% endif %}
       </time>
+      <meta itemprop="inLanguage" content="{{ site.active_lang }}">
       {% if page.author %}
         • <span itemprop="author" itemscope itemtype="http://schema.org/Person">
             <span class="p-author h-card" itemprop="name">{{ page.author }}</span>
@@ -29,6 +30,6 @@ layout: default
 
   <footer class="post-footer">
     <hr>
-    <a href="{{ '/' | relative_url }}">&larr; Back to home</a>
+    <a href="{{ '/' | relative_url }}">&larr; {% if site.active_lang == 'pt-br' %}Voltar ao início{% else %}Back to home{% endif %}</a>
   </footer>
 </article>

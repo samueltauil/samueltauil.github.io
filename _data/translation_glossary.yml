@@ -1,0 +1,254 @@
+# Technical terms to preserve in English during PT-BR translation
+# Built from comprehensive analysis of all blog posts and site content
+#
+# Rule: These terms should appear in English even within Portuguese sentences.
+# Example: "Eu criei um **workflow** que..." NOT "Eu criei um **fluxo de trabalho** que..."
+
+terms:
+
+  # ─── Products & Brands ───────────────────────────────────────────────
+  - GitHub
+  - GitHub Copilot
+  - GitHub Actions
+  - GitHub Pages
+  - GitHub Enterprise
+  - GitHub Codespaces
+  - VS Code
+  - Visual Studio Code
+  - VS Code Insiders
+  - Azure
+  - Azure AI
+  - Azure Functions
+  - Azure Static Web App
+  - Azure Speech Services
+  - Azure Text Analytics for Health
+  - Cosmos DB
+  - Microsoft
+  - Red Hat
+  - OpenShift
+  - JBoss
+  - Cloudflare
+  - Cloudflare Tunnel
+  - Claude
+  - Claude Desktop
+  - Codex
+  - Dependabot
+  - Coursera
+  - Credly
+  - Linux Foundation
+
+  # ─── Frameworks & Libraries ──────────────────────────────────────────
+  - Jekyll
+  - Astro
+  - React
+  - Chart.js
+  - react-chartjs-2
+  - Express
+  - Zod
+  - Hibernate
+  - Seam
+  - jBPM
+  - Knative
+  - Helm
+  - Kustomize
+  - Terraform
+  - Ansible
+  - Playwright
+
+  # ─── Languages & Runtimes ────────────────────────────────────────────
+  - Node.js
+  - TypeScript
+  - JavaScript
+  - Python
+  - Java
+  - Ruby
+  - LaTeX
+  - Markdown
+  - YAML
+  - JSON
+  - SCSS
+  - CSS
+  - HTML
+  - SQL
+
+  # ─── Protocols & Standards ───────────────────────────────────────────
+  - MCP
+  - Model Context Protocol
+  - MCP Apps
+  - MCP Apps SDK
+  - FHIR
+  - FHIR R4
+  - REST
+  - API
+  - SDK
+  - CLI
+  - GraphQL
+  - SARIF
+  - UMLS
+  - RSS
+  - Atom
+  - Schema.org
+  - hreflang
+  - OAuth
+  - PAT
+
+  # ─── DevOps & Infrastructure ─────────────────────────────────────────
+  - CI/CD
+  - pipeline
+  - deploy
+  - commit
+  - push
+  - pull request
+  - merge
+  - branch
+  - fork
+  - workflow
+  - plugin
+  - template
+  - layout
+  - endpoint
+  - webhook
+  - container
+  - middleware
+  - framework
+  - runtime
+  - sandbox
+  - sprint
+  - backlog
+  - release
+  - tag
+  - diff
+  - patch
+  - cron
+  - monorepo
+  - Docker
+  - Kubernetes
+  - Argo CD
+  - ArgoCD
+  - GitOps
+  - DevOps
+  - DevSecOps
+  - MLOps
+
+  # ─── AI & Agent Concepts ─────────────────────────────────────────────
+  - skill
+  - agent
+  - prompt
+  - token
+  - schema
+  - hook
+  - LLM
+  - NER
+  - diarization
+  - frontmatter
+  - agentic workflow
+  - agentic workflows
+  - GitHub Agentic Workflows
+  - gh-aw
+  - safe outputs
+  - safe-outputs
+  - noop
+  - ChatOps
+  - IssueOps
+  - DailyOps
+
+  # ─── MCP-Specific Terms ──────────────────────────────────────────────
+  - MCP server
+  - MCP endpoint
+  - MCP client
+  - registerAppTool
+  - registerAppResource
+  - useApp
+  - useHostStyles
+  - ontoolresult
+  - display-chart
+  - generate_copilot_report
+  - streamable HTTP
+
+  # ─── VS Code Concepts ───────────────────────────────────────────────
+  - Command Palette
+  - Quick Open
+  - Zen Mode
+  - Keyboard Shortcuts
+  - multi-cursor
+  - sidebar
+  - extension
+  - marketplace
+
+  # ─── File Formats & Data ─────────────────────────────────────────────
+  - WAV
+  - MP3
+  - M4A
+  - FLAC
+  - OGG
+  - PDF
+  - ZIP
+  - SVG
+  - CSV
+
+  # ─── Observability & Monitoring ──────────────────────────────────────
+  - Jaeger
+  - Grafana
+  - Grafana Tempo
+  - Prometheus
+  - Kafka
+
+  # ─── Skills Hub Specific ─────────────────────────────────────────────
+  - Skills Hub
+  - SKILL.md
+  - agent.md
+  - chatmode.md
+  - registry.json
+  - skills.json
+  - awesome-copilot
+  - sparse-checkout
+
+  # ─── Resume & Certifications ─────────────────────────────────────────
+  - Certified GitOps Associate
+  - CGA
+  - GitOpsCon
+  - ArgoCon
+
+  # ─── Photography Terms (kept as brand names) ─────────────────────────
+  - Lomography
+  - MiNT
+  - Polaroid
+  - Canon
+  - Pentax
+  - Mamiya
+
+  # ─── General Dev Terms (commonly kept in BR tech) ────────────────────
+  - open source
+  - README
+  - CONTRIBUTING
+  - CHANGELOG
+  - lockfile
+  - submodule
+  - git
+  - upstream
+  - downstream
+  - hot-reload
+  - dashboard
+  - mock
+  - setup
+  - boilerplate
+  - scaffolding
+  - bundler
+  - linter
+  - refactor
+  - debug
+  - feature
+  - bugfix
+  - breaking change
+  - cheat sheet
+  - feedback
+  - workaround
+  - input
+  - output
+  - default
+  - log
+  - benchmark
+  - cache
+  - snippet
+  - batch
+  - streaming

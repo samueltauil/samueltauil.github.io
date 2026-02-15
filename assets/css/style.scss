@@ -1097,3 +1097,90 @@ img {
     display: none;
   }
 }
+
+// Language Toggle Switch
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
+  padding-left: 1rem;
+  border-left: 1px solid $border-color;
+}
+
+.lang-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+  user-select: none;
+
+  &.active {
+    color: $text-primary;
+  }
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $bg-tertiary;
+  border: 1px solid $border-color;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    left: 2px;
+    bottom: 2px;
+    background: $accent-purple;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 4px rgba(163, 113, 247, 0.4);
+  }
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  border-color: $accent-purple;
+
+  &::before {
+    transform: translateX(16px);
+    background: $accent-green;
+    box-shadow: 0 0 4px rgba(63, 185, 80, 0.4);
+  }
+}
+
+.toggle-switch input:focus + .toggle-slider {
+  outline: 2px solid $accent-blue;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .lang-toggle {
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0;
+    padding: 0.5rem 0;
+  }
+}

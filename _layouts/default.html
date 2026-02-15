@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ site.active_lang | default: 'en' }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,9 @@
   
   <!-- SEO -->
   {% seo %}
+  
+  <!-- Multilingual hreflang -->
+  {% I18n_Headers %}
   
   <!-- Feed -->
   {% feed_meta %}
@@ -52,6 +55,14 @@
         menuToggle.addEventListener('click', function() {
           nav.classList.toggle('active');
           this.setAttribute('aria-expanded', nav.classList.contains('active'));
+        });
+      }
+
+      // Language toggle switch
+      const langSwitch = document.getElementById('lang-switch');
+      if (langSwitch) {
+        langSwitch.addEventListener('change', function() {
+          window.location.href = this.dataset.target;
         });
       }
     });

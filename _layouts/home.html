@@ -30,19 +30,23 @@ layout: default
   
   <aside class="home-sidebar">
     <div class="sidebar-section">
-      <h2>Latest Posts</h2>
+      <h2>{% if site.active_lang == 'pt-br' %}Últimas Publicações{% else %}Latest Posts{% endif %}</h2>
       {% if site.posts.size > 0 %}
       <ul class="sidebar-posts">
         {% for post in site.posts limit:5 %}
         <li>
           <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+          {% if site.active_lang == 'pt-br' %}
+          <span class="post-date">{{ post.date | date: "%d de %B de %Y" }}</span>
+          {% else %}
           <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
+          {% endif %}
         </li>
         {% endfor %}
       </ul>
-      <a href="{{ '/posts/' | relative_url }}" class="view-all">View all posts →</a>
+      <a href="{{ '/posts/' | relative_url }}" class="view-all">{% if site.active_lang == 'pt-br' %}Ver todas as publicações →{% else %}View all posts →{% endif %}</a>
       {% else %}
-      <p>No posts yet.</p>
+      <p>{% if site.active_lang == 'pt-br' %}Nenhuma publicação ainda.{% else %}No posts yet.{% endif %}</p>
       {% endif %}
     </div>
   </aside>
