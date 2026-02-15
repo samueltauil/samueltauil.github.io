@@ -1,4 +1,6 @@
 ---
+lang: pt-br
+permalink: /github/devops/automation/2025/10/20/automating-resume-builds-github-actions.html
 layout: post
 title: "Automatizando Builds de Currículo com GitHub Actions"
 date: 2025-10-20

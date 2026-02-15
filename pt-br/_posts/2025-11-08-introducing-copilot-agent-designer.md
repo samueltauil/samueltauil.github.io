@@ -1,4 +1,6 @@
 ---
+lang: pt-br
+permalink: /github-copilot/vscode/extensions/2025/11/08/introducing-copilot-agent-designer.html
 layout: post
 title: "Apresentando o Copilot Agent Designer: Um Workflow Visual para Agents do GitHub Copilot"
 date: 2025-11-08

@@ -1,4 +1,5 @@
 ---
+lang: en
 layout: post
 title: "Skills Hub: A Curated Catalog for Discovering and Installing AI Coding Skills"
 date: 2026-02-06

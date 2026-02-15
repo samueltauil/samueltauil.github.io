@@ -1,4 +1,6 @@
 ---
+lang: pt-br
+permalink: /github-copilot/open-source/developer-tools/2026/02/06/skills-hub-curated-catalog-discovering-installing-ai-coding-skills.html
 layout: post
 title: "Skills Hub: Um Catálogo Curado para Descobrir e Instalar Skills de Codificação com IA"
 date: 2026-02-06

@@ -1,4 +1,6 @@
 ---
+lang: pt-br
+permalink: /mcp/vscode/ai/tutorial/2026/01/28/building-mcp-app-interactive-charts-vscode.html
 layout: post
 title: "Construindo um MCP App com Gráficos Interativos para VS Code"
 date: 2026-01-28

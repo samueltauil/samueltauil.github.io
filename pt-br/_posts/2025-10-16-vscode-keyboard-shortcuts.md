@@ -1,4 +1,6 @@
 ---
+lang: pt-br
+permalink: /vscode/productivity/2025/10/16/vscode-keyboard-shortcuts.html
 layout: post
 title: "Aumente Sua Velocidade no VS Code com Atalhos de Teclado"
 date: 2025-10-16
