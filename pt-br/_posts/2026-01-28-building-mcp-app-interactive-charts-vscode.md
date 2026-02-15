@@ -1,5 +1,4 @@
 ---
-lang: pt-br
 layout: post
 title: "Construindo um MCP App com Gráficos Interativos para VS Code"
 date: 2026-01-28

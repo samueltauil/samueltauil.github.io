@@ -1,5 +1,4 @@
 ---
-lang: en
 layout: post
 title: "Automating Resume Builds with GitHub Actions"
 date: 2025-10-20

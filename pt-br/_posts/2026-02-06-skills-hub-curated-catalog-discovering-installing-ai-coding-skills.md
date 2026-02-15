@@ -1,5 +1,4 @@
 ---
-lang: pt-br
 layout: post
 title: "Skills Hub: Um Catálogo Curado para Descobrir e Instalar Skills de Codificação com IA"
 date: 2026-02-06

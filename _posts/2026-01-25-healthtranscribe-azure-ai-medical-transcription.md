@@ -1,5 +1,4 @@
 ---
-lang: en
 layout: post
 title: "HealthTranscribe: AI-Powered Medical Transcription with Azure"
 date: 2026-01-25 10:00:00 -0500
