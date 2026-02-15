@@ -2,6 +2,7 @@
 layout: page
 title: Fotografia
 permalink: /photography/
+lang: pt-br
 ---
 
 <p class="tagline" style="font-size: 1.1rem; color: #8b949e; margin-bottom: 2rem;">

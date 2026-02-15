@@ -1,4 +1,5 @@
 ---
+lang: pt-br
 layout: post
 title: "Automatizando Builds de Currículo com GitHub Actions"
 date: 2025-10-20

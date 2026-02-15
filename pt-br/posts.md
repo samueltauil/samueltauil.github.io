@@ -2,6 +2,7 @@
 layout: page
 title: Posts
 permalink: /posts/
+lang: pt-br
 ---
 
 <section class="section">

@@ -1,4 +1,5 @@
 ---
+lang: en
 layout: post
 title: "Building My First Agentic Workflow: A Documentation Sync Agent with GitHub Agentic Workflows"
 date: 2026-02-13

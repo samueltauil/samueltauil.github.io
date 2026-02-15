@@ -1,4 +1,5 @@
 ---
+lang: pt-br
 layout: post
 title: "Copilot Compass: Navegue Sua Adoção de GitHub Copilot com Insights Acionáveis"
 date: 2026-02-02

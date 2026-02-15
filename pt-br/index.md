@@ -1,6 +1,7 @@
 ---
 layout: home
 title: Início
+lang: pt-br
 ---
 
 <section class="section">

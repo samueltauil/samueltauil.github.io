@@ -1,4 +1,5 @@
 ---
+lang: en
 layout: post
 title: "Copilot Compass: Navigate Your GitHub Copilot Adoption with Actionable Insights"
 date: 2026-02-02

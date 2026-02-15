@@ -1,4 +1,5 @@
 ---
+lang: pt-br
 layout: post
 title: "Apresentando o Copilot Agent Designer: Um Workflow Visual para Agents do GitHub Copilot"
 date: 2025-11-08

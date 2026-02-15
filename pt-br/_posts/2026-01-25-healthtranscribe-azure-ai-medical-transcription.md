@@ -1,4 +1,5 @@
 ---
+lang: pt-br
 layout: post
 title: "HealthTranscribe: Transcrição Médica Baseada em IA com Azure"
 date: 2026-01-25 10:00:00 -0500

@@ -2,6 +2,7 @@
 layout: page
 title: About
 permalink: /about/
+lang: en
 ---
 
 <h2 style="margin-top: 0; font-size: 1.75rem;">Samuel Tauil</h2>
