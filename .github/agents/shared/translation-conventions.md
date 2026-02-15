@@ -177,6 +177,47 @@ preserved verbatim. If the diff exceeds ~60% of lines (major rewrite), fall back
 to full re-translation but still read the existing PT-BR first to absorb the
 established voice.
 
+### 6. Polyglot rewrites internal links to external projects
+
+**Problem:** Polyglot automatically rewrites any URL in rendered HTML that
+matches `site.url` (e.g., `https://samueltauil.github.io/...`), adding the
+`/pt-br/` language prefix. This breaks links to separate projects hosted on
+the same GitHub Pages domain (e.g., `/skills-hub`, `/other-project`) because
+those projects have no `/pt-br/` version.
+
+In markdown source: `[Live Site](https://samueltauil.github.io/skills-hub)`
+Rendered by polyglot: `<a href="https://samueltauil.github.io/pt-br/skills-hub">`
+
+**Fix:** In PT-BR files, convert affected links from markdown syntax to HTML
+using polyglot's `{% static_href %}` tag, which prevents URL rewriting:
+
+```html
+<a {% static_href %}href="https://samueltauil.github.io/skills-hub"{% endstatic_href %}>Live Site</a>
+```
+
+This applies to any link pointing to `samueltauil.github.io/<path>` where
+`<path>` is a separate project, not a page on this site. Links to
+`github.com/...` are not affected (different domain).
+
+### 7. `site.description` not translated in layouts
+
+**Problem:** The `{{ site.description }}` Liquid variable used in layouts
+(e.g., the hero tagline on the home page) pulls from `_config.yml`, which
+contains a single English string. Polyglot does not translate `_config.yml`
+values, so PT-BR pages display the English description.
+
+**Fix:** Use `site.active_lang` conditionals in layouts instead of relying
+on `{{ site.description }}` alone. The translated text must be hardcoded
+in the layout template:
+
+```liquid
+{% if site.active_lang == 'pt-br' %}
+<p class="tagline">Translated description here.</p>
+{% else %}
+<p class="tagline">{{ site.description }}</p>
+{% endif %}
+```
+
 ## Translation Quality Checklist
 
 - [ ] All glossary terms preserved in English
@@ -188,6 +229,7 @@ established voice.
 - [ ] Every PT-BR post has an explicit `permalink` matching the English URL pattern
 - [ ] `permalink` does NOT contain `pt-br` as a path segment
 - [ ] `categories` array does NOT include `pt-br`
+- [ ] Links to external projects on same domain use `{% static_href %}` in PT-BR files
 - [ ] Natural-sounding Brazilian Portuguese
 - [ ] No machine-translation artifacts
 - [ ] Consistent verb tense and pronoun usage

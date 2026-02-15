@@ -89,7 +89,14 @@ preserve consistency:
    - **Added content**: translate and insert at the corresponding position.
    - **Removed content**: remove the corresponding Portuguese text.
    - **Unchanged content**: preserve the existing Portuguese text **verbatim** —
-     do not rephrase, improve, or re-translate it.
+     do not rephrase, improve, or re-translate it. Copy it character-for-character
+     from the existing PT-BR file. Do NOT touch lines that were not affected by
+     the diff, even if you think you could improve them.
+
+   **Critical**: Start from the existing PT-BR file content as your output base.
+   Then apply only the specific paragraph replacements/insertions/deletions
+   identified from the diff. The final output must be identical to the existing
+   PT-BR file except for the paragraphs that correspond to changed English text.
 
 6. **Fallback to full re-translation**: If the diff shows more than ~60% of the
    file's lines changed (major rewrite), do a full re-translation instead — but
@@ -121,6 +128,15 @@ phrasing across edits, and only genuinely changed content gets new translations.
 - In YAML frontmatter: translate `title` and `excerpt` only. Keep `layout`, `date`,
   `tags`, `categories`, and all other fields unchanged.
 - Match the tone of the original — conversational, first-person, technically precise.
+- **Links to external projects on the same domain**: Any markdown link pointing to
+  `https://samueltauil.github.io/<path>` where `<path>` is a separate project (not
+  a page on this site) must be converted to HTML using polyglot's `static_href` tag
+  to prevent URL rewriting. Example:
+  ```html
+  <a {% static_href %}href="https://samueltauil.github.io/skills-hub"{% endstatic_href %}>Live Site</a>
+  ```
+  This prevents polyglot from adding `/pt-br/` to external project URLs. Links to
+  `github.com/...` (different domain) do not need this treatment.
 - Process files one at a time: read source → write translation → move to next.
 
 ### Output

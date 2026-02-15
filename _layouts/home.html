@@ -5,7 +5,11 @@ layout: default
 <div class="hero-compact">
   <div class="hero-info">
     <h1>{{ site.title }}</h1>
+    {% if site.active_lang == 'pt-br' %}
+    <p class="tagline">Engenheiro de Soluções Sênior na Microsoft focado em Experiência do Desenvolvedor — GitHub Copilot, VS Code, Codespaces e tecnologias cloud-native.</p>
+    {% else %}
     <p class="tagline">{{ site.description }}</p>
+    {% endif %}
   </div>
   <div class="hero-badges">
     <a href="https://github.com/{{ site.github_username }}" class="badge" target="_blank" rel="noopener">

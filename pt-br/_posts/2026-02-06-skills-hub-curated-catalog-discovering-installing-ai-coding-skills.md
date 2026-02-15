@@ -12,7 +12,7 @@ GitHub Copilot skills são poderosos. Eles permitem que você ensine ao Copilot 
 
 ![Skills Hub Homepage](/assets/images/2026-02-06-skills-hub/homepage.png)
 
-**Site ao vivo**: [samueltauil.github.io/skills-hub](https://samueltauil.github.io/skills-hub)
+**Site ao vivo**: <a {% static_href %}href="https://samueltauil.github.io/skills-hub"{% endstatic_href %}>samueltauil.github.io/skills-hub</a>
 
 **Repositório**: [github.com/samueltauil/skills-hub](https://github.com/samueltauil/skills-hub)
 
@@ -257,7 +257,7 @@ Há várias features planejadas para versões futuras:
 
 ## Recursos
 
-- [Live Site](https://samueltauil.github.io/skills-hub)
+- <a {% static_href %}href="https://samueltauil.github.io/skills-hub"{% endstatic_href %}>Live Site</a>
 - [GitHub Repository](https://github.com/samueltauil/skills-hub)
 - [Contributing Guide](https://github.com/samueltauil/skills-hub/blob/main/CONTRIBUTING.md)
 
