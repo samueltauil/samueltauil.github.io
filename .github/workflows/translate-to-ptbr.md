@@ -54,16 +54,52 @@ comfortable with English technical terms.
 
 For each English source file, before translating:
 
-1. Check if the corresponding `pt-br/` file exists. If it does **not** exist → translate it.
+1. Check if the corresponding `pt-br/` file exists. If it does **not** exist → add to the **new files** list (full translation needed).
 2. If the `pt-br/` file **does** exist, compare the last-modified commit dates:
    - Run `git log -1 --format="%H %aI" -- <english-file>` to get the latest commit hash and date for the English source.
    - Run `git log -1 --format="%H %aI" -- <pt-br-file>` to get the latest commit hash and date for the Portuguese translation.
-   - If the English file's commit date is **newer** than the Portuguese file's commit date → the translation is stale, re-translate it.
+   - If the English file's commit date is **newer** than the Portuguese file's commit date → add to the **stale files** list.
    - If the English file's commit date is **older or equal** → the translation is current, **skip it**.
-3. Collect all files that need translation into a list. If the list is empty, call `noop` with a message confirming everything is in sync and **stop**.
-4. Only translate the files in the stale/missing list — never re-translate files that are already current.
+3. Collect both lists. If both are empty, call `noop` with a message confirming everything is in sync and **stop**.
 
-This ensures the workflow is incremental and does not re-translate content unnecessarily.
+### Incremental translation (MUST follow for stale files)
+
+When a file is flagged as stale (English source is newer than Portuguese translation),
+do **NOT** re-translate the entire file from scratch. Use diff-based patching to
+preserve consistency:
+
+1. Get the commit hash when the PT-BR file was last modified:
+   ```
+   git log -1 --format="%H" -- <pt-br-file>
+   ```
+
+2. Get the diff of the English source since that commit:
+   ```
+   git diff <pt-br-commit-hash>..HEAD -- <english-file>
+   ```
+
+3. Read the **existing PT-BR translation** in full — this is your **base document**.
+
+4. Analyze the diff to identify exactly which lines/paragraphs changed in the
+   English source.
+
+5. **Patch the PT-BR file** — apply translations ONLY for the changed portions:
+   - **Changed prose**: translate the new English text and replace the corresponding
+     Portuguese paragraph, matching the tone and terminology of the surrounding text.
+   - **Added content**: translate and insert at the corresponding position.
+   - **Removed content**: remove the corresponding Portuguese text.
+   - **Unchanged content**: preserve the existing Portuguese text **verbatim** —
+     do not rephrase, improve, or re-translate it.
+
+6. **Fallback to full re-translation**: If the diff shows more than ~60% of the
+   file's lines changed (major rewrite), do a full re-translation instead — but
+   still read the existing PT-BR first to absorb the established voice and
+   phrasing patterns.
+
+For **new files** (no existing PT-BR version), do a full translation as usual.
+
+This ensures translation consistency — unchanged sections keep their exact
+phrasing across edits, and only genuinely changed content gets new translations.
 
 ### Files to translate
 

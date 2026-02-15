@@ -159,6 +159,24 @@ posts listing shows "pt-br" as a category badge alongside real categories.
 auto-generated URL. The `categories` array in frontmatter should only
 contain real content categories — never include `pt-br`.
 
+### 5. Translation drift from full re-translations
+
+**Problem:** When a single sentence changes in a 300-line post, the entire file
+gets flagged as stale and re-translated from scratch. The agent has no memory of
+prior translation choices, so unchanged paragraphs may get subtly different
+phrasing each time — different synonyms, different sentence structures, different
+transition phrases. Over multiple edit cycles, this erodes voice consistency.
+The glossary prevents *term* drift (200+ technical terms locked), but the
+connective tissue — verb conjugations, transition phrases, sentence structure —
+can still vary.
+
+**Fix:** Use diff-based patching. The workflow runs `git diff` to identify exactly
+what changed in the English source, reads the existing PT-BR translation as the
+base document, and patches only the changed portions. Unchanged PT-BR text is
+preserved verbatim. If the diff exceeds ~60% of lines (major rewrite), fall back
+to full re-translation but still read the existing PT-BR first to absorb the
+established voice.
+
 ## Translation Quality Checklist
 
 - [ ] All glossary terms preserved in English
