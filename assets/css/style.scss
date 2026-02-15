@@ -1184,3 +1184,31 @@ img {
     padding: 0.5rem 0;
   }
 }
+
+// AI Translation Notice
+.ai-translation-notice {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.75rem 2rem;
+
+  p {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    font-size: 0.8125rem;
+    color: $text-muted;
+    background: rgba(33, 38, 45, 0.6);
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 1.5;
+
+    a {
+      color: $accent-purple;
+      font-weight: 500;
+
+      &:hover {
+        color: $accent-blue;
+      }
+    }
+  }
+}
