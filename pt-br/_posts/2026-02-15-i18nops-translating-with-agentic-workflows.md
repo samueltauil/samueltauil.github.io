@@ -55,13 +55,13 @@ safe-outputs:
 ---
 ```
 
-Toda vez que faço um push de uma mudança em um blog post ou página (incluindo este post), o workflow dispara. O agent lê um [glossário de mais de 180 termos técnicos](https://github.com/samueltauil/samueltauil.github.io/blob/main/_data/translation_glossary.yml) que devem permanecer em inglês (palavras como *workflow*, *deploy*, *pull request*, *commit*), segue um [arquivo de convenções compartilhadas](https://github.com/samueltauil/samueltauil.github.io/blob/main/.github/agents/shared/translation-conventions.md) para regras de tom e formatação, e gera arquivos traduzidos em um diretório `pt-br/`. O resultado chega como um draft de pull request para eu revisar.
+Toda vez que faço um push de uma mudança em um post do blog ou página (incluindo este post), o workflow é acionado. O agent lê um [glossário de mais de 180 termos técnicos](https://github.com/samueltauil/samueltauil.github.io/blob/main/_data/translation_glossary.yml) que devem permanecer em inglês (palavras como *workflow*, *deploy*, *pull request*, *commit*), segue um [arquivo de convenções compartilhadas](https://github.com/samueltauil/samueltauil.github.io/blob/main/.github/agents/shared/translation-conventions.md) para regras de tom e formatação, e gera arquivos traduzidos em um diretório `pt-br/`. O resultado chega como um pull request em rascunho para eu revisar.
 
-O que eu gosto nisso em comparação com uma abordagem rígida de script é que o agent *entende* o conteúdo. Ele sabe não traduzir blocos de código, preserva tags de template Liquid, mantém URLs intactas e produz português brasileiro com sonoridade natural, não a saída engessada que você obtém de tradução automática pura. Lê como algo que uma pessoa escreveu, porque o agent está raciocinando sobre contexto, não fazendo find-and-replace.
+O que eu gosto nisso comparado a uma abordagem de script rígido é que o agent *entende* o conteúdo. Ele sabe não traduzir blocos de código, preserva tags de template Liquid, mantém URLs intactas e produz português brasileiro com som natural, não a saída engessada que você obtém de tradução automática pura. Lê como algo que uma pessoa escreveu, porque o agent está raciocinando sobre contexto, não fazendo buscar-e-substituir.
 
 ## A Parte Difícil: Polyglot e a Caçada ao Bug
 
-Configurar o translation agent foi honestamente a parte fácil. A verdadeira aventura de fim de semana foi fazer o [jekyll-polyglot](https://github.com/untra/polyglot) se comportar corretamente. Aqui está uma divertida: o Jekyll adiciona automaticamente o nome do diretório pai como uma categoria oculta para posts em subdiretórios. Então posts em `pt-br/_posts/` silenciosamente ganham `pt-br` como categoria. Combine isso com o prefixo de URL `/pt-br/` do polyglot, e você acaba com URLs como `/pt-br/pt-br/github/ai/2026/02/13/my-post.html`. Duplo prefixo. 404 em todo lugar.
+Configurar o agent de tradução foi honestamente a parte fácil. A verdadeira aventura de fim de semana foi fazer o [jekyll-polyglot](https://github.com/untra/polyglot) se comportar corretamente. Aqui vai uma interessante: Jekyll automaticamente adiciona o nome do diretório pai como uma categoria oculta para posts em subdiretórios. Então posts em `pt-br/_posts/` silenciosamente ganham `pt-br` como uma categoria. Combine isso com o prefixo de URL `/pt-br/` do polyglot, e você acaba com URLs como `/pt-br/pt-br/github/ai/2026/02/13/my-post.html`. Prefixo duplo. 404 em todo lugar.
 
 A correção foi adicionar frontmatter `permalink` explícito para cada post em PT-BR. Mas descobrir *por que* as coisas estavam quebradas exigiu algum trabalho de detetive: verificar URLs geradas, inspecionar a lógica de roteamento do polyglot e testar todas as 24 URLs (8 posts × 2 idiomas + 4 páginas × 2 idiomas) para garantir que tudo resolvesse corretamente.
 
@@ -75,38 +75,38 @@ A solução foi adicionar patching baseado em diff ao workflow. Em vez de cegame
 
 1. Obtém o hash do commit quando o arquivo PT-BR foi modificado pela última vez
 2. Executa `git diff` no source em inglês desde aquele commit
-3. Lê a tradução PT-BR existente como documento base
-4. Aplica patch apenas nas porções alteradas, preservando todo o resto verbatim
+3. Lê a tradução PT-BR existente como o documento base
+4. Aplica patch apenas nas porções alteradas, preservando todo o resto literalmente
 
-Se o diff mostrar mais de ~60% do arquivo alterado (uma reescrita maior), ele volta para uma re-tradução completa, mas ainda lê o PT-BR existente primeiro para absorver a voz estabelecida. Isso mantém as traduções consistentes entre edições. Parágrafos inalterados mantêm suas frases exatas, e apenas conteúdo genuinamente novo é traduzido.
+Se o diff mostra mais de ~60% do arquivo alterado (uma reescrita maior), ele volta para uma re-tradução completa mas ainda lê o PT-BR existente primeiro para absorver a voz estabelecida. Isso mantém as traduções consistentes através das edições. Parágrafos inalterados mantêm sua frase exata, e apenas conteúdo genuinamente novo é traduzido.
 
-## Propondo i18nOps como um Design Pattern
+## Propondo i18nOps como um Padrão de Design
 
-Depois de fazer tudo funcionar, percebi que isso não é apenas uma solução pontual. É um padrão repetível. O projeto gh-aw já tem design patterns bem definidos como ChatOps, IssueOps e DailyOps. Tradução se encaixa naturalmente no mesmo molde: um workflow orientado a trigger onde um AI agent lê conteúdo source, aplica regras específicas de domínio e gera resultados estruturados através de safe outputs.
+Depois de fazer tudo funcionar, percebi que isso não é apenas uma solução pontual. É um padrão repetível. O projeto gh-aw já tem padrões de design bem definidos como ChatOps, IssueOps e DailyOps. Tradução se encaixa naturalmente no mesmo molde: um workflow orientado a trigger onde um agent de IA lê conteúdo source, aplica regras específicas de domínio e gera resultados estruturados através de safe outputs.
 
 Então escrevi uma proposta e postei como uma [discussão no repositório gh-aw](https://github.com/github/gh-aw/discussions/15847): **i18nOps**, internacionalização como um padrão de workflow operacional. A ideia central:
 
-- **Trigger**: push em arquivos de conteúdo, ou verificações programadas de desatualização
-- **Comportamento do agent**: tradução consciente de glossário com patching baseado em diff
-- **Safe outputs**: draft de pull request com conteúdo traduzido
+- **Trigger**: push para arquivos de conteúdo, ou verificações agendadas de desatualização
+- **Comportamento do agent**: tradução com consciência de glossário com patching baseado em diff
+- **Safe outputs**: pull request em rascunho com conteúdo traduzido
 - **Convenções compartilhadas**: regras de tradução reutilizáveis entre idiomas
 
-Se você tem um site de docs, um blog ou qualquer repositório com conteúdo que precisa alcançar uma audiência multilíngue, esse padrão te dá um ponto de partida. Faça fork do workflow, troque por seu idioma alvo e glossário, e você tem tradução contínua com revisão humana.
+Se você tem um site de documentação, um blog ou qualquer repositório com conteúdo que precisa alcançar uma audiência multilíngue, esse padrão te dá um ponto de partida. Faça um fork do workflow, troque seu idioma alvo e glossário, e você tem tradução contínua com revisão humana.
 
 ## Um Bug Pelo Caminho
 
-Durante a implementação, também esbarrei em um bug no comando `gh aw compile`: quando o nome do repositório termina em `.github.io` (como repositórios do GitHub Pages fazem), o compilador gera um caminho `runtime-import` incorreto. Em vez de `.github/workflows/translate-to-ptbr.md`, ele gera `.github.io/.github/workflows/translate-to-ptbr.md`. Reportei como [gh-aw#15824](https://github.com/github/gh-aw/issues/15824). Por enquanto, corrijo manualmente o caminho no arquivo lock após cada compilação. Não ideal, mas funciona. Espero que seja corrigido em breve.
+Durante a implementação, também encontrei um bug no comando `gh aw compile`: quando o nome do repositório termina em `.github.io` (como repos GitHub Pages fazem), o compilador gera um caminho `runtime-import` incorreto. Em vez de `.github/workflows/translate-to-ptbr.md`, ele gera `.github.io/.github/workflows/translate-to-ptbr.md`. Reportei como [gh-aw#15824](https://github.com/github/gh-aw/issues/15824). Por enquanto, corrijo manualmente o caminho no arquivo lock após cada compilação. Não é ideal, mas funciona. Espero que seja corrigido em breve.
 
 ## Finalizando
 
-O que começou como um experimento de fim de semana se transformou em um site bilíngue funcionando, um padrão de tradução documentado, uma discussão na comunidade e um bug report. Nada mal para um sábado frio em Boston com o Copilot me fazendo companhia.
+O que começou como um experimento de fim de semana se transformou em um site bilíngue funcionando, um padrão de tradução documentado, uma discussão na comunidade e um relatório de bug. Nada mal para um sábado frio em Boston com Copilot me fazendo companhia.
 
-A coisa que continuo voltando com agentic workflows é o quão natural eles parecem. Você não está escrevendo condicionais YAML ou shell scripts. Você está descrevendo o que quer em linguagem simples, e o agent descobre os detalhes. Ensinar o agent sobre as armadilhas do polyglot foi tão simples quanto atualizar um arquivo Markdown. Adicionar tradução incremental foram alguns parágrafos de instruções, não uma biblioteca de análise de diff.
+A coisa que eu continuo voltando com agentic workflows é como eles parecem naturais. Você não está escrevendo condicionais YAML ou shell scripts. Você está descrevendo o que você quer em linguagem simples, e o agent descobre os detalhes. Ensinar o agent sobre armadilhas do polyglot foi tão simples quanto atualizar um arquivo Markdown. Adicionar tradução incremental foi alguns parágrafos de instruções, não uma biblioteca de parsing de diff.
 
-Se você quiser tentar por conta própria, aqui estão as peças principais:
+Se você quiser tentar você mesmo, aqui estão as peças-chave:
 
-- **Translation workflow**: [translate-to-ptbr.md](https://github.com/samueltauil/samueltauil.github.io/blob/main/.github/workflows/translate-to-ptbr.md)
-- **Translation conventions**: [translation-conventions.md](https://github.com/samueltauil/samueltauil.github.io/blob/main/.github/agents/shared/translation-conventions.md)
+- **Workflow de tradução**: [translate-to-ptbr.md](https://github.com/samueltauil/samueltauil.github.io/blob/main/.github/workflows/translate-to-ptbr.md)
+- **Convenções de tradução**: [translation-conventions.md](https://github.com/samueltauil/samueltauil.github.io/blob/main/.github/agents/shared/translation-conventions.md)
 - **Projeto original do Peli**: [action-continuous-translation](https://github.com/pelikhan/action-continuous-translation)
 - **Discussão i18nOps**: [gh-aw#15847](https://github.com/github/gh-aw/discussions/15847)
 - **Documentação gh-aw**: [github.github.com/gh-aw](https://github.github.com/gh-aw/introduction/overview/)
