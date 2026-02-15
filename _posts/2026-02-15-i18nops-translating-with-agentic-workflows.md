@@ -7,7 +7,7 @@ categories: [github, ai, devops]
 tags: [github-actions, ai, automation, agentic-workflows, translation, github-copilot, i18n]
 ---
 
-It is a cold Saturday in Boston. The kind of February weather where going outside feels optional and the best plan is coffee, a warm screen, and building something fun with Copilot. I just got back from Seattle last friday for Microsoft Tech Connect, where I spent time talking about developer productivity and AI tooling, and honestly I came home inspired. So this weekend I sat down and asked myself: what if I could make my entire site bilingual using nothing but an agentic workflow?
+It is a cold Sunday in Boston. The kind of February weather where going outside feels optional and the best plan is coffee, a warm screen, and building something fun with Copilot. I just got back from Seattle last friday for Microsoft Tech Connect, where I spent time talking about developer productivity and AI tooling, and honestly I came home inspired. So this weekend I sat down and asked myself: what if I could make my entire site bilingual using nothing but an agentic workflow?
 
 Turns out, you can. And the journey was full of surprises.
 
