@@ -8,17 +8,17 @@ categories: [github, ai, devops]
 tags: [github-actions, ai, automation, agentic-workflows, translation, github-copilot, i18n]
 ---
 
-É um sábado frio em Boston. O tipo de clima de fevereiro onde sair de casa parece opcional e o melhor plano é café, uma tela quentinha e construir algo divertido com Copilot. Acabei de voltar de Seattle na última sexta-feira para o Microsoft Tech Connect, onde passei um tempo conversando sobre produtividade de desenvolvedores e ferramentas de IA, e honestamente voltei inspirado. Então neste fim de semana sentei e me perguntei: e se eu pudesse tornar meu site inteiro bilíngue usando nada além de um agentic workflow?
+É um domingo frio em Boston. O tipo de clima de fevereiro em que sair de casa parece opcional e o melhor plano é café, uma tela quentinha e construir algo divertido com o Copilot. Acabei de voltar de Seattle na sexta-feira passada para a Microsoft Tech Connect, onde passei um tempo falando sobre produtividade de desenvolvedores e ferramentas de IA, e honestamente voltei para casa inspirado. Então neste fim de semana sentei e me perguntei: e se eu pudesse tornar todo o meu site bilíngue usando nada além de um agentic workflow?
 
 Acontece que você pode. E a jornada foi cheia de surpresas.
 
 ## A Ideia: Tradução Automatizada como um Workflow
 
-Tenho gostado muito de aprender sobre [GitHub Agentic Workflows](https://github.github.com/gh-aw/introduction/overview/) (gh-aw) ultimamente. Meu [post anterior]({% post_url 2026-02-13-building-my-first-agentic-workflow-docs-sync %}) cobriu a construção de um agent de sincronização de documentação para meu projeto Skills Hub. Desta vez eu queria tentar algo diferente: será que eu poderia usar um agentic workflow para manter uma tradução completa em português (pt-BR) deste site sincronizada, automaticamente?
+Tenho gostado muito de aprender sobre [GitHub Agentic Workflows](https://github.github.com/gh-aw/introduction/overview/) (gh-aw) ultimamente. Meu [post anterior]({% post_url 2026-02-13-building-my-first-agentic-workflow-docs-sync %}) cobriu a construção de um agent de docs-sync para o meu projeto Skills Hub. Desta vez eu queria tentar algo diferente: será que eu poderia usar um agentic workflow para manter uma tradução completa em português (pt-BR) deste site sincronizada, automaticamente?
 
-A faísca inicial veio de [Peli de Halleux](https://github.com/pelikhan) e seu projeto [action-continuous-translation](https://github.com/pelikhan/action-continuous-translation). Peli construiu uma GitHub Action que usa IA para traduzir continuamente a documentação. Faça um push de uma mudança no seu conteúdo em inglês, e a action gera um pull request com as traduções atualizadas. É um ótimo conceito: tratar tradução como uma preocupação de CI/CD, não uma tarefa manual. Aquele projeto me fez pensar sobre como esse padrão poderia ser expresso como um agentic workflow, com toda a flexibilidade e raciocínio que vem com isso.
+A faísca inicial veio de [Peli de Halleux](https://github.com/pelikhan) e seu projeto [action-continuous-translation](https://github.com/pelikhan/action-continuous-translation). O Peli construiu uma GitHub Action que usa IA para traduzir documentação continuamente. Faça um push de uma mudança no seu conteúdo em inglês, e a action gera um pull request com as traduções atualizadas. É um conceito ótimo: tratar tradução como uma preocupação de CI/CD, não uma tarefa manual. Esse projeto me fez pensar em como esse padrão poderia ser expresso como um agentic workflow, com toda a flexibilidade e raciocínio que vem com isso.
 
-## Construindo o Workflow de Tradução
+## Construindo o Translation Workflow
 
 O workflow em si vive em um único arquivo Markdown: [translate-to-ptbr.md](https://github.com/samueltauil/samueltauil.github.io/blob/main/.github/workflows/translate-to-ptbr.md). O frontmatter configura triggers, permissões e safe outputs:
 
@@ -69,7 +69,7 @@ Documentei todas as cinco armadilhas que encontramos nas [convenções de tradu�
 
 ## Tradução Incremental Baseada em Diff
 
-Um problema que surgiu durante os testes foi o desvio de tradução. Imagine que você corrige um erro de digitação em um post de blog de 300 linhas. O workflow o marca como desatualizado, re-traduz a coisa toda, e agora todas as 300 linhas de português estão ligeiramente diferentes, com escolhas de sinônimos diferentes, estruturas de frases diferentes, frases de transição diferentes. O glossário previne desvio de *termos*, mas o tecido conectivo da escrita muda toda vez.
+Um problema que surgiu durante os testes foi o desvio de tradução. Imagine que você corrige um erro de digitação em um blog post de 300 linhas. O workflow o marca como desatualizado, re-traduz a coisa toda, e agora todas as 300 linhas de português estão ligeiramente diferentes, com escolhas de sinônimos diferentes, estruturas de frases diferentes, frases de transição diferentes. O glossário previne o desvio de *termos*, mas o tecido conectivo da escrita muda toda vez.
 
 A solução foi adicionar patching baseado em diff ao workflow. Em vez de cegamente re-traduzir tudo, o agent agora:
 
@@ -111,4 +111,4 @@ Se você quiser tentar você mesmo, aqui estão as peças-chave:
 - **Discussão i18nOps**: [gh-aw#15847](https://github.com/github/gh-aw/discussions/15847)
 - **Documentação gh-aw**: [github.github.com/gh-aw](https://github.github.com/gh-aw/introduction/overview/)
 
-Escreva algum Markdown, ensine um agent suas convenções e deixe-o lidar com as traduções. Seu eu de fim de semana agradecerá.
+Escreva um pouco de Markdown, ensine a um agent suas convenções e deixe-o lidar com as traduções. Seu eu de fim de semana vai te agradecer.
