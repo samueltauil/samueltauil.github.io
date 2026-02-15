@@ -34,7 +34,130 @@
 - English pages (root) → Portuguese pages (`pt-br/` directory)
 - English posts (`_posts/`) → Portuguese posts (`pt-br/_posts/`)
 - Filenames remain the same (same slug)
-- `lang: pt-br` is set automatically by jekyll-polyglot based on directory
+
+## Required Frontmatter for Multilingual Content
+
+> **Critical:** Do NOT rely on jekyll-polyglot to auto-detect language from the
+> directory. Every content file must have explicit `lang` frontmatter, and PT-BR
+> posts require an explicit `permalink`. Omitting these causes broken URLs,
+> wrong-language content, or 404 errors.
+
+### English Pages (root-level `.md` files)
+
+Every English page must include `lang: en` in frontmatter:
+
+```yaml
+---
+lang: en
+layout: page
+title: "About"
+permalink: /about/
+---
+```
+
+### PT-BR Pages (`pt-br/*.md`)
+
+Every Portuguese page must include `lang: pt-br` in frontmatter:
+
+```yaml
+---
+lang: pt-br
+layout: page
+title: "Sobre"
+permalink: /about/
+---
+```
+
+### English Posts (`_posts/*.md`)
+
+Every English post must include `lang: en` in frontmatter:
+
+```yaml
+---
+lang: en
+layout: post
+title: "My Post Title"
+date: 2026-02-13
+categories: [github, ai, devops]
+---
+```
+
+### PT-BR Posts (`pt-br/_posts/*.md`) — ⚠️ Permalink Required
+
+Every Portuguese post **must** include both `lang: pt-br` **and** an explicit
+`permalink` that matches the English URL pattern. This is the most critical rule.
+
+```yaml
+---
+lang: pt-br
+permalink: /github/ai/devops/2026/02/13/my-post-slug.html
+layout: post
+title: "Meu Título do Post"
+date: 2026-02-13
+categories: [github, ai, devops]
+---
+```
+
+**How to construct the permalink:**
+
+```
+/<categories-joined-by-slash>/<year>/<month>/<day>/<slug>.html
+```
+
+- `categories`: from the `categories` array, joined with `/`
+- `date`: from the `date` field, split into `YYYY/MM/DD`
+- `slug`: the filename without the date prefix and `.md` extension
+  (e.g., `2026-02-13-my-post.md` → `my-post`)
+
+**Example:** A post with `categories: [mcp, vscode, ai, tutorial]`,
+`date: 2026-01-28`, filename `2026-01-28-building-charts.md`:
+
+```yaml
+permalink: /mcp/vscode/ai/tutorial/2026/01/28/building-charts.html
+```
+
+## Known Pitfalls & Why These Rules Exist
+
+### 1. Doubled `/pt-br/pt-br/` in URLs (404 errors)
+
+**Problem:** Jekyll automatically adds the directory name as a category for
+posts in subdirectories. Posts in `pt-br/_posts/` get `pt-br` as a hidden
+category. Combined with polyglot's `/pt-br/` URL prefix, this creates
+`/pt-br/pt-br/<categories>/...` — a URL that doesn't match what the listing
+page links to.
+
+**Fix:** The explicit `permalink` on PT-BR posts overrides the auto-generated
+URL, removing the directory-based `pt-br` category. Polyglot then adds its
+single `/pt-br/` prefix correctly.
+
+### 2. English pages showing Portuguese content
+
+**Problem:** Without `lang: en` on English pages, polyglot may render
+Portuguese versions at English URLs when both language versions share the
+same permalink.
+
+**Fix:** Always set `lang: en` on English pages and posts, and `lang: pt-br`
+on Portuguese pages and posts. This ensures each file only appears in its
+respective language build.
+
+### 3. PT-BR posts showing English content
+
+**Problem:** Polyglot's directory-based content replacement does NOT work
+reliably for `_posts`. If you remove `lang` from posts expecting polyglot
+to auto-detect language from the `pt-br/` directory, PT-BR post pages may
+render English content instead.
+
+**Fix:** PT-BR posts must be fully self-contained with `lang: pt-br` in
+frontmatter. Do NOT rely on directory-based language detection for posts.
+
+### 4. "pt-br" appearing as a category badge
+
+**Problem:** Because Jekyll treats the directory name as a category, the
+posts listing shows "pt-br" as a category badge alongside real categories.
+
+**Fix:** The explicit `permalink` prevents this by overriding the
+auto-generated URL. The `categories` array in frontmatter should only
+contain real content categories — never include `pt-br`.
 
 ## Translation Quality Checklist
 
@@ -42,6 +165,12 @@
 - [ ] Code blocks identical to English original
 - [ ] URLs and image paths unchanged
 - [ ] Frontmatter structure intact
+- [ ] `lang: en` set on every English file (pages and posts)
+- [ ] `lang: pt-br` set on every PT-BR file (pages and posts)
+- [ ] Every PT-BR post has an explicit `permalink` matching the English URL pattern
+- [ ] `permalink` does NOT contain `pt-br` as a path segment
+- [ ] `categories` array does NOT include `pt-br`
 - [ ] Natural-sounding Brazilian Portuguese
 - [ ] No machine-translation artifacts
 - [ ] Consistent verb tense and pronoun usage
+- [ ] Toggle switch navigates correctly between EN ↔ PT-BR versions
