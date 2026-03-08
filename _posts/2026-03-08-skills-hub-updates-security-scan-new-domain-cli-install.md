@@ -7,13 +7,15 @@ categories: [github-copilot, open-source, developer-tools]
 tags: [github-copilot, security, cli, automation, developer-tools, skills]
 ---
 
-When I first launched Skills Hub, it had 51 skills pulled from a single source. A few months later, the catalog grew to 225 skills aggregated from GitHub's awesome-copilot, Anthropic's skills repository, and MCP extensions. That kind of growth is exciting — but it also made me uncomfortable. Skills are executable code. They can run shell commands, touch the filesystem, make network requests. And I was shipping them without really knowing what was inside each one.
+When I first launched Skills Hub, it had 51 skills pulled from a single source. A few months later, the catalog grew to 225 skills aggregated from GitHub's awesome-copilot, Anthropic's skills repository, and MCP extensions. That's a lot of code I hadn't looked at.
 
-That's what pushed me to work on three updates over the past few weeks: security scanning, a proper CLI install flow, and a dedicated domain.
+Skills are powerful because they extend what your AI assistant can do. They get loaded dynamically into context, can shape responses, run shell commands, access files, make network requests. That flexibility is the whole point. But when you're aggregating 225 of them from multiple upstream repos, you want to know exactly what each one does before it reaches developers. Not knowing what's inside the code and not knowing exactly when it activates felt like a gap worth closing.
+
+The idea actually clicked during a hackathon at Microsoft Tech Connect in Seattle. We were brainstorming what Skills Hub needed most, and someone asked "do you actually know what these skills do before you ship them?" Honest answer: not really. That question stuck with me, and it pushed me to work on three updates: security scanning, a proper CLI install flow, and a dedicated domain.
 
 ## Security Scanning
 
-This was the one that kept bugging me. I'm pulling skills from upstream repos I don't fully control, and some of these skills can do pretty invasive things on a developer's machine. I needed a way to catch problems before they reach the catalog.
+This was the one that stuck with me from that hackathon conversation. I'm pulling skills from upstream repos I don't fully control, and I needed a way to know what's inside before it reaches the catalog.
 
 So I built an automated scanner that runs on every catalog update. It checks for nine categories of issues:
 
@@ -31,11 +33,13 @@ Skills that pass get a **Verified** badge on their detail page, with the scan ti
 
 ![Verified badge shown on the skill header](/assets/images/2026-03-08-skills-hub-updates/feature-verified-badge.png)
 
-Out of 225 skills, 212 passed clean. 13 got flagged with medium-to-high findings. I decided to keep the flagged ones visible and downloadable — hiding them felt wrong. Better to show the findings and let developers decide for themselves.
+Out of 225 skills, 212 passed clean. 13 got flagged with medium-to-high findings. I decided to keep the flagged ones visible and downloadable — pretending problems don't exist is worse than showing them. Better to surface the findings and let developers decide for themselves.
+
+The fun part nobody tells you about building a security scanner: you end up reading every single skill. Some of them are doing incredibly clever things I never noticed. And a few were doing things that made me go "yeah, glad we caught that."
 
 ## CLI Installation
 
-The original install experience was... fine. You could download a ZIP, copy file contents to clipboard, or grab individual files. It worked, but it felt clunky every time I used it myself. Multiple clicks, manual extraction, making sure the folder name was right.
+The original install experience was... fine. Download a ZIP, extract it, rename the folder, hope you got the path right. It worked, but it felt clunky every time I used it myself.
 
 I wanted something closer to how we actually install things — one command, done. So I built a GitHub CLI extension:
 
