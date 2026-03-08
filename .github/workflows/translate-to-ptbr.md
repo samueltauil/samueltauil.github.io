@@ -52,20 +52,26 @@ comfortable with English technical terms.
 
 ### Staleness check (MUST follow for every file)
 
+**Pre-requisite — unshallow the clone**: The CI checkout uses `fetch-depth: 1`
+(shallow clone). With only one commit, `git log -1 -- <file>` returns the HEAD
+commit for **every** file, making all files look equally recent. Before running
+any `git log` comparisons, you MUST deepen the history:
+
+```bash
+git fetch --unshallow 2>/dev/null || git fetch --depth=100
+```
+
+Run this **once** at the start before any staleness checks.
+
 For each English source file, before translating:
 
 1. Check if the corresponding `pt-br/` file exists. If it does **not** exist → add to the **new files** list (full translation needed).
 2. If the `pt-br/` file **does** exist, compare the last-modified commit dates:
    - Run `git log -1 --format="%H %aI" -- <english-file>` to get the latest commit hash and date for the English source.
    - Run `git log -1 --format="%H %aI" -- <pt-br-file>` to get the latest commit hash and date for the Portuguese translation.
-   - **Shallow clone handling**: If either `git log` command returns **empty output**
-     (no commits found in the available history), the repository is likely a shallow
-     clone with limited history. In this case, treat the file as **stale** and add
-     it to the stale files list. Do NOT assume the translation is current when git
-     history is unavailable.
-   - If both commands return results: compare the dates. If the English file's
-     commit date is **newer** than the Portuguese file's commit date → add to the
-     **stale files** list. If **older or equal** → the translation is current, **skip it**.
+   - If the English file's commit date is **newer** than the Portuguese file's commit date → add to the **stale files** list.
+   - If the English file's commit date is **older or equal** → the translation is current, **skip it**.
+   - If either `git log` command returns **empty output**, treat the file as **stale**.
 3. Collect both lists. If both are empty, call `noop` with a message confirming everything is in sync and **stop**.
 
 ### Incremental translation (MUST follow for stale files)
@@ -79,13 +85,10 @@ preserve consistency:
    git log -1 --format="%H" -- <pt-br-file>
    ```
 
-2. If step 1 returned a commit hash, get the diff of the English source since that commit:
+2. Get the diff of the English source since that commit:
    ```
    git diff <pt-br-commit-hash>..HEAD -- <english-file>
    ```
-   **Shallow clone fallback**: If step 1 returned empty (no commits in the
-   available history), you cannot compute a diff. Skip to step 3 and perform a
-   full re-translation instead of incremental patching.
 
 3. Read the **existing PT-BR translation** in full — this is your **base document**.
 
