@@ -8,13 +8,15 @@ categories: [github-copilot, open-source, developer-tools]
 tags: [github-copilot, security, cli, automation, developer-tools, skills]
 ---
 
-Quando lancei o Skills Hub pela primeira vez, ele tinha 51 skills vindos de uma única fonte. Alguns meses depois, o catálogo cresceu para 225 skills agregados do awesome-copilot do GitHub, do repositório de skills da Anthropic e de extensões MCP. Esse tipo de crescimento é empolgante — mas também me deixou desconfortável. Skills são código executável. Eles podem executar comandos shell, tocar o sistema de arquivos, fazer requisições de rede. E eu estava distribuindo tudo isso sem realmente saber o que havia dentro de cada um.
+Quando lancei o Skills Hub pela primeira vez, ele tinha 51 skills vindos de uma única fonte. Alguns meses depois, o catálogo cresceu para 225 skills agregados do awesome-copilot do GitHub, do repositório de skills da Anthropic e de extensões MCP. Era muito código que eu ainda não tinha examinado.
 
-Isso me levou a trabalhar em três atualizações nas últimas semanas: scanner de segurança, um fluxo de instalação via CLI adequado e um domínio dedicado.
+Skills são poderosos porque estendem o que seu assistente de IA pode fazer. Eles são carregados dinamicamente no contexto, podem moldar respostas, executar comandos shell, acessar arquivos, fazer requisições de rede. Essa flexibilidade é o ponto central. Mas quando você está agregando 225 deles de múltiplos repositórios upstream, você quer saber exatamente o que cada um faz antes de chegar aos desenvolvedores. Não saber o que havia dentro do código e não saber exatamente quando ele ativa parecia uma lacuna que valia a pena fechar.
+
+A ideia realmente se concretizou durante um hackathon na Microsoft Tech Connect em Seattle. Estávamos discutindo o que o Skills Hub mais precisava, e alguém perguntou "você sabe o que esses skills fazem antes de distribuí-los?" Resposta honesta: não realmente. Essa pergunta ficou comigo, e me levou a trabalhar em três atualizações: scanner de segurança, um fluxo de instalação via CLI adequado e um domínio dedicado.
 
 ## Scanner de Segurança
 
-Esse foi o que mais me incomodava. Eu estava puxando skills de repositórios upstream que não controlo totalmente, e alguns desses skills podem fazer coisas bem invasivas na máquina de um desenvolvedor. Eu precisava de uma forma de pegar problemas antes de chegarem ao catálogo.
+Esse foi o que ficou comigo desde aquela conversa no hackathon. Eu estava puxando skills de repositórios upstream que não controlo totalmente, e precisava de uma forma de saber o que havia dentro antes de chegar ao catálogo.
 
 Então construí um scanner automatizado que roda a cada atualização do catálogo. Ele verifica nove categorias de problemas:
 
@@ -32,11 +34,13 @@ Skills que passam recebem um badge **Verified** na página de detalhes, com o ti
 
 ![Badge Verified mostrado no cabeçalho do skill](/assets/images/2026-03-08-skills-hub-updates/feature-verified-badge.png)
 
-De 225 skills, 212 passaram limpos. 13 foram sinalizados com achados médios a altos. Decidi manter os sinalizados visíveis e baixáveis — escondê-los pareceu errado. Melhor mostrar os achados e deixar os desenvolvedores decidirem por si mesmos.
+De 225 skills, 212 passaram limpos. 13 foram sinalizados com achados médios a altos. Decidi manter os sinalizados visíveis e baixáveis — fingir que os problemas não existem é pior do que mostrá-los. Melhor surfacear os achados e deixar os desenvolvedores decidirem por si mesmos.
+
+A parte divertida que ninguém te conta sobre construir um scanner de segurança: você acaba lendo cada skill individualmente. Alguns estavam fazendo coisas incrivelmente inteligentes que eu nunca tinha notado. E alguns estavam fazendo coisas que me fizeram pensar "ainda bem que pegamos isso."
 
 ## Instalação via CLI
 
-A experiência de instalação original era... aceitável. Você podia baixar um ZIP, copiar o conteúdo dos arquivos para a área de transferência ou pegar arquivos individuais. Funcionava, mas parecia desajeitado toda vez que eu mesmo usava. Vários cliques, extração manual, garantindo que o nome da pasta estava certo.
+A experiência de instalação original era... aceitável. Baixar um ZIP, extrair, renomear a pasta, torcer para o caminho estar certo. Funcionava, mas parecia desajeitado toda vez que eu mesmo usava.
 
 Eu queria algo mais próximo de como realmente instalamos as coisas — um comando, pronto. Então construí uma extensão do GitHub CLI:
 
