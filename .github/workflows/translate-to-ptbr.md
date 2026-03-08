@@ -58,8 +58,14 @@ For each English source file, before translating:
 2. If the `pt-br/` file **does** exist, compare the last-modified commit dates:
    - Run `git log -1 --format="%H %aI" -- <english-file>` to get the latest commit hash and date for the English source.
    - Run `git log -1 --format="%H %aI" -- <pt-br-file>` to get the latest commit hash and date for the Portuguese translation.
-   - If the English file's commit date is **newer** than the Portuguese file's commit date → add to the **stale files** list.
-   - If the English file's commit date is **older or equal** → the translation is current, **skip it**.
+   - **Shallow clone handling**: If either `git log` command returns **empty output**
+     (no commits found in the available history), the repository is likely a shallow
+     clone with limited history. In this case, treat the file as **stale** and add
+     it to the stale files list. Do NOT assume the translation is current when git
+     history is unavailable.
+   - If both commands return results: compare the dates. If the English file's
+     commit date is **newer** than the Portuguese file's commit date → add to the
+     **stale files** list. If **older or equal** → the translation is current, **skip it**.
 3. Collect both lists. If both are empty, call `noop` with a message confirming everything is in sync and **stop**.
 
 ### Incremental translation (MUST follow for stale files)
@@ -73,10 +79,13 @@ preserve consistency:
    git log -1 --format="%H" -- <pt-br-file>
    ```
 
-2. Get the diff of the English source since that commit:
+2. If step 1 returned a commit hash, get the diff of the English source since that commit:
    ```
    git diff <pt-br-commit-hash>..HEAD -- <english-file>
    ```
+   **Shallow clone fallback**: If step 1 returned empty (no commits in the
+   available history), you cannot compute a diff. Skip to step 3 and perform a
+   full re-translation instead of incremental patching.
 
 3. Read the **existing PT-BR translation** in full — this is your **base document**.
 
