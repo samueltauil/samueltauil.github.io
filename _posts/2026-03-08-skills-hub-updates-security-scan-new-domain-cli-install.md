@@ -29,8 +29,6 @@ So I built an automated scanner that runs on every catalog update. It checks for
 
 Skills that pass get a **Verified** badge on their detail page, with the scan timestamp and a breakdown of what was checked.
 
-![Security scan details on a skill page](/assets/images/2026-03-08-skills-hub-updates/feature-security-scan.png)
-
 ![Verified badge shown on the skill header](/assets/images/2026-03-08-skills-hub-updates/feature-verified-badge.png)
 
 Out of 225 skills, 212 passed clean. 13 got flagged with medium-to-high findings. I decided to keep the flagged ones visible and downloadable — hiding them felt wrong. Better to show the findings and let developers decide for themselves.
