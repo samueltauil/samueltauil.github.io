@@ -52,6 +52,15 @@ def fetch_with_curl(url):
     return None
 
 
+def is_valid_lomography_response(content):
+    """Check if the response is actual Lomography content, not a Cloudflare challenge."""
+    if not content or len(content) < 1000:
+        return False
+    # Cloudflare challenge pages won't contain Lomography-specific markers
+    indicators = ['lomography.com', LOMOGRAPHY_USERNAME, 'photo', '<img']
+    return any(indicator in content.lower() for indicator in indicators)
+
+
 def fetch_url(url, retries=MAX_RETRIES):
     """Fetch URL with retry logic, trying curl first then cloudscraper."""
     last_error = None
@@ -65,8 +74,10 @@ def fetch_url(url, retries=MAX_RETRIES):
         # Try curl first (often bypasses Cloudflare better)
         print(f"  Attempt {attempt + 1}: trying curl...")
         content = fetch_with_curl(url)
-        if content and len(content) > 1000:  # Sanity check for valid response
+        if is_valid_lomography_response(content):
             return content
+        elif content:
+            print(f"  curl returned {len(content)} bytes but doesn't look like Lomography content (likely Cloudflare challenge)")
         
         # Try cloudscraper as fallback
         try:
@@ -81,9 +92,13 @@ def fetch_url(url, retries=MAX_RETRIES):
             )
             print(f"  Attempt {attempt + 1}: trying cloudscraper...")
             response = scraper.get(url, timeout=30)
-            if response.status_code == 200:
+            if response.status_code == 200 and is_valid_lomography_response(response.text):
                 return response.text
-            last_error = f"HTTP {response.status_code}"
+            elif response.status_code == 200:
+                print(f"  cloudscraper returned 200 but content doesn't look like Lomography (likely Cloudflare challenge)")
+                last_error = "Response passed Cloudflare check but content is not valid Lomography HTML"
+            else:
+                last_error = f"HTTP {response.status_code}"
         except Exception as e:
             last_error = str(e)
             print(f"  cloudscraper failed: {e}")
@@ -245,6 +260,12 @@ def main():
     recent_photo_ids = fetch_recent_photo_ids()
     print(f"Found {len(recent_photo_ids)} recent photos on Lomography: {recent_photo_ids}")
     
+    if not recent_photo_ids:
+        print("\n⚠️  ERROR: Found 0 photos on Lomography profile page.")
+        print("This likely means the page fetch was blocked by Cloudflare or the page structure changed.")
+        print("Exiting without modifying photography.md to avoid data loss.")
+        exit(1)
+
     # Find new photos that aren't already in the file
     new_photo_ids = [pid for pid in recent_photo_ids if pid not in existing_ids]
     
