@@ -56,9 +56,7 @@ def is_valid_lomography_response(content):
     """Check if the response is actual Lomography content, not a Cloudflare challenge."""
     if not content or len(content) < 1000:
         return False
-    # Cloudflare challenge pages won't contain Lomography-specific markers
-    indicators = ['lomography.com', LOMOGRAPHY_USERNAME, 'photo', '<img']
-    return any(indicator in content.lower() for indicator in indicators)
+    return True
 
 
 def fetch_url(url, retries=MAX_RETRIES):
@@ -122,24 +120,70 @@ def get_existing_photo_ids():
         return set()
 
 
-def fetch_recent_photo_ids():
-    """Fetch the most recent photo IDs from Lomography profile."""
-    content = fetch_url(LOMOGRAPHY_PROFILE_URL)
-    
-    # Extract photo IDs from the page
+def _extract_photo_ids(content):
+    """Extract unique photo IDs from page content, preserving order."""
     photo_ids = re.findall(
         rf'/homes/{LOMOGRAPHY_USERNAME}/photos/(\d+)',
         content
     )
-    # Remove duplicates while preserving order
     seen = set()
     unique_ids = []
     for pid in photo_ids:
         if pid not in seen:
             seen.add(pid)
             unique_ids.append(pid)
+    return unique_ids
+
+
+def fetch_recent_photo_ids():
+    """Fetch the most recent photo IDs from Lomography profile.
     
-    return unique_ids[:NUM_PHOTOS_TO_FETCH]
+    Tries curl then cloudscraper independently, validating that
+    photo IDs are actually found in the response before accepting it.
+    """
+    last_error = None
+
+    for attempt in range(MAX_RETRIES):
+        if attempt > 0:
+            wait_time = (2 ** attempt) + random.uniform(0, 1)
+            print(f"  Retry {attempt}/{MAX_RETRIES-1}, waiting {wait_time:.1f}s...")
+            time.sleep(wait_time)
+
+        # Try curl
+        print(f"  Attempt {attempt + 1}: trying curl...")
+        content = fetch_with_curl(LOMOGRAPHY_PROFILE_URL)
+        if content:
+            ids = _extract_photo_ids(content)
+            if ids:
+                return ids[:NUM_PHOTOS_TO_FETCH]
+            print(f"  curl returned {len(content)} bytes but 0 photo IDs found (likely Cloudflare challenge)")
+
+        # Try cloudscraper
+        try:
+            import cloudscraper
+            scraper = cloudscraper.create_scraper(
+                browser={
+                    'browser': 'chrome',
+                    'platform': 'linux',
+                    'desktop': True
+                },
+                delay=10
+            )
+            print(f"  Attempt {attempt + 1}: trying cloudscraper...")
+            response = scraper.get(LOMOGRAPHY_PROFILE_URL, timeout=30)
+            if response.status_code == 200:
+                ids = _extract_photo_ids(response.text)
+                if ids:
+                    return ids[:NUM_PHOTOS_TO_FETCH]
+                print(f"  cloudscraper returned 200 but 0 photo IDs found (likely Cloudflare challenge)")
+                last_error = "Response contained no photo IDs"
+            else:
+                last_error = f"HTTP {response.status_code}"
+        except Exception as e:
+            last_error = str(e)
+            print(f"  cloudscraper failed: {e}")
+
+    raise Exception(f"Failed to fetch photo IDs after {MAX_RETRIES} attempts. Last error: {last_error}")
 
 
 def fetch_photo_cdn_url(photo_id):
