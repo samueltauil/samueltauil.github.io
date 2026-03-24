@@ -53,8 +53,22 @@ def fetch_with_curl(url):
 
 
 def is_valid_lomography_response(content):
-    """Check if the response is actual Lomography content, not a Cloudflare challenge."""
+    """Check if the response is actual Lomography content, not a Cloudflare challenge.
+    
+    CF challenge pages are small (~5KB) with a 'Just a moment' title and no real content.
+    Real Lomography pages are much larger with proper HTML structure.
+    """
     if not content or len(content) < 1000:
+        return False
+    content_lower = content.lower()
+    # Cloudflare interstitial challenge pages
+    cf_challenge_markers = [
+        '<title>just a moment',
+        'cf_chl_opt',
+        '<title>attention required',
+        '<title>please wait',
+    ]
+    if any(marker in content_lower for marker in cf_challenge_markers):
         return False
     return True
 
@@ -186,45 +200,37 @@ def fetch_recent_photo_ids():
     raise Exception(f"Failed to fetch photo IDs after {MAX_RETRIES} attempts. Last error: {last_error}")
 
 
-def fetch_photo_cdn_url(photo_id):
-    """Fetch the CDN URL for a specific photo."""
+def fetch_photo_details(photo_id):
+    """Fetch the CDN URL and title for a specific photo in a single request."""
     photo_url = f"https://www.lomography.com/homes/{LOMOGRAPHY_USERNAME}/photos/{photo_id}"
-    time.sleep(1)  # Rate limiting: wait 1 second between requests
+    time.sleep(1)  # Rate limiting
     content = fetch_url(photo_url)
     
     soup = BeautifulSoup(content, 'html.parser')
     
-    # Find the main image - look for img tags with cdn.assets.lomography.com
+    # Extract CDN URL
+    cdn_url = None
     img_tags = soup.find_all('img')
     for img in img_tags:
         src = img.get('src', '')
         if 'cdn.assets.lomography.com' in src:
-            return src
+            cdn_url = src
+            break
     
-    # Also check for meta og:image
-    og_image = soup.find('meta', property='og:image')
-    if og_image and og_image.get('content'):
-        content = og_image['content']
-        if 'cdn.assets.lomography.com' in content:
-            return content
+    if not cdn_url:
+        og_image = soup.find('meta', property='og:image')
+        if og_image and og_image.get('content'):
+            img_content = og_image['content']
+            if 'cdn.assets.lomography.com' in img_content:
+                cdn_url = img_content
     
-    return None
-
-
-def fetch_photo_title(photo_id):
-    """Fetch the title/description for a specific photo."""
-    photo_url = f"https://www.lomography.com/homes/{LOMOGRAPHY_USERNAME}/photos/{photo_id}"
-    time.sleep(0.5)  # Rate limiting
-    content = fetch_url(photo_url)
-    
-    soup = BeautifulSoup(content, 'html.parser')
-    
-    # Try to find the photo description
+    # Extract title
+    title = f"Photo {photo_id}"
     og_title = soup.find('meta', property='og:title')
     if og_title and og_title.get('content'):
-        return og_title['content']
+        title = og_title['content']
     
-    return f"Photo {photo_id}"
+    return cdn_url, title
 
 
 def generate_photo_gallery_html(photos):
@@ -330,9 +336,8 @@ def main():
         seen_ids.add(photo_id)
         
         print(f"Fetching details for photo {photo_id}{'  [NEW]' if photo_id in new_photo_ids else ''}...")
-        cdn_url = fetch_photo_cdn_url(photo_id)
+        cdn_url, title = fetch_photo_details(photo_id)
         if cdn_url:
-            title = fetch_photo_title(photo_id)
             # Clean title for alt text
             title = title.split(' - ')[0] if ' - ' in title else title
             title = title[:100]  # Limit length
