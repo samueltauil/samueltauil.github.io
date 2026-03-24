@@ -29,41 +29,41 @@ The name **Expired Emulsions** comes from my love of experimenting with expired 
 ### Recent Photos
 
 <div class="photo-gallery">
+  <a href="https://www.lomography.com/homes/samueltauil/photos/29231673" target="_blank" rel="noopener">
+    <img src="https://cdn.assets.lomography.com/b6/c23ad05865eb22ea408f16a3bc9c8ba1b1ebc4/1037x1272x2.jpg?auth=5aa8d2423d7767732a227d20db422c26367027c4" alt="#29231673" loading="lazy">
+  </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28979520" target="_blank" rel="noopener">
-    <img src="https://cdn.assets.lomography.com/d7/aed0f18a2a136ee82da551b90e35436ba2d447/1034x1261x2.jpg?auth=55bd328e05f9aabf9391fe400a731330436bb3b2" alt="Barn - Polaroid SX-70" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/d7/aed0f18a2a136ee82da551b90e35436ba2d447/1034x1261x2.jpg?auth=55bd328e05f9aabf9391fe400a731330436bb3b2" alt="#28979520" loading="lazy">
   </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28976794" target="_blank" rel="noopener">
-    <img src="https://cdn.assets.lomography.com/36/b7339b0e38fa7c4235e32caf2eb37fb9738285/1029x1262x2.jpg?auth=99c88595e5043bf0631a6cad4edc58a3eed245f5" alt="Moments of being - Polaroid I-2" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/36/b7339b0e38fa7c4235e32caf2eb37fb9738285/1029x1262x2.jpg?auth=99c88595e5043bf0631a6cad4edc58a3eed245f5" alt="#28976794" loading="lazy">
   </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28968482" target="_blank" rel="noopener">
-    <img src="https://cdn.assets.lomography.com/5a/574b0d1279d83a017796e1ebb5b3111a04adc1/1032x1269x2.jpg?auth=7f8896fd5b39db9e2e31c4c543ca259ae9651fb2" alt="Vintage car - Polaroid SX-70" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/5a/574b0d1279d83a017796e1ebb5b3111a04adc1/1032x1269x2.jpg?auth=7f8896fd5b39db9e2e31c4c543ca259ae9651fb2" alt="#28968482" loading="lazy">
   </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28701975" target="_blank" rel="noopener">
-    <img src="https://cdn.assets.lomography.com/4e/0446a13ae4eda702986c1ca56411e559e3ca98/1032x1267x2.jpg?auth=32df333923fe865e77c52600d816177c5fde2eea" alt="Thunderbird - Polaroid SX-70" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/4e/0446a13ae4eda702986c1ca56411e559e3ca98/1032x1267x2.jpg?auth=32df333923fe865e77c52600d816177c5fde2eea" alt="#28701975" loading="lazy">
   </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28613790" target="_blank" rel="noopener">
-    <img src="https://cdn.assets.lomography.com/36/81eb877b84f1c1f7d9051e4f724ca37ccf90c5/1022x1266x2.jpg?auth=87fc886c812e2889a48774abe790e6d7f3b64858" alt="Flying sausages - Polaroid SX-70" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/36/81eb877b84f1c1f7d9051e4f724ca37ccf90c5/1022x1266x2.jpg?auth=87fc886c812e2889a48774abe790e6d7f3b64858" alt="#28613790" loading="lazy">
   </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28611800" target="_blank" rel="noopener">
-    <img src="https://cdn.assets.lomography.com/3f/cb8abeb4df1815e4718c95b59870f19507e692/1025x1267x2.jpg?auth=b698f5e128bf44ff10ddc648ee066a4671ab384a" alt="A thousand flowers - Polaroid SX-70" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/3f/cb8abeb4df1815e4718c95b59870f19507e692/1025x1267x2.jpg?auth=b698f5e128bf44ff10ddc648ee066a4671ab384a" alt="#28611800" loading="lazy">
   </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28604968" target="_blank" rel="noopener">
-    <img src="https://cdn.assets.lomography.com/39/b70cb946fae1a10a34709451d895d8790b2bd7/1034x1270x2.jpg?auth=38454083e0a813f5d0c24c0a683cf19c957183aa" alt="Gasoline - Polaroid SX-70" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/39/b70cb946fae1a10a34709451d895d8790b2bd7/1034x1270x2.jpg?auth=38454083e0a813f5d0c24c0a683cf19c957183aa" alt="#28604968" loading="lazy">
   </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28438926" target="_blank" rel="noopener">
-    <img src="https://cdn.assets.lomography.com/eb/50cc4a337c21355c76d5d7b6c8db4de3d99ecc/1040x1268x2.jpg?auth=9c03b6ea86e61b22bf828a9510b05bc2c01e4213" alt="Jaguar - Polaroid I-2" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/eb/50cc4a337c21355c76d5d7b6c8db4de3d99ecc/1040x1268x2.jpg?auth=9c03b6ea86e61b22bf828a9510b05bc2c01e4213" alt="#28438926" loading="lazy">
   </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28436373" target="_blank" rel="noopener">
-    <img src="https://cdn.assets.lomography.com/c8/7e3929df0595491b62f0f5f29b846daa3c8d87/1043x1272x2.jpg?auth=838b1168f2dd749be38893f0df2b60149449310e" alt="Helena - Polaroid I-2" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/c8/7e3929df0595491b62f0f5f29b846daa3c8d87/1043x1272x2.jpg?auth=838b1168f2dd749be38893f0df2b60149449310e" alt="#28436373" loading="lazy">
   </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28318931" target="_blank" rel="noopener">
-    <img src="https://cdn.assets.lomography.com/1e/b3e5a6dee36ba864a872cf7479c098157b2d6a/1031x1262x2.jpg?auth=f2672e6c231a44550c5f9690be55f3c3f24b5eb5" alt="Peonies - MiNT SLR670-X" loading="lazy">
+    <img src="https://cdn.assets.lomography.com/1e/b3e5a6dee36ba864a872cf7479c098157b2d6a/1031x1262x2.jpg?auth=f2672e6c231a44550c5f9690be55f3c3f24b5eb5" alt="#28318931" loading="lazy">
   </a>
-  <a href="https://www.lomography.com/homes/samueltauil/photos/28292145" target="_blank" rel="noopener">
-    <img src="https://cdn.assets.lomography.com/70/315770849800329fe7d5ad26240dba614259b2/1034x1267x2.jpg?auth=8644dee50197d2126b8975b02e7ee7975f098e3f" alt="Street art - Polaroid I-2" loading="lazy">
-  </a>
-  <a href="https://www.lomography.com/homes/samueltauil/photos/28289537" target="_blank" rel="noopener">
-    <img src="https://cdn.assets.lomography.com/f8/205cf62a17a9708202d4a463bae6ef99b08bef/1035x1265x2.jpg?auth=cbf51d24b54b217501dd1ac4e0e5bb3b65f42abc" alt="Peonies with filter - MiNT SLR670-X" loading="lazy">
+  <a href="https://www.lomography.com/homes/samueltauil/photos/28302088" target="_blank" rel="noopener">
+    <img src="https://cdn.assets.lomography.com/78/c772aa0d382f055a399c66419a3df83ee11a83/1025x1264x2.jpg?auth=a09c9fff176ab6549fe08e25585ec9fbac91a3f7" alt="#28302088" loading="lazy">
   </a>
 </div>
 
