@@ -29,6 +29,9 @@ The name **Expired Emulsions** comes from my love of experimenting with expired 
 ### Recent Photos
 
 <div class="photo-gallery">
+  <a href="https://www.lomography.com/homes/samueltauil/photos/29255520" target="_blank" rel="noopener">
+    <img src="https://cdn.assets.lomography.com/56/0ad3a46a724745d61c5e13a312520f7240a3b9/1028x1271x2.jpg?auth=3688d88ee9d7b814e0246062d74db0ac23f1980e" alt="#29255520" loading="lazy">
+  </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/29231673" target="_blank" rel="noopener">
     <img src="https://cdn.assets.lomography.com/b6/c23ad05865eb22ea408f16a3bc9c8ba1b1ebc4/1037x1272x2.jpg?auth=5aa8d2423d7767732a227d20db422c26367027c4" alt="#29231673" loading="lazy">
   </a>
@@ -61,9 +64,6 @@ The name **Expired Emulsions** comes from my love of experimenting with expired 
   </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/28318931" target="_blank" rel="noopener">
     <img src="https://cdn.assets.lomography.com/1e/b3e5a6dee36ba864a872cf7479c098157b2d6a/1031x1262x2.jpg?auth=f2672e6c231a44550c5f9690be55f3c3f24b5eb5" alt="#28318931" loading="lazy">
-  </a>
-  <a href="https://www.lomography.com/homes/samueltauil/photos/28302088" target="_blank" rel="noopener">
-    <img src="https://cdn.assets.lomography.com/78/c772aa0d382f055a399c66419a3df83ee11a83/1025x1264x2.jpg?auth=a09c9fff176ab6549fe08e25585ec9fbac91a3f7" alt="#28302088" loading="lazy">
   </a>
 </div>
 
