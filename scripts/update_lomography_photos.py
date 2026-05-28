@@ -307,7 +307,12 @@ def main():
     print(f"Found {len(existing_ids)} existing photos in file")
     
     print("\nFetching recent photo IDs from Lomography...")
-    recent_photo_ids = fetch_recent_photo_ids()
+    try:
+        recent_photo_ids = fetch_recent_photo_ids()
+    except Exception as e:
+        print(f"\n⚠️  Could not fetch photos from Lomography: {e}")
+        print("Skipping update — existing photos remain unchanged.")
+        return
     print(f"Found {len(recent_photo_ids)} recent photos on Lomography: {recent_photo_ids}")
     
     if not recent_photo_ids:
