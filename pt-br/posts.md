@@ -2,14 +2,14 @@
 layout: page
 title: Posts
 permalink: /posts/
-lang: en
+lang: pt-br
 ---
 
 <section class="section">
-  <p class="tagline" style="color: #8b949e;">Technical articles, tutorials, and insights on cloud-native technologies, AI, and developer tools.</p>
+  <p class="tagline" style="color: #8b949e;">Artigos técnicos, tutoriais e insights sobre tecnologias cloud-native, IA e ferramentas de desenvolvedor.</p>
 </section>
 
-## All Posts
+## Todos os Posts
 
 <ul class="post-list">
 {% for post in site.posts %}

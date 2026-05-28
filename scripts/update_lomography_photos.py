@@ -52,6 +52,27 @@ def fetch_with_curl(url):
     return None
 
 
+def is_valid_lomography_response(content):
+    """Check if the response is actual Lomography content, not a Cloudflare challenge.
+    
+    CF challenge pages are small (~5KB) with a 'Just a moment' title and no real content.
+    Real Lomography pages are much larger with proper HTML structure.
+    """
+    if not content or len(content) < 1000:
+        return False
+    content_lower = content.lower()
+    # Cloudflare interstitial challenge pages
+    cf_challenge_markers = [
+        '<title>just a moment',
+        'cf_chl_opt',
+        '<title>attention required',
+        '<title>please wait',
+    ]
+    if any(marker in content_lower for marker in cf_challenge_markers):
+        return False
+    return True
+
+
 def fetch_url(url, retries=MAX_RETRIES):
     """Fetch URL with retry logic, trying curl first then cloudscraper."""
     last_error = None
@@ -65,8 +86,10 @@ def fetch_url(url, retries=MAX_RETRIES):
         # Try curl first (often bypasses Cloudflare better)
         print(f"  Attempt {attempt + 1}: trying curl...")
         content = fetch_with_curl(url)
-        if content and len(content) > 1000:  # Sanity check for valid response
+        if is_valid_lomography_response(content):
             return content
+        elif content:
+            print(f"  curl returned {len(content)} bytes but doesn't look like Lomography content (likely Cloudflare challenge)")
         
         # Try cloudscraper as fallback
         try:
@@ -81,9 +104,13 @@ def fetch_url(url, retries=MAX_RETRIES):
             )
             print(f"  Attempt {attempt + 1}: trying cloudscraper...")
             response = scraper.get(url, timeout=30)
-            if response.status_code == 200:
+            if response.status_code == 200 and is_valid_lomography_response(response.text):
                 return response.text
-            last_error = f"HTTP {response.status_code}"
+            elif response.status_code == 200:
+                print(f"  cloudscraper returned 200 but content doesn't look like Lomography (likely Cloudflare challenge)")
+                last_error = "Response passed Cloudflare check but content is not valid Lomography HTML"
+            else:
+                last_error = f"HTTP {response.status_code}"
         except Exception as e:
             last_error = str(e)
             print(f"  cloudscraper failed: {e}")
@@ -107,65 +134,103 @@ def get_existing_photo_ids():
         return set()
 
 
-def fetch_recent_photo_ids():
-    """Fetch the most recent photo IDs from Lomography profile."""
-    content = fetch_url(LOMOGRAPHY_PROFILE_URL)
-    
-    # Extract photo IDs from the page
+def _extract_photo_ids(content):
+    """Extract unique photo IDs from page content, preserving order."""
     photo_ids = re.findall(
         rf'/homes/{LOMOGRAPHY_USERNAME}/photos/(\d+)',
         content
     )
-    # Remove duplicates while preserving order
     seen = set()
     unique_ids = []
     for pid in photo_ids:
         if pid not in seen:
             seen.add(pid)
             unique_ids.append(pid)
+    return unique_ids
+
+
+def fetch_recent_photo_ids():
+    """Fetch the most recent photo IDs from Lomography profile.
     
-    return unique_ids[:NUM_PHOTOS_TO_FETCH]
+    Tries curl then cloudscraper independently, validating that
+    photo IDs are actually found in the response before accepting it.
+    """
+    last_error = None
+
+    for attempt in range(MAX_RETRIES):
+        if attempt > 0:
+            wait_time = (2 ** attempt) + random.uniform(0, 1)
+            print(f"  Retry {attempt}/{MAX_RETRIES-1}, waiting {wait_time:.1f}s...")
+            time.sleep(wait_time)
+
+        # Try curl
+        print(f"  Attempt {attempt + 1}: trying curl...")
+        content = fetch_with_curl(LOMOGRAPHY_PROFILE_URL)
+        if content:
+            ids = _extract_photo_ids(content)
+            if ids:
+                return ids[:NUM_PHOTOS_TO_FETCH]
+            print(f"  curl returned {len(content)} bytes but 0 photo IDs found (likely Cloudflare challenge)")
+
+        # Try cloudscraper
+        try:
+            import cloudscraper
+            scraper = cloudscraper.create_scraper(
+                browser={
+                    'browser': 'chrome',
+                    'platform': 'linux',
+                    'desktop': True
+                },
+                delay=10
+            )
+            print(f"  Attempt {attempt + 1}: trying cloudscraper...")
+            response = scraper.get(LOMOGRAPHY_PROFILE_URL, timeout=30)
+            if response.status_code == 200:
+                ids = _extract_photo_ids(response.text)
+                if ids:
+                    return ids[:NUM_PHOTOS_TO_FETCH]
+                print(f"  cloudscraper returned 200 but 0 photo IDs found (likely Cloudflare challenge)")
+                last_error = "Response contained no photo IDs"
+            else:
+                last_error = f"HTTP {response.status_code}"
+        except Exception as e:
+            last_error = str(e)
+            print(f"  cloudscraper failed: {e}")
+
+    raise Exception(f"Failed to fetch photo IDs after {MAX_RETRIES} attempts. Last error: {last_error}")
 
 
-def fetch_photo_cdn_url(photo_id):
-    """Fetch the CDN URL for a specific photo."""
+def fetch_photo_details(photo_id):
+    """Fetch the CDN URL and title for a specific photo in a single request."""
     photo_url = f"https://www.lomography.com/homes/{LOMOGRAPHY_USERNAME}/photos/{photo_id}"
-    time.sleep(1)  # Rate limiting: wait 1 second between requests
+    time.sleep(1)  # Rate limiting
     content = fetch_url(photo_url)
     
     soup = BeautifulSoup(content, 'html.parser')
     
-    # Find the main image - look for img tags with cdn.assets.lomography.com
+    # Extract CDN URL
+    cdn_url = None
     img_tags = soup.find_all('img')
     for img in img_tags:
         src = img.get('src', '')
         if 'cdn.assets.lomography.com' in src:
-            return src
+            cdn_url = src
+            break
     
-    # Also check for meta og:image
-    og_image = soup.find('meta', property='og:image')
-    if og_image and og_image.get('content'):
-        content = og_image['content']
-        if 'cdn.assets.lomography.com' in content:
-            return content
+    if not cdn_url:
+        og_image = soup.find('meta', property='og:image')
+        if og_image and og_image.get('content'):
+            img_content = og_image['content']
+            if 'cdn.assets.lomography.com' in img_content:
+                cdn_url = img_content
     
-    return None
-
-
-def fetch_photo_title(photo_id):
-    """Fetch the title/description for a specific photo."""
-    photo_url = f"https://www.lomography.com/homes/{LOMOGRAPHY_USERNAME}/photos/{photo_id}"
-    time.sleep(0.5)  # Rate limiting
-    content = fetch_url(photo_url)
-    
-    soup = BeautifulSoup(content, 'html.parser')
-    
-    # Try to find the photo description
+    # Extract title
+    title = f"Photo {photo_id}"
     og_title = soup.find('meta', property='og:title')
     if og_title and og_title.get('content'):
-        return og_title['content']
+        title = og_title['content']
     
-    return f"Photo {photo_id}"
+    return cdn_url, title
 
 
 def generate_photo_gallery_html(photos):
@@ -245,6 +310,12 @@ def main():
     recent_photo_ids = fetch_recent_photo_ids()
     print(f"Found {len(recent_photo_ids)} recent photos on Lomography: {recent_photo_ids}")
     
+    if not recent_photo_ids:
+        print("\n⚠️  ERROR: Found 0 photos on Lomography profile page.")
+        print("This likely means the page fetch was blocked by Cloudflare or the page structure changed.")
+        print("Exiting without modifying photography.md to avoid data loss.")
+        exit(1)
+
     # Find new photos that aren't already in the file
     new_photo_ids = [pid for pid in recent_photo_ids if pid not in existing_ids]
     
@@ -265,9 +336,8 @@ def main():
         seen_ids.add(photo_id)
         
         print(f"Fetching details for photo {photo_id}{'  [NEW]' if photo_id in new_photo_ids else ''}...")
-        cdn_url = fetch_photo_cdn_url(photo_id)
+        cdn_url, title = fetch_photo_details(photo_id)
         if cdn_url:
-            title = fetch_photo_title(photo_id)
             # Clean title for alt text
             title = title.split(' - ')[0] if ' - ' in title else title
             title = title[:100]  # Limit length

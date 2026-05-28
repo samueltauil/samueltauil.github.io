@@ -1,4 +1,5 @@
 ---
+lang: en
 layout: post
 title: "Skills Hub: A Curated Catalog for Discovering and Installing AI Coding Skills"
 date: 2026-02-06
@@ -10,7 +11,7 @@ GitHub Copilot skills are powerful. They let you teach Copilot how to handle spe
 
 ![Skills Hub Homepage](/assets/images/2026-02-06-skills-hub/homepage.png)
 
-**Live site**: [samueltauil.github.io/skills-hub](https://samueltauil.github.io/skills-hub)
+**Live site**: [skillshub.space](https://skillshub.space)
 
 **Repository**: [github.com/samueltauil/skills-hub](https://github.com/samueltauil/skills-hub)
 

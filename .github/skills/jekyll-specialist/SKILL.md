@@ -46,15 +46,31 @@ New posts go in `_posts/` with filename format: `YYYY-MM-DD-slug-title.md`
 
 See [templates reference](references/TEMPLATES.md) for full post template.
 
+### Writing Style Rules
+- **No em dashes**. Use commas, periods, or rephrase instead.
+- **No emojis** in post content.
+- **Write in a natural, conversational tone**. The blog should read like a real person wrote it, not an AI assistant. Avoid overly polished, formulaic, or corporate-sounding language.
+- Use casual phrasing and varied sentence length. Mix short punchy sentences with longer ones.
+- Prefer personal narration ("I thought", "Turns out", "I have to give credit") over detached summaries ("This project implements", "The solution provides").
+- Avoid generic section headers like "The Problem", "The Solution". Use descriptive, lowercase headers that sound natural (e.g., "The reality of healthcare integrations", "Why Camel on Quarkus").
+- When the post is based on notes or rough ideas, expand them into a story but keep the original voice and energy.
+- **Only create the English version** in `_posts/`. The Portuguese translation is handled by a separate workflow, do not create files under `pt-br/_posts/`.
+
+### Gathering Context
+- When a post references a GitHub project, fetch the repo README and details before writing to ensure technical accuracy.
+- Review an existing post (e.g., the most recent one in `_posts/`) to match the current writing style and frontmatter conventions.
+
 ### Common Categories
 - `github-copilot` - GitHub Copilot content
 - `vscode` - VS Code tips and extensions
 - `devops` - CI/CD, automation, pipelines
 - `github` - GitHub features and workflows
 - `ai` - AI/ML and developer tools
+- `open-source` - Open source projects
+- `healthcare` - Healthcare technology
 
 ### Common Tags
-`github-copilot`, `vscode`, `github-actions`, `ci-cd`, `automation`, `devops`, `open-source`, `kubernetes`, `openshift`, `gitops`, `developer-tools`, `productivity`
+`github-copilot`, `vscode`, `github-actions`, `ci-cd`, `automation`, `devops`, `open-source`, `kubernetes`, `openshift`, `gitops`, `developer-tools`, `productivity`, `cloud-native`, `apache-camel`, `quarkus`, `healthcare`, `hl7`, `fhir`, `java`, `kafka`, `integration`
 
 ## Photography Page
 

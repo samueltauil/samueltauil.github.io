@@ -1,4 +1,5 @@
 ---
+lang: en
 layout: post
 title: "Level Up Your VS Code Speed with Keyboard Shortcuts"
 date: 2025-10-16

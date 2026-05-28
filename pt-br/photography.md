@@ -1,19 +1,19 @@
 ---
 layout: page
-title: Photography
+title: Fotografia
 permalink: /photography/
-lang: en
+lang: pt-br
 ---
 
 <p class="tagline" style="font-size: 1.1rem; color: #8b949e; margin-bottom: 2rem;">
-Analog photography enthusiast capturing moments on instant film and vintage cameras.
+Entusiasta de fotografia analógica capturando momentos em filme instantâneo e câmeras vintage.
 </p>
 
-## Analog Photography
+## Fotografia Analógica
 
-I've been shooting analog since 2011, exploring the unique aesthetics of film photography across different formats and cameras. My gear ranges from classic Lomography cameras like the LC-A to Polaroid folding SLRs including the iconic SX-70 and my MiNT SLR670-X Ming Edition — a beautifully restored camera that combines vintage Polaroid engineering with modern precision.
+Eu fotografo analógico desde 2011, explorando a estética única da fotografia em filme em diferentes formatos e câmeras. Meu equipamento varia de câmeras clássicas Lomography como a LC-A até SLRs dobráveis Polaroid incluindo a icônica SX-70 e minha MiNT SLR670-X Ming Edition — uma câmera lindamente restaurada que combina engenharia vintage Polaroid com precisão moderna.
 
-The name **Expired Emulsions** comes from my love of experimenting with expired film, which produces unpredictable colors, light leaks, and beautiful imperfections that digital simply can't replicate. Whether it's instant Polaroid shots, experimental LomoChrome films, or classic 35mm, there's something magical about the anticipation of waiting for results and embracing the happy accidents that come with analog.
+O nome **Expired Emulsions** vem do meu amor por experimentar com filmes vencidos, que produzem cores imprevisíveis, vazamentos de luz e imperfeições lindas que o digital simplesmente não consegue replicar. Seja fotos instantâneas Polaroid, filmes experimentais LomoChrome, ou clássico 35mm, há algo mágico na antecipação de esperar pelos resultados e abraçar os acidentes felizes que vêm com o analógico.
 
 <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 2rem 0;">
   <a href="https://instagram.com/expiredemulsions" class="badge" target="_blank" rel="noopener" style="padding: 0.75rem 1.25rem; font-size: 1rem;">
@@ -26,12 +26,9 @@ The name **Expired Emulsions** comes from my love of experimenting with expired 
   </a>
 </div>
 
-### Recent Photos
+### Fotos Recentes
 
 <div class="photo-gallery">
-  <a href="https://www.lomography.com/homes/samueltauil/photos/29373163" target="_blank" rel="noopener">
-    <img src="https://cdn.assets.lomography.com/76/63a6582cb371bf10501a9739972e046bc49263/1040x1276x2.jpg?auth=6c6d19e32c86d2afadd7bfbc860497dbf857c14f" alt="#29373163" loading="lazy">
-  </a>
   <a href="https://www.lomography.com/homes/samueltauil/photos/29255520" target="_blank" rel="noopener">
     <img src="https://cdn.assets.lomography.com/56/0ad3a46a724745d61c5e13a312520f7240a3b9/1028x1271x2.jpg?auth=3688d88ee9d7b814e0246062d74db0ac23f1980e" alt="#29255520" loading="lazy">
   </a>
@@ -65,6 +62,9 @@ The name **Expired Emulsions** comes from my love of experimenting with expired 
   <a href="https://www.lomography.com/homes/samueltauil/photos/28436373" target="_blank" rel="noopener">
     <img src="https://cdn.assets.lomography.com/c8/7e3929df0595491b62f0f5f29b846daa3c8d87/1043x1272x2.jpg?auth=838b1168f2dd749be38893f0df2b60149449310e" alt="#28436373" loading="lazy">
   </a>
+  <a href="https://www.lomography.com/homes/samueltauil/photos/28318931" target="_blank" rel="noopener">
+    <img src="https://cdn.assets.lomography.com/1e/b3e5a6dee36ba864a872cf7479c098157b2d6a/1031x1262x2.jpg?auth=f2672e6c231a44550c5f9690be55f3c3f24b5eb5" alt="#28318931" loading="lazy">
+  </a>
 </div>
 
 <style>
@@ -93,60 +93,60 @@ The name **Expired Emulsions** comes from my love of experimenting with expired 
 }
 </style>
 
-<a href="https://www.lomography.com/homes/samueltauil/photos?order=trending" class="badge" target="_blank" rel="noopener" style="margin-top: 1rem;">View More →</a>
+<a href="https://www.lomography.com/homes/samueltauil/photos?order=trending" class="badge" target="_blank" rel="noopener" style="margin-top: 1rem;">Ver Mais →</a>
 
-## My Cameras
+## Minhas Câmeras
 
-A collection of vintage and Lomography cameras I shoot with:
+Uma coleção de câmeras vintage e Lomography com as quais fotografo:
 
 <div class="camera-list">
   <div class="camera-item">
     <span class="camera-icon">📷</span>
     <div>
       <strong>MiNT SLR670-X Ming Edition</strong>
-      <span>Restored Polaroid SX-70 with modern precision, manual controls, and stunning aesthetics</span>
+      <span>Polaroid SX-70 restaurada com precisão moderna, controles manuais e estética deslumbrante</span>
     </div>
   </div>
   <div class="camera-item">
     <span class="camera-icon">📷</span>
     <div>
       <strong>Polaroid SX-70 Sonar</strong>
-      <span>The iconic folding SLR instant camera with autofocus sonar system</span>
+      <span>A icônica câmera SLR instantânea dobrável com sistema de foco automático sonar</span>
     </div>
   </div>
   <div class="camera-item">
     <span class="camera-icon">📷</span>
     <div>
       <strong>Polaroid SLR 680se</strong>
-      <span>Built-in flash and sonar autofocus for 600 film</span>
+      <span>Flash embutido e foco automático sonar para filme 600</span>
     </div>
   </div>
   <div class="camera-item">
     <span class="camera-icon">📷</span>
     <div>
       <strong>Lomo LC-A</strong>
-      <span>The legendary Russian camera that started the Lomography movement</span>
+      <span>A lendária câmera russa que iniciou o movimento Lomography</span>
     </div>
   </div>
   <div class="camera-item">
     <span class="camera-icon">📷</span>
     <div>
       <strong>Canon AE-1 Program</strong>
-      <span>Classic 35mm SLR, the best-selling camera of its era</span>
+      <span>SLR 35mm clássica, a câmera mais vendida de sua era</span>
     </div>
   </div>
   <div class="camera-item">
     <span class="camera-icon">📷</span>
     <div>
       <strong>Pentax K1000</strong>
-      <span>The quintessential fully mechanical 35mm SLR</span>
+      <span>A quintessencial SLR 35mm totalmente mecânica</span>
     </div>
   </div>
   <div class="camera-item">
     <span class="camera-icon">📷</span>
     <div>
       <strong>Mamiya RB67</strong>
-      <span>Professional medium format beast with rotating back</span>
+      <span>Fera profissional de médio formato com dorso rotativo</span>
     </div>
   </div>
 </div>
@@ -186,22 +186,22 @@ A collection of vintage and Lomography cameras I shoot with:
 }
 </style>
 
-## Films I Love
+## Filmes que Eu Amo
 
 - **Polaroid 600** — Color, B&W, Round Frame Edition
 - **Polaroid SX-70** — Color, Paul Giambarba Spectrum Edition
 - **Polaroid i-Type** — Color, Golden Moments, MoMA Edition
-- **LomoChrome Purple** — Surreal color shifts
-- **LomoChrome Turquoise** — Cool, dreamy tones
-- **Kodak Ektachrome 100** — Classic slide film
-- **Fuji Pro 400H** — Beautiful skin tones (RIP)
-- **Ilford Delta 100** — Crisp black & white
+- **LomoChrome Purple** — Mudanças de cor surreais
+- **LomoChrome Turquoise** — Tons frios e sonhadores
+- **Kodak Ektachrome 100** — Filme slide clássico
+- **Fuji Pro 400H** — Lindos tons de pele (RIP)
+- **Ilford Delta 100** — Preto e branco nítido
 
-## Locations
+## Locações
 
-Photos captured in:
-**Boston** • **Cambridge** • **Salem** • **Gloucester** • **Rockport** • **Ogunquit, Maine** • **Porto, Portugal** • **São Paulo, Brazil**
+Fotos capturadas em:
+**Boston** • **Cambridge** • **Salem** • **Gloucester** • **Rockport** • **Ogunquit, Maine** • **Porto, Portugal** • **São Paulo, Brasil**
 
 <p style="margin-top: 3rem; font-style: italic; color: #6e7681;">
-"Photography is the story I fail to put into words." — Destin Sparks
+"A fotografia é a história que eu falho em colocar em palavras." — Destin Sparks
 </p>

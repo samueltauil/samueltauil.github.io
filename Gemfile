@@ -1,12 +1,11 @@
 source "https://rubygems.org"
 
-# GitHub Pages gem includes Jekyll and all supported plugins
-gem "github-pages", group: :jekyll_plugins
+gem "jekyll", "~> 4.3"
 
-# Additional plugins
 group :jekyll_plugins do
   gem "jekyll-feed"
   gem "jekyll-seo-tag"
+  gem "jekyll-polyglot"
 end
 
 # Windows and JRuby compatibility

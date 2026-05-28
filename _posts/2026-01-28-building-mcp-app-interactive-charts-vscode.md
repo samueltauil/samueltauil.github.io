@@ -1,4 +1,5 @@
 ---
+lang: en
 layout: post
 title: "Building an MCP App with Interactive Charts for VS Code"
 date: 2026-01-28

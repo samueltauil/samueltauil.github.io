@@ -903,6 +903,15 @@ img {
   height: auto;
 }
 
+// Inline icon for headings
+.inline-icon {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: middle;
+  margin-right: 0.3em;
+  display: inline-block;
+}
+
 // Selection
 ::selection {
   background: rgba(163, 113, 247, 0.3);
@@ -1086,5 +1095,120 @@ img {
   .site-header,
   .site-footer {
     display: none;
+  }
+}
+
+// Language Toggle Switch
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
+  padding-left: 1rem;
+  border-left: 1px solid $border-color;
+}
+
+.lang-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+  user-select: none;
+
+  &.active {
+    color: $text-primary;
+  }
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $bg-tertiary;
+  border: 1px solid $border-color;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    left: 2px;
+    bottom: 2px;
+    background: $accent-purple;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 4px rgba(163, 113, 247, 0.4);
+  }
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  border-color: $accent-purple;
+
+  &::before {
+    transform: translateX(16px);
+    background: $accent-green;
+    box-shadow: 0 0 4px rgba(63, 185, 80, 0.4);
+  }
+}
+
+.toggle-switch input:focus + .toggle-slider {
+  outline: 2px solid $accent-blue;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .lang-toggle {
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0;
+    padding: 0.5rem 0;
+  }
+}
+
+// AI Translation Notice
+.ai-translation-notice {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.75rem 2rem;
+
+  p {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    font-size: 0.8125rem;
+    color: $text-muted;
+    background: rgba(33, 38, 45, 0.6);
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 1.5;
+
+    a {
+      color: $accent-purple;
+      font-weight: 500;
+
+      &:hover {
+        color: $accent-blue;
+      }
+    }
   }
 }

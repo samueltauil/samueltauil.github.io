@@ -1,6 +1,8 @@
 ---
 layout: home
 title: Home
+permalink: /index.html
+lang: en
 ---
 
 <section class="section">
