@@ -28,6 +28,10 @@ jobs:
           pip install cloudscraper beautifulsoup4
 
       - name: Fetch and update Lomography photos
+        env:
+          LOMOGRAPHY_COOKIES: ${{ secrets.LOMOGRAPHY_COOKIES }}
+          LOMOGRAPHY_CF_CLEARANCE: ${{ secrets.LOMOGRAPHY_CF_CLEARANCE }}
+          LOMOGRAPHY_SESSION: ${{ secrets.LOMOGRAPHY_SESSION }}
         run: |
           python scripts/update_lomography_photos.py
 
