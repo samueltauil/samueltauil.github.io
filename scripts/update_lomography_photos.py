@@ -32,6 +32,8 @@ def parse_cookie_string(cookie_string):
     if not cookie_string:
         return cookies
     for part in cookie_string.split(';'):
+        if '\r' in part or '\n' in part:
+            continue
         if '=' not in part:
             continue
         key, value = part.split('=', 1)
@@ -47,9 +49,9 @@ def get_auth_cookies():
     cookies = parse_cookie_string(os.getenv("LOMOGRAPHY_COOKIES", "").strip())
     cf_clearance = os.getenv("LOMOGRAPHY_CF_CLEARANCE", "").strip()
     session_cookie = os.getenv("LOMOGRAPHY_SESSION", "").strip()
-    if cf_clearance:
+    if cf_clearance and '\r' not in cf_clearance and '\n' not in cf_clearance:
         cookies["cf_clearance"] = cf_clearance
-    if session_cookie:
+    if session_cookie and '\r' not in session_cookie and '\n' not in session_cookie:
         cookies["_session"] = session_cookie
     return cookies
 
@@ -87,6 +89,7 @@ AUTH_COOKIES = get_auth_cookies()
 def fetch_with_curl(url):
     """Fetch URL using curl as a fallback (often works better with Cloudflare)."""
     user_agent = random.choice(USER_AGENTS)
+    status_marker = "__CURL_HTTP_STATUS__:"
     command = [
         "curl", "-s", "-L",
         "-H", f"User-Agent: {user_agent}",
@@ -97,6 +100,7 @@ def fetch_with_curl(url):
         "-H", "Upgrade-Insecure-Requests: 1",
         "-H", "Referer: https://www.lomography.com/",
         "--compressed",
+        "--write-out", f"\n{status_marker}%{{http_code}}",
     ]
     if AUTH_COOKIES:
         cookie_header = "; ".join([f"{k}={v}" for k, v in AUTH_COOKIES.items()])
@@ -110,10 +114,21 @@ def fetch_with_curl(url):
             timeout=60
         )
         if result.returncode == 0 and result.stdout:
-            return result.stdout
+            status_code = None
+            content = result.stdout
+            marker_index = content.rfind(status_marker)
+            if marker_index != -1:
+                status_text = content[marker_index + len(status_marker):].strip()
+                if status_text.isdigit():
+                    status_code = int(status_text)
+                content = content[:marker_index]
+                if content.endswith('\n'):
+                    content = content[:-1]
+            if content:
+                return content, status_code
     except Exception as e:
         print(f"  curl failed: {e}")
-    return None
+    return None, None
 
 
 def is_valid_lomography_response(content):
@@ -141,11 +156,11 @@ def fetch_url(url, retries=MAX_RETRIES):
         
         # Try curl first (often bypasses Cloudflare better)
         print(f"  Attempt {attempt + 1}: trying curl...")
-        content = fetch_with_curl(url)
+        content, curl_status = fetch_with_curl(url)
         if is_valid_lomography_response(content):
             return content
         elif content:
-            log_fetch_diagnostics("curl", content=content)
+            log_fetch_diagnostics("curl", status_code=curl_status, content=content)
             print("  curl content doesn't look like Lomography content (likely Cloudflare challenge)")
         
         # Try cloudscraper as fallback
@@ -234,12 +249,12 @@ def fetch_recent_photo_ids():
 
         # Try curl
         print(f"  Attempt {attempt + 1}: trying curl...")
-        content = fetch_with_curl(LOMOGRAPHY_PROFILE_URL)
+        content, curl_status = fetch_with_curl(LOMOGRAPHY_PROFILE_URL)
         if content:
             ids = _extract_photo_ids(content)
             if ids:
                 return ids[:NUM_PHOTOS_TO_FETCH]
-            markers = log_fetch_diagnostics("curl", content=content, ids_found=0)
+            markers = log_fetch_diagnostics("curl", status_code=curl_status, content=content, ids_found=0)
             marker_text = ", ".join(markers) if markers else "none"
             print("  curl returned 0 photo IDs found (likely Cloudflare challenge)")
             last_error = f"curl returned 0 IDs (markers: {marker_text})"
