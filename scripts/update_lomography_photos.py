@@ -8,6 +8,7 @@ import re
 import time
 import subprocess
 import random
+import os
 from bs4 import BeautifulSoup
 
 LOMOGRAPHY_USERNAME = "samueltauil"
@@ -25,31 +26,111 @@ USER_AGENTS = [
 ]
 
 
+def parse_cookie_string(cookie_string):
+    """Parse a Cookie header string into a cookie dict."""
+    cookies = {}
+    if not cookie_string:
+        return cookies
+    for part in cookie_string.split(';'):
+        if has_header_breaks(part):
+            continue
+        if '=' not in part:
+            continue
+        key, value = part.split('=', 1)
+        key = key.strip()
+        value = value.strip()
+        if key and value:
+            cookies[key] = value
+    return cookies
+
+
+def get_auth_cookies():
+    """Get optional authentication cookies from environment variables."""
+    cookies = parse_cookie_string(os.getenv("LOMOGRAPHY_COOKIES", "").strip())
+    cf_clearance = os.getenv("LOMOGRAPHY_CF_CLEARANCE", "").strip()
+    session_cookie = os.getenv("LOMOGRAPHY_SESSION", "").strip()
+    if cf_clearance and not has_header_breaks(cf_clearance):
+        cookies["cf_clearance"] = cf_clearance
+    if session_cookie and not has_header_breaks(session_cookie):
+        cookies["_session"] = session_cookie
+    return cookies
+
+
+def has_header_breaks(value):
+    """Return True when a header value contains CR/LF characters."""
+    return '\r' in value or '\n' in value
+
+
+def detect_challenge_markers(content):
+    """Return known Cloudflare challenge markers found in content."""
+    if not content:
+        return []
+    content_lower = content.lower()
+    markers = {
+        'just_a_moment': '<title>just a moment',
+        'cf_chl_opt': 'cf_chl_opt',
+        'attention_required': '<title>attention required',
+        'please_wait': '<title>please wait',
+        'cf-ray': 'cf-ray',
+        'challenges.cloudflare.com': 'challenges.cloudflare.com',
+    }
+    return [name for name, token in markers.items() if token in content_lower]
+
+
+def log_fetch_diagnostics(source, status_code=None, content=None, ids_found=None):
+    """Log response diagnostics to help monitor Cloudflare challenge behavior."""
+    markers = detect_challenge_markers(content)
+    status = status_code if status_code is not None else "n/a"
+    size = len(content) if content else 0
+    marker_text = ", ".join(markers) if markers else "none"
+    ids_text = f", ids_found={ids_found}" if ids_found is not None else ""
+    print(f"  [{source}] status={status}, bytes={size}, challenge_markers={marker_text}{ids_text}")
+    return markers
+
+
+AUTH_COOKIES = get_auth_cookies()
+
+
 def fetch_with_curl(url):
     """Fetch URL using curl as a fallback (often works better with Cloudflare)."""
     user_agent = random.choice(USER_AGENTS)
+    status_marker = "__CURL_HTTP_STATUS__:"
+    command = [
+        "curl", "-s", "-L",
+        "-H", f"User-Agent: {user_agent}",
+        "-H", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "-H", "Accept-Language: en-US,en;q=0.5",
+        "-H", "Accept-Encoding: gzip, deflate, br",
+        "-H", "Connection: keep-alive",
+        "-H", "Upgrade-Insecure-Requests: 1",
+        "-H", "Referer: https://www.lomography.com/",
+        "--compressed",
+        "--write-out", f"\n{status_marker}%{{http_code}}",
+    ]
+    if AUTH_COOKIES:
+        cookie_header = "; ".join([f"{k}={v}" for k, v in AUTH_COOKIES.items()])
+        command.extend(["-H", f"Cookie: {cookie_header}"])
+    command.append(url)
     try:
         result = subprocess.run(
-            [
-                "curl", "-s", "-L",
-                "-H", f"User-Agent: {user_agent}",
-                "-H", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-                "-H", "Accept-Language: en-US,en;q=0.5",
-                "-H", "Accept-Encoding: gzip, deflate, br",
-                "-H", "Connection: keep-alive",
-                "-H", "Upgrade-Insecure-Requests: 1",
-                "--compressed",
-                url
-            ],
+            command,
             capture_output=True,
             text=True,
             timeout=60
         )
         if result.returncode == 0 and result.stdout:
-            return result.stdout
+            status_code = None
+            content = result.stdout
+            status_pattern = r"\n" + re.escape(status_marker) + r"(\d{3})\s*$"
+            status_match = re.search(status_pattern, content)
+            if status_match:
+                status_code = int(status_match.group(1))
+                content = content[:status_match.start()].rstrip('\n')
+            if content:
+                return content, status_code
     except Exception as e:
         print(f"  curl failed: {e}")
-    return None
+    return None, None
 
 
 def is_valid_lomography_response(content):
@@ -60,15 +141,7 @@ def is_valid_lomography_response(content):
     """
     if not content or len(content) < 1000:
         return False
-    content_lower = content.lower()
-    # Cloudflare interstitial challenge pages
-    cf_challenge_markers = [
-        '<title>just a moment',
-        'cf_chl_opt',
-        '<title>attention required',
-        '<title>please wait',
-    ]
-    if any(marker in content_lower for marker in cf_challenge_markers):
+    if detect_challenge_markers(content):
         return False
     return True
 
@@ -85,11 +158,12 @@ def fetch_url(url, retries=MAX_RETRIES):
         
         # Try curl first (often bypasses Cloudflare better)
         print(f"  Attempt {attempt + 1}: trying curl...")
-        content = fetch_with_curl(url)
+        content, curl_status = fetch_with_curl(url)
         if is_valid_lomography_response(content):
             return content
         elif content:
-            print(f"  curl returned {len(content)} bytes but doesn't look like Lomography content (likely Cloudflare challenge)")
+            log_fetch_diagnostics("curl", status_code=curl_status, content=content)
+            print("  curl content doesn't look like Lomography content (likely Cloudflare challenge)")
         
         # Try cloudscraper as fallback
         try:
@@ -102,14 +176,26 @@ def fetch_url(url, retries=MAX_RETRIES):
                 },
                 delay=10
             )
+            if AUTH_COOKIES:
+                scraper.cookies.update(AUTH_COOKIES)
             print(f"  Attempt {attempt + 1}: trying cloudscraper...")
-            response = scraper.get(url, timeout=30)
+            response = scraper.get(
+                url,
+                timeout=30,
+                headers={
+                    "User-Agent": random.choice(USER_AGENTS),
+                    "Referer": "https://www.lomography.com/",
+                }
+            )
             if response.status_code == 200 and is_valid_lomography_response(response.text):
                 return response.text
             elif response.status_code == 200:
-                print(f"  cloudscraper returned 200 but content doesn't look like Lomography (likely Cloudflare challenge)")
-                last_error = "Response passed Cloudflare check but content is not valid Lomography HTML"
+                markers = log_fetch_diagnostics("cloudscraper", status_code=response.status_code, content=response.text)
+                print("  cloudscraper returned 200 but content doesn't look like Lomography (likely Cloudflare challenge)")
+                marker_text = ", ".join(markers) if markers else "none"
+                last_error = f"Response passed Cloudflare check but content is not valid Lomography HTML (markers: {marker_text})"
             else:
+                log_fetch_diagnostics("cloudscraper", status_code=response.status_code, content=response.text)
                 last_error = f"HTTP {response.status_code}"
         except Exception as e:
             last_error = str(e)
@@ -165,12 +251,15 @@ def fetch_recent_photo_ids():
 
         # Try curl
         print(f"  Attempt {attempt + 1}: trying curl...")
-        content = fetch_with_curl(LOMOGRAPHY_PROFILE_URL)
+        content, curl_status = fetch_with_curl(LOMOGRAPHY_PROFILE_URL)
         if content:
             ids = _extract_photo_ids(content)
             if ids:
                 return ids[:NUM_PHOTOS_TO_FETCH]
-            print(f"  curl returned {len(content)} bytes but 0 photo IDs found (likely Cloudflare challenge)")
+            markers = log_fetch_diagnostics("curl", status_code=curl_status, content=content, ids_found=0)
+            marker_text = ", ".join(markers) if markers else "none"
+            print("  curl returned 0 photo IDs found (likely Cloudflare challenge)")
+            last_error = f"curl returned 0 IDs (markers: {marker_text})"
 
         # Try cloudscraper
         try:
@@ -183,15 +272,32 @@ def fetch_recent_photo_ids():
                 },
                 delay=10
             )
+            if AUTH_COOKIES:
+                scraper.cookies.update(AUTH_COOKIES)
             print(f"  Attempt {attempt + 1}: trying cloudscraper...")
-            response = scraper.get(LOMOGRAPHY_PROFILE_URL, timeout=30)
+            response = scraper.get(
+                LOMOGRAPHY_PROFILE_URL,
+                timeout=30,
+                headers={
+                    "User-Agent": random.choice(USER_AGENTS),
+                    "Referer": "https://www.lomography.com/",
+                }
+            )
             if response.status_code == 200:
                 ids = _extract_photo_ids(response.text)
                 if ids:
                     return ids[:NUM_PHOTOS_TO_FETCH]
-                print(f"  cloudscraper returned 200 but 0 photo IDs found (likely Cloudflare challenge)")
-                last_error = "Response contained no photo IDs"
+                markers = log_fetch_diagnostics(
+                    "cloudscraper",
+                    status_code=response.status_code,
+                    content=response.text,
+                    ids_found=0
+                )
+                print("  cloudscraper returned 200 but 0 photo IDs found (likely Cloudflare challenge)")
+                marker_text = ", ".join(markers) if markers else "none"
+                last_error = f"Response contained no photo IDs (markers: {marker_text})"
             else:
+                log_fetch_diagnostics("cloudscraper", status_code=response.status_code, content=response.text)
                 last_error = f"HTTP {response.status_code}"
         except Exception as e:
             last_error = str(e)
@@ -302,6 +408,11 @@ def update_photography_md(new_gallery_html):
 
 
 def main():
+    if AUTH_COOKIES:
+        print(f"Using authenticated cookie mode ({len(AUTH_COOKIES)} cookies loaded from env vars)")
+    else:
+        print("Using anonymous mode (no Lomography cookies configured)")
+
     print("Reading existing photo IDs from photography.md...")
     existing_ids = get_existing_photo_ids()
     print(f"Found {len(existing_ids)} existing photos in file")
