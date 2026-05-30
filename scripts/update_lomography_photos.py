@@ -32,7 +32,7 @@ def parse_cookie_string(cookie_string):
     if not cookie_string:
         return cookies
     for part in cookie_string.split(';'):
-        if '\r' in part or '\n' in part:
+        if has_header_breaks(part):
             continue
         if '=' not in part:
             continue
@@ -49,11 +49,16 @@ def get_auth_cookies():
     cookies = parse_cookie_string(os.getenv("LOMOGRAPHY_COOKIES", "").strip())
     cf_clearance = os.getenv("LOMOGRAPHY_CF_CLEARANCE", "").strip()
     session_cookie = os.getenv("LOMOGRAPHY_SESSION", "").strip()
-    if cf_clearance and '\r' not in cf_clearance and '\n' not in cf_clearance:
+    if cf_clearance and not has_header_breaks(cf_clearance):
         cookies["cf_clearance"] = cf_clearance
-    if session_cookie and '\r' not in session_cookie and '\n' not in session_cookie:
+    if session_cookie and not has_header_breaks(session_cookie):
         cookies["_session"] = session_cookie
     return cookies
+
+
+def has_header_breaks(value):
+    """Return True when a header value contains CR/LF characters."""
+    return '\r' in value or '\n' in value
 
 
 def detect_challenge_markers(content):
@@ -116,14 +121,11 @@ def fetch_with_curl(url):
         if result.returncode == 0 and result.stdout:
             status_code = None
             content = result.stdout
-            marker_index = content.rfind(status_marker)
-            if marker_index != -1:
-                status_text = content[marker_index + len(status_marker):].strip()
-                if status_text.isdigit():
-                    status_code = int(status_text)
-                content = content[:marker_index]
-                if content.endswith('\n'):
-                    content = content[:-1]
+            status_pattern = r"\n" + re.escape(status_marker) + r"(\d{3})\s*$"
+            status_match = re.search(status_pattern, content)
+            if status_match:
+                status_code = int(status_match.group(1))
+                content = content[:status_match.start()].rstrip('\n')
             if content:
                 return content, status_code
     except Exception as e:
