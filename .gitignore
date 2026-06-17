@@ -4,6 +4,9 @@ _site/
 .jekyll-cache/
 .jekyll-metadata
 _theme_packages/
+.playwright-mcp/
+
+
 
 # Ruby
 *.gem
