@@ -8,7 +8,7 @@ categories: [github-copilot, devops]
 tags: [github, github-actions, agentic-workflows, nextjs, bundle-analyzer, ci-cd, performance]
 ---
 
-Na semana passada eu sentei com um cliente que tinha um problema que eu ouço o tempo todo. O app Next.js deles estava crescendo há cerca de um ano, e ninguém estava realmente monitorando o tamanho do bundle. A cada poucos sprints, alguém notava que a página estava lenta no celular, rodava um profile, encontrava uma dependência de 200 kB que havia entrado por um import transitivo, e o time passava uma sexta-feira inteira removendo isso. A correção era fácil. A detecção era a parte que estava quebrada.
+Recentemente eu sentei com um cliente que tinha um problema que eu ouço o tempo todo. O app Next.js deles estava crescendo há cerca de um ano, e ninguém estava realmente monitorando o tamanho do bundle. A cada poucos sprints, alguém notava que a página estava lenta no celular, rodava um profile, encontrava uma dependência de 200 kB que havia entrado por um import transitivo, e o time passava uma sexta-feira inteira removendo isso. A correção era fácil. A detecção era a parte que estava quebrada.
 
 Então eu fiz a pergunta com que sempre começo para esse tipo de coisa: dá pra colocar um agent no CI sem transformar o pipeline numa caixa preta? Eles eram céticos, o que é justo. A maioria dos demos de agent circulando agora quer assumir o controle do seu pipeline, rodar com quaisquer permissões que conseguir, e escrever commits que você precisa revisar depois. Isso não era o que eu queria mostrar.
 
