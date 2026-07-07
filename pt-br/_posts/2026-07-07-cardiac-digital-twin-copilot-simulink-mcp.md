@@ -1,0 +1,90 @@
+---
+layout: post
+lang: pt-br
+permalink: /github-copilot/ai/healthcare/2026/07/07/cardiac-digital-twin-copilot-simulink-mcp.html
+title: "Cardiac Digital Twin: Controlando um Modelo Simulink com o GitHub Copilot em Oito Prompts"
+date: 2026-07-07
+categories: [github-copilot, ai, healthcare]
+tags: [github-copilot, mcp, simulink, matlab, digital-twin, healthcare, pharma, agentic-workflows, ai]
+---
+
+O lançamento do Simulink Agentic Toolkit do MATLAB chegou algumas semanas atrás, e meu primeiro pensamento não foi "o que isso faz." Foi a pergunta que me pego fazendo sobre cada novo lançamento de MCP ultimamente: o que seria realmente útil perguntar a esse negócio em português ou inglês? Simulink não é uma superfície de linguagem de modelo. É um ambiente de modelagem gráfica que engenheiros de aeroespacial, medicina e automotivo usam há décadas para construir simulações precisas e validadas. Passar uma dessas para um prompt de chat parecia estranho o suficiente para eu querer ver o que acontecia. O que eu não tinha era um bom caso de uso.
+
+Fiquei pensando nisso por alguns dias. A ideia que não me deixava em paz veio de um canto do meu trabalho sobre o qual normalmente não escrevo: healthcare e pharma.
+
+Ensaios clínicos cardiovasculares fazem a pergunta errada. Eles perguntam "como o paciente médio vai responder a essa dose", aí recrutam pessoas, e depois medem. Pacientes não são médios. Idade, peso, função renal, genética, medicamentos atuais. Um único ensaio contra uma média não captura nenhuma dessa variabilidade, e um ensaio cardiovascular fracassado custa bilhões de dólares e anos de tempo para uma empresa farmacêutica. A pergunta que todo mundo realmente quer responder antes de recrutar alguém é diferente. Como ESTE paciente vai responder?
+
+É para isso que serve um cardiac digital twin. É um substituto computacional para o sistema cardiovascular de um paciente específico. Você muda a dose no software, roda o modelo, vê o que aconteceria. Depois decide se vale a pena conduzir o ensaio. É uma ideia muito antiga em aeroespacial. Você bate o avião no simulador antes de batê-lo no céu. O healthcare tem se atualizado lentamente, principalmente porque construir os modelos é difícil e conduzi-los nunca foi fácil.
+
+Isso virou a demo. Eu a construí aqui: [samueltauil/cardiac-digital-twin](https://github.com/samueltauil/cardiac-digital-twin). Ela usa o GitHub Copilot no modo Agent, orquestrando o Simulink Agentic Toolkit via MCP, para simular uma mudança de dosagem de betabloqueador em um cardiac digital twin com oito prompts em linguagem natural. Sem edição manual de código. O modelo é um modelo cardíaco de malha fechada real, não um script de brinquedo.
+
+## O que tentei primeiro
+
+Meu primeiro instinto foi fazer a demo sobre um pequeno script MATLAB e deixar o Copilot reescrevê-lo. Isso funciona, e eu descartei depois de meia hora. Respondia uma pergunta entediante ("o Copilot consegue editar código MATLAB," o que claro que consegue) e pulava a que eu me importava. Eu queria ver o Copilot conduzindo um modelo Simulink validado sem tocar no código-fonte do modelo. Editar um script significa que o modelo é um arquivo de texto. Conduzir um modelo Simulink significa que é uma simulação ativa que o agent tem que interrogar.
+
+Então descartei o brinquedo e construí um modelo cardíaco de malha fechada de verdade com cinco subsistemas: farmacocinética para metoprolol, uma resposta de frequência cardíaca Hill/Emax, débito cardíaco, pressão arterial, e um loop de feedback de barorreflexo que compensa parcialmente a queda de frequência cardíaca. Tudo em Simulink, construído programaticamente a partir de `model/create_cardiac_model.m`. Esse é o objeto com que o Copilot tem que interagir, não um script.
+
+## Os oito prompts
+
+O cenário da demo é uma única linha que o usuário digita para o Copilot no modo Agent: *"Simule o efeito de aumentar a dosagem de beta-blocker (metoprolol) de um paciente em 20%."* A partir dessa frase, o Copilot executa um workflow de oito etapas:
+
+1. Descrever a topologia de subsistemas do modelo cardíaco.
+2. Localizar e resolver o parâmetro de workspace `beta_blocker_dose_mg`.
+3. Aplicar a mudança de +20% (50 mg para 60 mg).
+4. Rerodar a simulação de malha fechada e comparar as métricas principais.
+5. Interpretar o impacto fisiológico em contexto clínico.
+6. Gerar um teste de verificação em Gherkin.
+7. Redigir requisitos formais de engenharia a partir dos resultados da simulação.
+8. Lançar um dashboard `uifigure` em tempo real com uma comparação de execuções sobrepostas.
+
+O texto dos prompts fica em `.github/prompts/01-explore-model.prompt.md` até `08-realtime-dashboard.prompt.md`. O Copilot agent que os conecta é `.github/agents/cardiac-demo.agent.md`. Tudo está no repositório, tudo versionado, tudo revisável. Nada roda contra um dashboard oculto ou um skill hospedado.
+
+![Copilot Chat respondendo ao primeiro prompt sobre a estrutura do modelo cardíaco](https://raw.githubusercontent.com/samueltauil/cardiac-digital-twin/main/docs/images/demo-copilot-first-prompt.png)
+
+A configuração para as duas superfícies do Copilot são dois pequenos arquivos de MCP config, um para o Copilot Chat no modo Agent e um para o Copilot CLI:
+
+```json
+// .vscode/mcp.json  (VS Code, Copilot Chat in Agent mode)
+{
+  "servers": {
+    "matlab-simulink": { ... }
+  }
+}
+```
+
+```json
+// .github/mcp.json  (GitHub Copilot CLI)
+{
+  "mcpServers": {
+    "matlab-simulink": { ... }
+  }
+}
+```
+
+Dois schemas, um servidor. Ambos apontam para o MCP server `matlab-simulink` que o instalador do Simulink Agentic Toolkit configurou. O Toolkit compartilha uma sessão MATLAB ativa com esse servidor, então quando o Copilot faz uma pergunta ao modelo, ele está perguntando a um workspace Simulink ativo com o modelo carregado, não a um snapshot em disco.
+
+Essa é a parte que me importa. O rigor ainda vive no modelo Simulink. O que o MCP adicionou foi um shell de linguagem natural sobre ele.
+
+## Os números, e por que eles são o ponto
+
+Depois que o Copilot aumenta a dose de 50 mg para 60 mg e roda a simulação novamente, a comparação que ele imprime de volta é pequena de propósito:
+
+| Métrica | Baseline (50 mg) | Modificado (60 mg) | Variação |
+|---------|:----------------:|:------------------:|:--------:|
+| Frequência cardíaca | 67,4 bpm | 66,6 bpm | -1,3 % |
+| Débito cardíaco | 4,72 L/min | 4,66 L/min | -1,3 % |
+| Pressão arterial média | 84,9 mmHg | 83,9 mmHg | -1,3 % |
+
+Uma mudança de dose de +20% produzindo uma queda de -1,3% na frequência cardíaca parece decepcionante até você ler a explicação do Copilot, que é o output real da demo. A curva de Hill para metoprolol satura perto do Emax nesses níveis de dose, então um aumento de 20% na dose não é um aumento de 20% na ocupação de receptores. O barorreflexo restaura parcialmente a frequência cardíaca à medida que a pressão arterial cai, amortecendo ainda mais o efeito observável. Essa é uma resposta fisiológica real, produzida por um modelo fisiológico real, em resposta a uma pergunta feita em linguagem natural.
+
+A outra coisa que o Copilot escreve nesse ponto é um arquivo Gherkin, `validation/beta_blocker_dose_response.feature`, que transforma esses números em um cenário: dado o baseline do `CardiacDigitalTwin`, quando `beta_blocker_dose_mg` aumenta para 60 mg, então a frequência cardíaca e a pressão arterial média caem 1,3%. Esse teste não existia antes de o Copilot gerá-lo a partir do output da simulação. Na próxima vez que alguém mudar o modelo, o arquivo Gherkin é o que diz se a fisiologia ainda se sustenta.
+
+## Por que o padrão vale a pena copiar
+
+A tentação com uma demo assim é lê-la como "a IA agora está fazendo simulação clínica." Não está. O modelo Simulink faz a simulação. Cada valor naquela tabela de comparação veio de equações que um engenheiro escreveu e validou. O que mudou é a interface.
+
+Para quem trabalha em um domínio regulado que já tem um simulador maduro, essa é a forma que vale copiar. Pode ser um modelo de estabilidade de rede elétrica, ou um modelo de rendimento de refinaria, ou um motor de adjudicação de sinistros. A física ou as regras de negócio já estão codificadas. O que faltava era uma maneira de fazer ao modelo uma pergunta na linguagem do problema, sem também ser fluente na linguagem da ferramenta. O MCP é a peça que fecha essa lacuna. O agent não está substituindo o modelo. Ele é um tradutor sentado em cima dele.
+
+A versão com onze prompts da demo (três prompts opcionais de aprofundamento além dos oito) vai mais longe. Ela lineariza a malha fechada, verifica as margens de estabilidade do barorreflexo com um diagrama de Bode, e roda uma coorte Monte Carlo de 100 pacientes com um tornado de sensibilidade PRCC, tudo em linguagem natural. Essa é a parte que um farmacologista clínico pode usar, não porque o Copilot de repente entende farmacologia, mas porque o modelo entende, e o Copilot agora pode perguntar.
+
+Quando o agent consegue conduzir um modelo Simulink validado, o prompt interessante para de ser "o que devo codificar" e passa a ser "qual paciente devo simular." O repositório está em [samueltauil/cardiac-digital-twin](https://github.com/samueltauil/cardiac-digital-twin), e o site de documentação completo (arquitetura do modelo, narrativa dos prompts, matemática fisiológica, metodologia de validação) está em <a {% static_href %}href="https://samueltauil.github.io/cardiac-digital-twin/"{% endstatic_href %}>samueltauil.github.io/cardiac-digital-twin</a> se você quiser explorar.
