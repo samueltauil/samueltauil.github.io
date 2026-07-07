@@ -1,32 +1,32 @@
 ---
+layout: post
 lang: pt-br
 permalink: /github-copilot/ai/healthcare/2026/07/07/cardiac-digital-twin-copilot-simulink-mcp.html
-layout: post
-title: "Cardiac Digital Twin: Controlando um Modelo Simulink com GitHub Copilot em Oito Prompts"
+title: "Cardiac Digital Twin: Controlando um Modelo Simulink com o GitHub Copilot em Oito Prompts"
 date: 2026-07-07
 categories: [github-copilot, ai, healthcare]
 tags: [github-copilot, mcp, simulink, matlab, digital-twin, healthcare, pharma, agentic-workflows, ai]
 ---
 
-O lançamento do Simulink Agentic Toolkit pelo MATLAB aconteceu algumas semanas atrás, e meu primeiro pensamento não foi "o que isso faz". Foi a pergunta que me pego fazendo sobre todo novo lançamento de MCP: o que seria realmente útil pedir a essa coisa em inglês? Simulink não é uma superfície de language model. É um ambiente de modelagem gráfica que engenheiros de aeroespacial, medicina e automotivo usam há décadas para construir simulações precisas e validadas. Entregar um desses para um chat prompt pareceu estranho o suficiente para eu querer ver o que acontecia. O que eu não tinha era um bom caso de uso.
+O lançamento do Simulink Agentic Toolkit do MATLAB chegou algumas semanas atrás, e meu primeiro pensamento não foi "o que isso faz." Foi a pergunta que me pego fazendo sobre cada novo lançamento de MCP ultimamente: o que seria realmente útil perguntar a esse negócio em português ou inglês? Simulink não é uma superfície de linguagem de modelo. É um ambiente de modelagem gráfica que engenheiros de aeroespacial, medicina e automotivo usam há décadas para construir simulações precisas e validadas. Passar uma dessas para um prompt de chat parecia estranho o suficiente para eu querer ver o que acontecia. O que eu não tinha era um bom caso de uso.
 
-Fiquei com isso por alguns dias. A ideia que não me deixava em paz veio de um canto do meu trabalho sobre o qual normalmente não escrevo: healthcare e pharma.
+Fiquei pensando nisso por alguns dias. A ideia que não me deixava em paz veio de um canto do meu trabalho sobre o qual normalmente não escrevo: healthcare e pharma.
 
-Os estudos clínicos cardiovasculares fazem a pergunta errada. Eles perguntam "como o paciente médio vai responder a essa dose", aí recrutam pessoas, aí medem. Pacientes não são médios. Idade, peso, função renal, genética, medicamentos em uso. Um único estudo contra uma média não captura nada dessa variabilidade, e um estudo cardiovascular fracassado custa bilhões de dólares e anos de tempo para uma empresa farmacêutica. A pergunta que todo mundo realmente quer responder antes de recrutar qualquer pessoa é diferente. Como ESSE paciente vai responder?
+Ensaios clínicos cardiovasculares fazem a pergunta errada. Eles perguntam "como o paciente médio vai responder a essa dose", aí recrutam pessoas, e depois medem. Pacientes não são médios. Idade, peso, função renal, genética, medicamentos atuais. Um único ensaio contra uma média não captura nenhuma dessa variabilidade, e um ensaio cardiovascular fracassado custa bilhões de dólares e anos de tempo para uma empresa farmacêutica. A pergunta que todo mundo realmente quer responder antes de recrutar alguém é diferente. Como ESTE paciente vai responder?
 
-É para isso que serve um cardiac digital twin. É um substituto computacional do sistema cardiovascular de um paciente específico. Você muda a dose no software, roda o modelo, vê o que aconteceria. Aí decide se vale a pena conduzir o estudo. É uma ideia muito antiga no aeroespacial. Bata o avião no simulador antes de bater no céu. O healthcare tem se atualizado lentamente, principalmente porque construir os modelos é difícil e dirigi-los nunca foi fácil.
+É para isso que serve um cardiac digital twin. É um substituto computacional para o sistema cardiovascular de um paciente específico. Você muda a dose no software, roda o modelo, vê o que aconteceria. Depois decide se vale a pena conduzir o ensaio. É uma ideia muito antiga em aeroespacial. Você bate o avião no simulador antes de batê-lo no céu. O healthcare tem se atualizado lentamente, principalmente porque construir os modelos é difícil e conduzi-los nunca foi fácil.
 
-Esse virou o demo. Eu construí aqui: [samueltauil/cardiac-digital-twin](https://github.com/samueltauil/cardiac-digital-twin). Ele usa GitHub Copilot no modo Agent, orquestrando o Simulink Agentic Toolkit através de MCP, para simular uma mudança de dosagem de beta-bloqueador em um cardiac digital twin em oito prompts em linguagem natural. Sem edição manual de código. O modelo é um modelo cardíaco de loop fechado real, não um script de brinquedo.
+Isso virou a demo. Eu a construí aqui: [samueltauil/cardiac-digital-twin](https://github.com/samueltauil/cardiac-digital-twin). Ela usa o GitHub Copilot no modo Agent, orquestrando o Simulink Agentic Toolkit via MCP, para simular uma mudança de dosagem de betabloqueador em um cardiac digital twin com oito prompts em linguagem natural. Sem edição manual de código. O modelo é um modelo cardíaco de malha fechada real, não um script de brinquedo.
 
 ## O que tentei primeiro
 
-Meu primeiro instinto foi fazer o demo sobre um pequeno script MATLAB e pedir ao Copilot para reescrevê-lo. Funciona, e descartei depois de uns trinta minutos. Respondia uma pergunta chata ("o Copilot consegue editar código MATLAB", que obviamente consegue) e ignorava a que eu me importava. Eu queria ver o Copilot controlando um modelo Simulink validado sem tocar no código-fonte do modelo. Editar um script significa que o modelo é um arquivo de texto. Controlar um modelo Simulink significa que é uma simulação viva que o agent precisa interrogar.
+Meu primeiro instinto foi fazer a demo sobre um pequeno script MATLAB e deixar o Copilot reescrevê-lo. Isso funciona, e eu descartei depois de meia hora. Respondia uma pergunta entediante ("o Copilot consegue editar código MATLAB," o que claro que consegue) e pulava a que eu me importava. Eu queria ver o Copilot conduzindo um modelo Simulink validado sem tocar no código-fonte do modelo. Editar um script significa que o modelo é um arquivo de texto. Conduzir um modelo Simulink significa que é uma simulação ativa que o agent tem que interrogar.
 
-Então descartei o brinquedo e construí um modelo cardíaco de loop fechado de verdade com cinco subsistemas: farmacocinética para metoprolol, uma resposta de frequência cardíaca Hill/Emax, débito cardíaco, pressão arterial e um loop de feedback de barorreflexo que compensa parcialmente a queda de frequência cardíaca. Tudo em Simulink, construído programaticamente a partir de `model/create_cardiac_model.m`. Isso é o que o Copilot tem que interagir, não um script.
+Então descartei o brinquedo e construí um modelo cardíaco de malha fechada de verdade com cinco subsistemas: farmacocinética para metoprolol, uma resposta de frequência cardíaca Hill/Emax, débito cardíaco, pressão arterial, e um loop de feedback de barorreflexo que compensa parcialmente a queda de frequência cardíaca. Tudo em Simulink, construído programaticamente a partir de `model/create_cardiac_model.m`. Esse é o objeto com que o Copilot tem que interagir, não um script.
 
 ## Os oito prompts
 
-O cenário do demo é uma única linha que o usuário digita para o Copilot no modo Agent: *"Simulate the effect of increasing a patient's beta-blocker (metoprolol) dosage by 20%."* A partir dessa única frase, o Copilot executa um workflow de oito etapas:
+O cenário da demo é uma única linha que o usuário digita para o Copilot no modo Agent: *"Simule o efeito de aumentar a dosagem de beta-blocker (metoprolol) de um paciente em 20%."* A partir dessa frase, o Copilot executa um workflow de oito etapas:
 
 1. Descrever a topologia de subsistemas do modelo cardíaco.
 2. Localizar e resolver o parâmetro de workspace `beta_blocker_dose_mg`.
