@@ -37,8 +37,6 @@ The demo scenario is a single line the user types to Copilot in Agent mode: *"Si
 
 The prompt text lives in `.github/prompts/01-explore-model.prompt.md` through `08-realtime-dashboard.prompt.md`. The Copilot agent that ties them together is `.github/agents/cardiac-demo.agent.md`. Everything is in the repo, all versioned, all reviewable. Nothing runs against a hidden dashboard or a hosted skill.
 
-![Copilot Chat responding to the first prompt about the cardiac model structure](https://raw.githubusercontent.com/samueltauil/cardiac-digital-twin/main/docs/images/demo-copilot-first-prompt.png)
-
 The wiring for both Copilot surfaces is two small MCP config files, one for Copilot Chat in Agent mode and one for the Copilot CLI:
 
 ```json
@@ -74,6 +72,8 @@ After Copilot bumps the dose from 50 mg to 60 mg and reruns the simulation, the 
 | Mean arterial pressure | 84.9 mmHg | 83.9 mmHg | -1.3 % |
 
 A +20% dose change producing a -1.3% heart-rate drop looks underwhelming until you read Copilot's explanation of it, which is the real output of the demo. The Hill curve for metoprolol saturates near Emax at these dose levels, so a 20% dose increase is not a 20% receptor-occupancy increase. The baroreflex partially restores heart rate as blood pressure drops, damping the observable effect even more. That is a real physiological answer, produced by a real physiological model, in response to a question asked in English.
+
+![Real-time uifigure dashboard showing baseline and modified beta-blocker runs overlaid, with live gauges for heart rate, cardiac output, and mean arterial pressure](https://raw.githubusercontent.com/samueltauil/cardiac-digital-twin/main/docs/images/dashboard.png)
 
 The other thing Copilot writes at that point is a Gherkin file, `validation/beta_blocker_dose_response.feature`, that turns those numbers into a scenario: given the `CardiacDigitalTwin` baseline, when `beta_blocker_dose_mg` increases to 60 mg, then heart rate and mean arterial pressure both drop by 1.3%. That test did not exist before Copilot generated it from the simulation output. The next time someone changes the model, the Gherkin file is what tells them whether the physiology still holds.
 
