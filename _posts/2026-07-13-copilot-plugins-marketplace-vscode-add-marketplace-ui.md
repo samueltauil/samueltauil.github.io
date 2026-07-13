@@ -6,7 +6,9 @@ categories: [github-copilot, vscode]
 tags: [github-copilot, vscode, plugins, copilot-cli, developer-tools, devex, open-source]
 ---
 
-Every team that adopts Copilot eventually asks the same question: how do we share our customizations across the org? Someone writes a genuinely good agent or skill, it lives in one repo, and the next team rebuilds a slightly different version from scratch because there is no clean way to pass it around. I spent a weekend on an answer: a plugins marketplace for Copilot. Not the GitHub Marketplace, a single repo that packages agents, skills, and extensions into installable units a whole team can standardize on. [samueltauil/copilot-plugins](https://github.com/samueltauil/copilot-plugins) is a working one with 12 plugins in it, and it doubles as a reference implementation you can fork for your own org. Building it was the easy part. Getting a teammate to add it in VS Code is where I found one rough edge worth smoothing.
+Every team that adopts Copilot eventually asks the same question: how do we share our customizations across the org? The good news is that most of the answer already ships in the box. GitHub Copilot and VS Code come with plugin marketplaces built in, and two are configured by default, including the excellent [awesome-copilot](https://github.com/github/awesome-copilot) one. A marketplace packages agents, skills, and extensions into installable units a whole team can standardize on, instead of copying the same agent into a dozen repos by hand.
+
+I wanted to actually understand that mechanism rather than just point customers at the docs, so I built my own: [samueltauil/copilot-plugins](https://github.com/samueltauil/copilot-plugins), a working marketplace with 12 plugins that doubles as a reference implementation you can fork for your own org. Standing it up was straightforward. Getting a teammate to add it in VS Code is where I hit the one rough edge worth writing about.
 
 ## The button exists, just not where you would look
 
