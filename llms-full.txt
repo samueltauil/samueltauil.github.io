@@ -1,0 +1,24 @@
+---
+permalink: /llms-full.txt
+layout: none
+sitemap: false
+---
+# {{ site.title }} — Full Content
+
+> {{ site.description | strip_newlines | strip }}
+
+This file contains the full text of every blog post, concatenated for LLM and AI
+assistant consumption. Source: {{ site.url }}{{ site.baseurl }}
+Index: {{ '/llms.txt' | absolute_url }}
+{% for post in site.posts %}
+================================================================================
+
+# {{ post.title | strip }}
+
+URL: {{ post.url | absolute_url }}
+Date: {{ post.date | date: "%Y-%m-%d" }}
+{% if post.categories.size > 0 %}Categories: {{ post.categories | join: ", " }}
+{% endif %}{% if post.tags.size > 0 %}Tags: {{ post.tags | join: ", " }}
+{% endif %}
+{{ post.content | strip_html | strip }}
+{% endfor %}

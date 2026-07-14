@@ -1,0 +1,26 @@
+---
+permalink: /llms.txt
+layout: none
+sitemap: false
+---
+# {{ site.title }}
+
+> {{ site.description | strip_newlines | strip }}
+
+{{ site.author.name | default: site.title }} writes about GitHub Copilot, VS Code,
+Codespaces, agentic workflows, cloud-native technologies, and developer experience.
+This file is a machine-readable index for LLMs and AI assistants. A full-text version
+of every post is available at {{ '/llms-full.txt' | absolute_url }}.
+
+## Pages
+
+- [Home]({{ '/' | absolute_url }}): Landing page and profile overview.
+- [Posts]({{ '/posts/' | absolute_url }}): Full list of technical articles and tutorials.
+- [About]({{ '/about/' | absolute_url }}): Background, experience, and community work.
+- [Photography]({{ '/photography/' | absolute_url }}): Analog and film photography gallery.
+- [RSS Feed]({{ '/feed.xml' | absolute_url }}): Subscribe to new posts.
+
+## Posts
+{% for post in site.posts %}
+- [{{ post.title | strip }}]({{ post.url | absolute_url }}) ({{ post.date | date: "%Y-%m-%d" }}): {% if post.description %}{{ post.description | strip_html | strip_newlines | strip }}{% else %}{{ post.excerpt | strip_html | strip_newlines | truncate: 160 | strip }}{% endif %}
+{%- endfor %}
