@@ -1,0 +1,52 @@
+---
+permalink: /sitemap.xml
+sitemap: false
+---
+{%- assign base = site.url -%}
+{%- if site.active_lang == site.default_lang -%}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{%- for post in site.posts -%}
+{%- unless post.lang == 'pt-br' -%}
+{%- assign enloc = post.url | prepend: base -%}
+{%- assign ptloc = post.url | prepend: '/pt-br' | prepend: base -%}
+  <url>
+    <loc>{{ enloc }}</loc>
+    <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="{{ enloc }}" />
+    <xhtml:link rel="alternate" hreflang="pt-br" href="{{ ptloc }}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ enloc }}" />
+  </url>
+  <url>
+    <loc>{{ ptloc }}</loc>
+    <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="{{ enloc }}" />
+    <xhtml:link rel="alternate" hreflang="pt-br" href="{{ ptloc }}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ enloc }}" />
+  </url>
+{%- endunless -%}
+{%- endfor -%}
+{%- for page in site.html_pages -%}
+{%- unless page.sitemap == false or page.lang == 'pt-br' or page.url contains '404' -%}
+{%- assign path = page.url | replace: '/index.html', '/' -%}
+{%- assign enloc = path | prepend: base -%}
+{%- assign ptloc = path | prepend: '/pt-br' | prepend: base -%}
+  <url>
+    <loc>{{ enloc }}</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="{{ enloc }}" />
+    <xhtml:link rel="alternate" hreflang="pt-br" href="{{ ptloc }}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ enloc }}" />
+  </url>
+  <url>
+    <loc>{{ ptloc }}</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="{{ enloc }}" />
+    <xhtml:link rel="alternate" hreflang="pt-br" href="{{ ptloc }}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ enloc }}" />
+  </url>
+{%- endunless -%}
+{%- endfor -%}
+</urlset>
+{%- else -%}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>
+{%- endif -%}
