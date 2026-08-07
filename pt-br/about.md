@@ -105,6 +105,7 @@ Líder de tecnologia inovador e orientado a resultados com mais de 15 anos de ex
 - VMware vSphere: Install, Configure, Manage (Mar 2021)
 
 ### AI & Machine Learning
+- [Agentic AI Foundations: Business Applications and Risks – Harvard Online](https://cecredential-validation.tlt.harvard.edu/) (Jul 2026, CeDiD: 26KE-TZSO-S4LO)
 - [Machine Learning – Stanford Online](https://coursera.org/verify/N2HE5GQT68FZ) (Nov 2022)
 
 ## Comunidade & Engajamentos Notáveis
