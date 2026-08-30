@@ -1,6 +1,7 @@
 ---
 layout: home
 title: Início
+permalink: /
 lang: pt-br
 ---
 
