@@ -2,6 +2,7 @@
 lang: en
 layout: post
 title: "Introducing Copilot Agent Designer: A Visual Workflow for GitHub Copilot Agents"
+description: "A visual workflow builder for GitHub Copilot agents: design agent definitions and handoffs on a canvas instead of hand-editing config files."
 date: 2025-11-08
 categories: [github-copilot, vscode, extensions]
 tags: [github-copilot, vscode, ai, developer-tools, open-source]

@@ -3,6 +3,7 @@ lang: pt-br
 permalink: /mcp/vscode/ai/tutorial/2026/01/28/building-mcp-app-interactive-charts-vscode.html
 layout: post
 title: "Construindo um MCP App com Gráficos Interativos para VS Code"
+description: "Como construí um app Model Context Protocol que renderiza gráficos interativos dentro do VS Code, com todo o código gerado pelo GitHub Copilot."
 date: 2026-01-28
 categories: [mcp, vscode, ai, tutorial]
 tags: [mcp, model-context-protocol, chart.js, react, vscode, github-copilot]

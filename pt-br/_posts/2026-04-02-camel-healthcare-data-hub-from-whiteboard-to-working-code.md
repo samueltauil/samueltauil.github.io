@@ -3,6 +3,7 @@ lang: pt-br
 permalink: /github-copilot/open-source/healthcare/2026/04/02/camel-healthcare-data-hub-from-whiteboard-to-working-code.html
 layout: post
 title: "Camel Healthcare Data Hub: Do Quadro Branco ao Código Funcionando em Uma Sessão"
+description: "Do quadro branco em uma sessão do Microsoft Innovation Hub a um data hub de saúde em Apache Camel, construído com o GitHub Copilot em uma sessão."
 date: 2026-04-02
 categories: [github-copilot, open-source, healthcare]
 tags: [github-copilot, apache-camel, quarkus, healthcare, hl7, fhir, open-source, developer-tools, cloud-native]

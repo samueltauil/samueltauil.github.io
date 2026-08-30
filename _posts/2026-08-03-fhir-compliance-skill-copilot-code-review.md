@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Well formed is not the same as safe to build"
+description: "A green test suite hid eight FHIR R4 violations, including a patient SSN in a free-text field. Here is the Copilot skill I wrote to catch them in review."
 date: 2026-08-03
 categories: [github-copilot, healthcare]
 tags: [github-copilot, code-review, agent-skills, healthcare, fhir, hl7, interoperability, hipaa, typescript]

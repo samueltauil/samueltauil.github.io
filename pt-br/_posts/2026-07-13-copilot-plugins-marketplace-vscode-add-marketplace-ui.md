@@ -3,6 +3,7 @@ lang: pt-br
 permalink: /github-copilot/vscode/2026/07/13/copilot-plugins-marketplace-vscode-add-marketplace-ui.html
 layout: post
 title: "O doc de setup que virou um pull request no VS Code"
+description: "Escrever um doc de setup sobre marketplaces de plugins do Copilot me levou a um pull request no VS Code com a opção Add Marketplace na interface."
 date: 2026-07-13
 categories: [github-copilot, vscode]
 tags: [github-copilot, vscode, plugins, copilot-cli, developer-tools, devex, open-source]

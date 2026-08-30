@@ -50,6 +50,22 @@ comfortable with English technical terms.
 2. Follow the shared translation conventions in `.github/agents/shared/translation-conventions.md`.
 3. **Determine which files actually need translation** using this procedure:
 
+### Opt-out check (run this first)
+
+Read the message of the commit that triggered this run:
+
+```bash
+git log -1 --format=%B
+```
+
+If the message contains `[skip translate]`, call `noop` with a message explaining
+that the author opted out, and **stop immediately**. Do not run the staleness
+check or translate anything.
+
+This exists for changes that touch both `_posts/` and `pt-br/_posts/` in the same
+commit, such as bulk frontmatter or metadata edits, where the Portuguese side is
+already up to date and re-translating would only churn the files.
+
 ### Staleness check (MUST follow for every file)
 
 **Pre-requisite — unshallow the clone**: The CI checkout uses `fetch-depth: 1`
@@ -71,6 +87,7 @@ For each English source file, before translating:
    - Run `git log -1 --format="%H %aI" -- <pt-br-file>` to get the latest commit hash and date for the Portuguese translation.
    - If the English file's commit date is **newer** than the Portuguese file's commit date → add to the **stale files** list.
    - If the English file's commit date is **older or equal** → the translation is current, **skip it**.
+   - If both files were last modified by the **same commit hash**, the pair was updated together, so the translation is current, **skip it**.
    - If either `git log` command returns **empty output**, treat the file as **stale**.
 3. Collect both lists. If both are empty, call `noop` with a message confirming everything is in sync and **stop**.
 
@@ -137,8 +154,9 @@ phrasing across edits, and only genuinely changed content gets new translations.
 - Keep all glossary terms in English — embed them naturally in Portuguese sentences.
 - Never modify content inside fenced code blocks or inline code.
 - Preserve all URLs, image paths, HTML tags, and Liquid template tags verbatim.
-- In YAML frontmatter: translate `title` and `excerpt` only. Keep `layout`, `date`,
-  `tags`, `categories`, and all other fields unchanged.
+- In YAML frontmatter: translate `title`, `description`, and `excerpt` only. Keep `layout`,
+  `date`, `tags`, `categories`, and all other fields unchanged. Keep the translated
+  `description` between 120 and 155 characters so it stays valid as a meta description.
 - Match the tone of the original — conversational, first-person, technically precise.
 - **Links to external projects on the same domain**: Any markdown link pointing to
   `https://samueltauil.github.io/<path>` where `<path>` is a separate project (not

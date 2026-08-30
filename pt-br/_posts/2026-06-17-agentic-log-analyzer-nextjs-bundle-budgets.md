@@ -3,6 +3,7 @@ layout: post
 lang: pt-br
 permalink: /github-copilot/devops/2026/06/17/agentic-log-analyzer-nextjs-bundle-budgets.html
 title: "Demo para Cliente: Agentic Workflow Revisando Orçamentos de Bundle do Next.js e Atualizando PRs"
+description: "Um agentic workflow que acompanha orçamentos de bundle do Next.js, detecta regressões no CI e comenta a análise direto no pull request."
 date: 2026-06-17
 categories: [github-copilot, devops]
 tags: [github, github-actions, agentic-workflows, nextjs, bundle-analyzer, ci-cd, performance]

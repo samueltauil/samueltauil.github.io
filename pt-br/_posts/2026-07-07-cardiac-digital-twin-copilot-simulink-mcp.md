@@ -3,6 +3,7 @@ layout: post
 lang: pt-br
 permalink: /github-copilot/ai/healthcare/2026/07/07/cardiac-digital-twin-copilot-simulink-mcp.html
 title: "Cardiac Digital Twin: Controlando um Modelo Simulink com o GitHub Copilot em Oito Prompts"
+description: "Controlando um modelo cardíaco em Simulink pelo GitHub Copilot em oito prompts, usando o Simulink Agentic Toolkit da MATLAB como servidor MCP."
 date: 2026-07-07
 categories: [github-copilot, ai, healthcare]
 tags: [github-copilot, mcp, simulink, matlab, digital-twin, healthcare, pharma, agentic-workflows, ai]

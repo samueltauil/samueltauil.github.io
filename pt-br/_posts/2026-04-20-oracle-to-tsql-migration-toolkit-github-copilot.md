@@ -3,6 +3,7 @@ lang: pt-br
 permalink: /github-copilot/open-source/ai/2026/04/20/oracle-to-tsql-migration-toolkit-github-copilot.html
 layout: post
 title: "Oracle to T-SQL Migration Toolkit: Agents Personalizados, Pipelines Paralelos e um Rubber Duck"
+description: "Um toolkit open source de migração de Oracle para T-SQL com agents personalizados do GitHub Copilot, pipelines paralelos e revisão rubber duck."
 date: 2026-04-20
 categories: [github-copilot, open-source, ai]
 tags: [github-copilot, github-copilot-cli, developer-tools, automation, sql-server, oracle, migration, ai]

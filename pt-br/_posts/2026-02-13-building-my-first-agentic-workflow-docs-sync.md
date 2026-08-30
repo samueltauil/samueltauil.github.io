@@ -3,6 +3,7 @@ lang: pt-br
 permalink: /github/ai/devops/2026/02/13/building-my-first-agentic-workflow-docs-sync.html
 layout: post
 title: "Construindo Meu Primeiro Agentic Workflow: Um Agente de Sincronização de Documentação com GitHub Agentic Workflows"
+description: "O que aprendi construindo um agente de sincronização de documentação com GitHub Agentic Workflows, onde o pipeline raciocina em vez de só executar."
 date: 2026-02-13
 categories: [github, ai, devops]
 tags: [github-actions, ai, automation, agentic-workflows, developer-tools, github-copilot]

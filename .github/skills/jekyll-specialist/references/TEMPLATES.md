@@ -6,6 +6,7 @@
 ---
 layout: post
 title: "Your Post Title Here"
+description: "One sentence, 120 to 155 characters, used as the meta description and search snippet."
 date: YYYY-MM-DD
 categories: [category1, category2]
 tags: [tag1, tag2, tag3]

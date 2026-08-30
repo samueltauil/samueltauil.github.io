@@ -3,6 +3,7 @@ lang: pt-br
 permalink: /github/devops/automation/2025/10/20/automating-resume-builds-github-actions.html
 layout: post
 title: "Automatizando Builds de Currículo com GitHub Actions"
+description: "Como configurei o GitHub Actions para compilar meu currículo em LaTeX e publicar o PDF automaticamente, mantendo fonte e saída em sincronia."
 date: 2025-10-20
 categories: [github, devops, automation]
 tags: [latex, github-actions, ci-cd, automation, devops]

@@ -3,6 +3,7 @@ lang: pt-br
 permalink: /github-copilot/vscode/extensions/2025/11/08/introducing-copilot-agent-designer.html
 layout: post
 title: "Apresentando o Copilot Agent Designer: Um Workflow Visual para Agents do GitHub Copilot"
+description: "Um construtor visual de fluxos para agents do GitHub Copilot: desenhe definições e handoffs em um canvas em vez de editar arquivos de configuração."
 date: 2025-11-08
 categories: [github-copilot, vscode, extensions]
 tags: [github-copilot, vscode, ai, developer-tools, open-source]

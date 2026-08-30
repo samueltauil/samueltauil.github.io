@@ -2,6 +2,7 @@
 lang: en
 layout: post
 title: "Automating Resume Builds with GitHub Actions"
+description: "How I set up GitHub Actions to compile my LaTeX resume and commit the PDF automatically, so one source edit keeps everything in sync."
 date: 2025-10-20
 categories: [github, devops, automation]
 tags: [latex, github-actions, ci-cd, automation, devops]

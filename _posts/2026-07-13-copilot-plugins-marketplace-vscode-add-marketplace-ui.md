@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "The setup doc that turned into a VS Code pull request"
+description: "Writing a setup doc about Copilot plugin marketplaces led me to a VS Code pull request adding an Add Marketplace option to the extensions UI."
 date: 2026-07-13
 categories: [github-copilot, vscode]
 tags: [github-copilot, vscode, plugins, copilot-cli, developer-tools, devex, open-source]

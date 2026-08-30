@@ -3,6 +3,7 @@ lang: pt-br
 permalink: /github/ai/devops/2026/02/15/i18nops-translating-with-agentic-workflows.html
 layout: post
 title: "i18nOps: Traduzindo Meu Site com GitHub Agentic Workflows"
+description: "Como traduzi este site para o português com GitHub Agentic Workflows, usando um glossário e o Jekyll Polyglot para manter os dois idiomas alinhados."
 date: 2026-02-15
 categories: [github, ai, devops]
 tags: [github-actions, ai, automation, agentic-workflows, translation, github-copilot, i18n]

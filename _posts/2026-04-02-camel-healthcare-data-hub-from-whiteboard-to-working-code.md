@@ -2,6 +2,7 @@
 lang: en
 layout: post
 title: "Camel Healthcare Data Hub: From Whiteboard to Working Code in One Session"
+description: "From a whiteboard at a Microsoft Innovation Hub session to a working Apache Camel healthcare data hub, built with GitHub Copilot in one sitting."
 date: 2026-04-02
 categories: [github-copilot, open-source, healthcare]
 tags: [github-copilot, apache-camel, quarkus, healthcare, hl7, fhir, open-source, developer-tools, cloud-native]

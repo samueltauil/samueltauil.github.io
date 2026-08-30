@@ -2,6 +2,7 @@
 lang: en
 layout: post
 title: "i18nOps: Translating My Site with GitHub Agentic Workflows"
+description: "How I translated this site into Portuguese with GitHub Agentic Workflows, using a glossary and Jekyll Polyglot to keep both languages in sync."
 date: 2026-02-15
 categories: [github, ai, devops]
 tags: [github-actions, ai, automation, agentic-workflows, translation, github-copilot, i18n]

@@ -47,6 +47,7 @@ New posts go in `_posts/` with filename format: `YYYY-MM-DD-slug-title.md`
 See [templates reference](references/TEMPLATES.md) for full post template.
 
 ### Writing Style Rules
+- **Always set `description` in the frontmatter**, 120 to 155 characters. `jekyll-seo-tag` otherwise falls back to the full opening paragraph, which search engines flag as an over-long meta description.
 - **No em dashes**. Use commas, periods, or rephrase instead.
 - **No emojis** in post content.
 - **Write in a natural, conversational tone**. The blog should read like a real person wrote it, not an AI assistant. Avoid overly polished, formulaic, or corporate-sounding language.

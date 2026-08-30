@@ -44,6 +44,7 @@ Enforce every one of these before you deliver. They come from `jekyll-specialist
 - **No inflated significance.** Kill "pivotal", "testament", "underscores", "showcases", "vibrant tapestry", "in the ever-evolving landscape of".
 - **No knowledge-cutoff hedging** or "likely / it is believed / based on available information" filler. If you do not know, ask or leave it out.
 - **No bolded inline-header lists.** Prefer real prose paragraphs, or a plain bullet list without bolded lead-ins on every item.
+- **Always write a `description` in the front matter.** Between 120 and 155 characters, one sentence, no em dashes, no trailing period required. Without it `jekyll-seo-tag` falls back to the whole opening paragraph, which Bing and Google flag as an over-long meta description. Write it as the sentence you would want to read in a search result: what the post is about and what the reader gets, in Samuel's voice, not a keyword list. Count the characters before you deliver.
 - **English post only.** Create the file in `_posts/`. Never create anything under `pt-br/_posts/`.
 
 ## Workflow (follow this every time)
@@ -87,6 +88,7 @@ Write the full post in Markdown using the jekyll-specialist blog post template (
 While drafting:
 
 - Use `I` early. First sentence should have a human in it.
+- Write the `description` front matter last, once the post exists, so it summarizes what you actually wrote instead of what you planned. Keep it inside 120 to 155 characters.
 - Prefer specifics over adjectives. "634 kB against an 800 kB warn threshold" beats "significantly under budget".
 - If you need to explain a config, show the config block and then say *why* that choice, not what the syntax means.
 - Chunk config and code blocks. Keep them under roughly 15 lines when you can. If a block has to be longer, break it in half with a "what to notice" line in between, so the reader is not decoding YAML with no guide.
@@ -100,7 +102,8 @@ After the draft, run the humanizer loop against your own text. Do not skip this 
 2. **Answer the question:** "What makes the below still sound AI generated?" Write 2 to 5 short bullets naming the remaining tells.
 3. **Revise into a final version** that addresses every bullet and contains zero em dashes and zero en dashes. Grep the final text for `—` and `–` before delivering. Any hit means the draft is not done.
 4. **Check the human signals** the humanizer skill calls out: is there a specific, hard-to-fabricate detail? Is there at least one moment of mixed feelings or an unresolved take? Does sentence length actually vary? If any answer is no, revise again.
-5. **Retention check.** Confirm the post actually delivers what intake promised: (a) paragraph one ends on unresolved tension, not on an answer; (b) there is a "what I tried first" beat, or an honest note that there was no false start; (c) there is a mental-model paragraph the reader can quote; (d) the closer lands the one sentence to remember, in Samuel's voice, not a generic uplifting close. Missing any of these is a rewrite, not a delivery.
+5. **Front matter check.** Confirm the file has a `description`, that it is between 120 and 155 characters, that it contains no em dashes or curly quotes, and that it reads as a sentence rather than a summary of headings. A missing or over-long description is a rewrite, not a delivery.
+6. **Retention check.** Confirm the post actually delivers what intake promised: (a) paragraph one ends on unresolved tension, not on an answer; (b) there is a "what I tried first" beat, or an honest note that there was no false start; (c) there is a mental-model paragraph the reader can quote; (d) the closer lands the one sentence to remember, in Samuel's voice, not a generic uplifting close. Missing any of these is a rewrite, not a delivery.
 
 ### 6. Delivery
 
@@ -109,9 +112,10 @@ By default, the blog post is written to disk. The LinkedIn call-out is the only 
 1. **Save the post file** to `_posts/YYYY-MM-DD-slug.md` using the file-write tool. Do not paste the full post body back into chat unless the user explicitly asks for it. Never save to `pt-br/_posts/`.
 2. A one-line **file path** confirming where the post was saved, formatted as a workspace-relative markdown link.
 3. A short **story summary** (2 to 3 sentences) explaining the scene, the tension, and the takeaway. This is your check that the story is actually there.
-4. A brief **humanizer audit note**: which patterns you caught and rewrote, and confirmation that the final has no em or en dashes.
-5. If the post references screenshots, a list of `assets/images/<slug>/` paths the user needs to populate (or raw GitHub URLs the post embeds), with a one-line description of each image.
-6. The **LinkedIn call-out** (see the section below), pasted directly in chat. This is the one artifact that never goes to a file.
+4. The **`description`** you wrote, with its character count in parentheses, so Samuel can see it fits the 120 to 155 range.
+5. A brief **humanizer audit note**: which patterns you caught and rewrote, and confirmation that the final has no em or en dashes.
+6. If the post references screenshots, a list of `assets/images/<slug>/` paths the user needs to populate (or raw GitHub URLs the post embeds), with a one-line description of each image.
+7. The **LinkedIn call-out** (see the section below), pasted directly in chat. This is the one artifact that never goes to a file.
 
 If the user explicitly asks to *not* save ("just show me the draft first", "preview only"), skip step 1 and paste the full post as a Markdown code block instead. Default is save.
 

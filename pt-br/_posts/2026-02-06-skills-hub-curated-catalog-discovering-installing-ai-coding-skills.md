@@ -3,6 +3,7 @@ lang: pt-br
 permalink: /github-copilot/open-source/developer-tools/2026/02/06/skills-hub-curated-catalog-discovering-installing-ai-coding-skills.html
 layout: post
 title: "Skills Hub: Um Catálogo Curado para Descobrir e Instalar Skills de Codificação com IA"
+description: "O Skills Hub é um catálogo curado para descobrir, comparar e instalar skills do GitHub Copilot que hoje ficam espalhadas por vários repositórios."
 date: 2026-02-06
 categories: [github-copilot, open-source, developer-tools]
 tags: [github-copilot, astro, github-pages, open-source, developer-tools, skills, automation]

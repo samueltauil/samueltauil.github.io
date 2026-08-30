@@ -3,6 +3,7 @@ layout: post
 lang: pt-br
 permalink: /github-copilot/devops/2026/07/02/visualizing-copilot-prompt-cache-otel-grafana.html
 title: "Monitorando o Cache de Prompt do Copilot com OpenTelemetry e Grafana"
+description: "Exportando métricas de cache de prompt do GitHub Copilot com OpenTelemetry e desenhando no Grafana o comportamento do cache em toda uma frota."
 date: 2026-07-02
 categories: [github-copilot, devops]
 tags: [github-copilot, opentelemetry, grafana, tempo, observability, vscode, prompt-caching, prompt-engineering, intune]

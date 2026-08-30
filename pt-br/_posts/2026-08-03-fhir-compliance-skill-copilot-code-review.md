@@ -3,6 +3,7 @@ lang: pt-br
 permalink: /github-copilot/healthcare/2026/08/03/fhir-compliance-skill-copilot-code-review.html
 layout: post
 title: "Bem formado não é a mesma coisa que seguro para construir"
+description: "Uma suíte de testes verde escondia oito violações de FHIR R4, incluindo um SSN em campo livre. A skill do Copilot que escrevi para pegá-las na revisão."
 date: 2026-08-03
 categories: [github-copilot, healthcare]
 tags: [github-copilot, code-review, agent-skills, healthcare, fhir, hl7, interoperability, hipaa, typescript]

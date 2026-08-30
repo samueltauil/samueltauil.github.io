@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Adding Local Weather to My GitHub Copilot CLI Statusline"
+description: "Adding local weather to the GitHub Copilot CLI statusline with a small script, and what building it taught me about customizing the CLI."
 date: 2026-05-28
 categories: [github-copilot, developer-tools]
 tags: [github-copilot, cli, bash, statusline, wttr, productivity]

@@ -3,6 +3,7 @@ lang: pt-br
 permalink: /mcp/github-copilot/analytics/vscode/2026/02/02/copilot-compass-github-copilot-analytics-mcp-app.html
 layout: post
 title: "Copilot Compass: Navegue Sua Adoção de GitHub Copilot com Insights Acionáveis"
+description: "O Copilot Compass transforma as APIs de uso do GitHub Copilot em insights de adoção, com atividade de licenças e tendências em um app MCP."
 date: 2026-02-02
 categories: [mcp, github-copilot, analytics, vscode]
 tags: [mcp, model-context-protocol, github-copilot, react, vscode, analytics, dashboard]
