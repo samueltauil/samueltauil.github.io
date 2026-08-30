@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="-KYnUrFSkDsyImp9yhsWyU4PANTtaRuz-icMPEMhGTs" />
-  <meta name="description" content="{{ page.description | default: site.description }}">
-  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
@@ -19,10 +17,25 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   
   <!-- SEO -->
-  {% seo %}
+  {%- capture seo_tags %}{% seo %}{% endcapture -%}
+  {%- if site.active_lang != site.default_lang -%}
+    {%- comment -%} Polyglot only relativizes href attributes, so localize the URLs seo-tag emits in content= and JSON-LD. {%- endcomment -%}
+    {%- assign site_root = site.url | append: site.baseurl | append: '/' -%}
+    {%- assign lang_root = site_root | append: site.active_lang | append: '/' -%}
+    {%- assign og_from = 'og:url" content="' | append: site_root -%}
+    {%- assign og_to = 'og:url" content="' | append: lang_root -%}
+    {%- assign id_from = '"@id":"' | append: site_root -%}
+    {%- assign id_to = '"@id":"' | append: lang_root -%}
+    {%- assign url_from = '"url":"' | append: site_root -%}
+    {%- assign url_to = '"url":"' | append: lang_root -%}
+    {%- assign seo_tags = seo_tags | replace: og_from, og_to | replace: id_from, id_to | replace: url_from, url_to -%}
+  {%- endif -%}
+  {{ seo_tags }}
   
-  <!-- Multilingual hreflang -->
-  {% I18n_Headers %}
+  <!-- Multilingual hreflang (canonical comes from jekyll-seo-tag, so polyglot's duplicate is stripped) -->
+  {% capture i18n_headers %}{% I18n_Headers %}{% endcapture %}
+  {% assign hreflang_tags = i18n_headers | split: '<link rel="alternate"' %}
+  {% for hreflang_tag in hreflang_tags offset: 1 %}<link rel="alternate"{{ hreflang_tag }}{% endfor %}
   
   <!-- Feed -->
   {% feed_meta %}

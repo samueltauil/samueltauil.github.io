@@ -34,7 +34,8 @@ author:
 languages: ["en", "pt-br"]
 default_lang: "en"
 exclude_from_localization: ["assets", "scripts", "images"]
-parallel_localization: true
+# Parallel localization forks a process per language, which Ruby cannot do on Windows.
+parallel_localization: false
 
 # Exclude from build
 exclude:
