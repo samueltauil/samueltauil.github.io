@@ -35,7 +35,7 @@ languages: ["en", "pt-br"]
 default_lang: "en"
 # sitemap.xml and robots.txt are site-wide files; localizing them only produced an
 # empty /pt-br/sitemap.xml and an unreachable /pt-br/robots.txt.
-exclude_from_localization: ["assets", "scripts", "images", "sitemap.xml", "robots.txt"]
+exclude_from_localization: ["assets", "scripts", "images", "sitemap.xml", "sitemap.txt", "robots.txt"]
 # Parallel localization forks a process per language, which Ruby cannot do on Windows.
 parallel_localization: false
 

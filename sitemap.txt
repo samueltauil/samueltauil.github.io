@@ -1,0 +1,21 @@
+---
+permalink: /sitemap.txt
+sitemap: false
+---
+{%- assign base = site.url -%}
+{%- capture urls -%}
+{%- for post in site.posts -%}
+{%- unless post.lang == 'pt-br' %}
+{{ post.url | prepend: base }}
+{{ post.url | prepend: '/pt-br' | prepend: base }}
+{%- endunless -%}
+{%- endfor -%}
+{%- for page in site.html_pages -%}
+{%- assign path = page.url | replace: '/index.html', '/' -%}
+{%- unless page.sitemap == false or page.lang == 'pt-br' or page.url contains '404' %}
+{{ path | prepend: base }}
+{{ path | prepend: '/pt-br' | prepend: base }}
+{%- endunless -%}
+{%- endfor -%}
+{%- endcapture -%}
+{{ urls | strip }}

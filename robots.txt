@@ -56,3 +56,4 @@ User-agent: Meta-ExternalAgent
 Allow: /
 
 Sitemap: {{ '/sitemap.xml' | absolute_url }}
+Sitemap: {{ '/sitemap.txt' | absolute_url }}
