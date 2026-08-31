@@ -1,23 +1,6 @@
 <a class="skip-link" href="#main">{% if site.active_lang == 'pt-br' %}Pular para o conteúdo{% else %}Skip to content{% endif %}</a>
 <header class="site-header">
   <div class="header-container">
-    <a class="site-title" href="{{ '/' | relative_url }}" aria-label="{{ site.title }}{% if site.active_lang == 'pt-br' %}, início{% else %}, home{% endif %}">
-      <span class="site-mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" role="img" focusable="false">
-          <defs>
-            <linearGradient id="mark-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#a371f7"/>
-              <stop offset="50%" stop-color="#58a6ff"/>
-              <stop offset="100%" stop-color="#3fb950"/>
-            </linearGradient>
-          </defs>
-          <circle cx="16" cy="16" r="14" fill="none" stroke="url(#mark-gradient)" stroke-width="2"/>
-          <text x="16" y="21" text-anchor="middle" fill="url(#mark-gradient)" font-family="system-ui, sans-serif" font-weight="700" font-size="13">ST</text>
-        </svg>
-      </span>
-      <span class="site-name">{{ site.title }}</span>
-    </a>
-    
     <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <line x1="3" y1="6" x2="21" y2="6"></line>
