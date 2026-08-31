@@ -17,8 +17,11 @@ layout: default
       {% endif %}
       {% if page.categories.size > 0 %}
         • 
+        {%- comment -%} Jekyll infers a "pt-br" category from the pt-br/_posts path, so drop language codes. {%- endcomment -%}
         {% for category in page.categories %}
+          {% unless site.languages contains category %}
           <a class="badge" href="{{ '/categories/' | append: category | append: '/' | relative_url }}">{{ category }}</a>
+          {% endunless %}
         {% endfor %}
       {% endif %}
     </p>

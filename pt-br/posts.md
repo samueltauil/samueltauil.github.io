@@ -23,7 +23,9 @@ lang: pt-br
     {% if post.categories.size > 0 %}
     <div style="margin-top: 0.5rem;">
       {% for cat in post.categories %}
+      {% unless site.languages contains cat %}
       <a class="badge" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;" href="{{ '/categories/' | append: cat | append: '/' | relative_url }}">{{ cat }}</a>
+      {% endunless %}
       {% endfor %}
     </div>
     {% endif %}

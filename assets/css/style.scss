@@ -1318,6 +1318,12 @@ h1 {
     max-width: 70ch;
   }
 
+  // Card lists are layout, not prose, so they keep the full column width.
+  .post-list,
+  .post-list li {
+    max-width: none;
+  }
+
   li {
     margin-bottom: 0.35em;
   }
@@ -1336,4 +1342,22 @@ h1 {
 
 .post-meta {
   color: $text-muted;
+}
+
+// Category tags sit next to the date, so they should read as metadata rather
+// than as buttons competing with the headline.
+.post-meta .badge {
+  padding: 0.1rem 0.55rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  border-radius: 1rem;
+  background: transparent;
+  border-color: $border-color;
+  color: $text-muted;
+
+  &:hover {
+    color: $accent-blue;
+    border-color: $accent-blue;
+    background: transparent;
+  }
 }
