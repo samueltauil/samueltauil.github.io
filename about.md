@@ -16,7 +16,7 @@ Greater Boston Area
 
 ## About Me
 
-I'm a Senior Solution Engineer at **Microsoft** focused on Developer Experience — helping enterprise teams unlock productivity with **GitHub Copilot**, **VS Code**, **Codespaces**, and **GitHub Enterprise**.
+I'm a Senior Solution Engineer at **Microsoft** focused on Developer Experience, helping enterprise teams unlock productivity with **GitHub Copilot**, **VS Code**, **Codespaces**, and **GitHub Enterprise**.
 
 With 15+ years of experience in cloud-native technologies, I specialize in bridging the gap between development, operations, and business outcomes through open source innovation.
 
@@ -72,8 +72,8 @@ Innovative and results-driven technology leader with 15+ years of experience lea
 
 ### Earlier Roles
 
-**Groupon Brasil** — Java Architect (2012)  
-**GPTI, Atech, Getronics, Control Consultoria, BuscaPé** — Senior Java Developer & Architect
+**Groupon Brasil**: Java Architect (2012)  
+**GPTI, Atech, Getronics, Control Consultoria, BuscaPé**: Senior Java Developer & Architect
 
 ## Education
 

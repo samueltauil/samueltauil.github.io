@@ -810,26 +810,6 @@ hr {
   margin: 0;
 }
 
-// Copilot sparkle effect
-.copilot-sparkle {
-  position: relative;
-  display: inline-block;
-
-  &::before {
-    content: '✨';
-    position: absolute;
-    top: -0.5rem;
-    right: -1rem;
-    font-size: 0.75rem;
-    animation: sparkle 2s ease-in-out infinite;
-  }
-}
-
-@keyframes sparkle {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.2); }
-}
-
 // Gradient text utility
 .gradient-text {
   background: $accent-gradient;
@@ -1276,4 +1256,84 @@ a.badge {
     border-color: $accent-blue;
     color: $accent-blue;
   }
+}
+
+
+// ---------------------------------------------------------------------------
+// Editorial refinements
+// ---------------------------------------------------------------------------
+
+// The site title previously used background-clip:text on the anchor while the
+// inner span was inline-block, which created its own painting context and left
+// the wordmark invisible.
+.site-title {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: currentColor;
+  color: $text-primary;
+  letter-spacing: -0.01em;
+
+  &:hover {
+    color: $accent-blue;
+    opacity: 1;
+  }
+}
+
+// Reserve the gradient for the home hero. Article and archive headings read as
+// editorial rather than promotional in a solid colour.
+h1 {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: currentColor;
+  color: $text-primary;
+  letter-spacing: -0.02em;
+}
+
+.hero-compact h1 {
+  background: $accent-gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Long-form reading: brighter body copy, larger type, and a measure capped
+// near 70 characters. Code, tables, and images keep the full column width.
+.post {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.post-content {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+
+  p,
+  ul,
+  ol,
+  blockquote {
+    color: $text-primary;
+    max-width: 70ch;
+  }
+
+  li {
+    margin-bottom: 0.35em;
+  }
+
+  h2,
+  h3,
+  h4 {
+    max-width: 70ch;
+    margin-top: 2.25em;
+  }
+
+  h2 {
+    padding-bottom: 0.3em;
+  }
+}
+
+.post-meta {
+  color: $text-muted;
 }

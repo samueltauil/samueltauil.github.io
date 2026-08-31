@@ -11,7 +11,7 @@ Analog photography enthusiast capturing moments on instant film and vintage came
 
 ## Analog Photography
 
-I've been shooting analog since 2011, exploring the unique aesthetics of film photography across different formats and cameras. My gear ranges from classic Lomography cameras like the LC-A to Polaroid folding SLRs including the iconic SX-70 and my MiNT SLR670-X Ming Edition — a beautifully restored camera that combines vintage Polaroid engineering with modern precision.
+I've been shooting analog since 2011, exploring the unique aesthetics of film photography across different formats and cameras. My gear ranges from classic Lomography cameras like the LC-A to Polaroid folding SLRs including the iconic SX-70 and my MiNT SLR670-X Ming Edition, a beautifully restored camera that combines vintage Polaroid engineering with modern precision.
 
 The name **Expired Emulsions** comes from my love of experimenting with expired film, which produces unpredictable colors, light leaks, and beautiful imperfections that digital simply can't replicate. Whether it's instant Polaroid shots, experimental LomoChrome films, or classic 35mm, there's something magical about the anticipation of waiting for results and embracing the happy accidents that come with analog.
 
@@ -188,14 +188,14 @@ A collection of vintage and Lomography cameras I shoot with:
 
 ## Films I Love
 
-- **Polaroid 600** — Color, B&W, Round Frame Edition
-- **Polaroid SX-70** — Color, Paul Giambarba Spectrum Edition
-- **Polaroid i-Type** — Color, Golden Moments, MoMA Edition
-- **LomoChrome Purple** — Surreal color shifts
-- **LomoChrome Turquoise** — Cool, dreamy tones
-- **Kodak Ektachrome 100** — Classic slide film
-- **Fuji Pro 400H** — Beautiful skin tones (RIP)
-- **Ilford Delta 100** — Crisp black & white
+- **Polaroid 600**: Color, B&W, Round Frame Edition
+- **Polaroid SX-70**: Color, Paul Giambarba Spectrum Edition
+- **Polaroid i-Type**: Color, Golden Moments, MoMA Edition
+- **LomoChrome Purple**: Surreal color shifts
+- **LomoChrome Turquoise**: Cool, dreamy tones
+- **Kodak Ektachrome 100**: Classic slide film
+- **Fuji Pro 400H**: Beautiful skin tones (RIP)
+- **Ilford Delta 100**: Crisp black & white
 
 ## Locations
 

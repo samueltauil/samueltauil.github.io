@@ -11,7 +11,7 @@ Entusiasta de fotografia analógica capturando momentos em filme instantâneo e 
 
 ## Fotografia Analógica
 
-Eu fotografo analógico desde 2011, explorando a estética única da fotografia em filme em diferentes formatos e câmeras. Meu equipamento varia de câmeras clássicas Lomography como a LC-A até SLRs dobráveis Polaroid incluindo a icônica SX-70 e minha MiNT SLR670-X Ming Edition — uma câmera lindamente restaurada que combina engenharia vintage Polaroid com precisão moderna.
+Eu fotografo analógico desde 2011, explorando a estética única da fotografia em filme em diferentes formatos e câmeras. Meu equipamento varia de câmeras clássicas Lomography como a LC-A até SLRs dobráveis Polaroid incluindo a icônica SX-70 e minha MiNT SLR670-X Ming Edition, uma câmera lindamente restaurada que combina engenharia vintage Polaroid com precisão moderna.
 
 O nome **Expired Emulsions** vem do meu amor por experimentar com filmes vencidos, que produzem cores imprevisíveis, vazamentos de luz e imperfeições lindas que o digital simplesmente não consegue replicar. Seja fotos instantâneas Polaroid, filmes experimentais LomoChrome, ou clássico 35mm, há algo mágico na antecipação de esperar pelos resultados e abraçar os acidentes felizes que vêm com o analógico.
 
@@ -188,14 +188,14 @@ Uma coleção de câmeras vintage e Lomography com as quais fotografo:
 
 ## Filmes que Eu Amo
 
-- **Polaroid 600** — Color, B&W, Round Frame Edition
-- **Polaroid SX-70** — Color, Paul Giambarba Spectrum Edition
-- **Polaroid i-Type** — Color, Golden Moments, MoMA Edition
-- **LomoChrome Purple** — Mudanças de cor surreais
-- **LomoChrome Turquoise** — Tons frios e sonhadores
-- **Kodak Ektachrome 100** — Filme slide clássico
-- **Fuji Pro 400H** — Lindos tons de pele (RIP)
-- **Ilford Delta 100** — Preto e branco nítido
+- **Polaroid 600**: Color, B&W, Round Frame Edition
+- **Polaroid SX-70**: Color, Paul Giambarba Spectrum Edition
+- **Polaroid i-Type**: Color, Golden Moments, MoMA Edition
+- **LomoChrome Purple**: Mudanças de cor surreais
+- **LomoChrome Turquoise**: Tons frios e sonhadores
+- **Kodak Ektachrome 100**: Filme slide clássico
+- **Fuji Pro 400H**: Lindos tons de pele (RIP)
+- **Ilford Delta 100**: Preto e branco nítido
 
 ## Locações
 
