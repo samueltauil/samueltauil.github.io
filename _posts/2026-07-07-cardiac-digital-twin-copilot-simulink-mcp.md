@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Cardiac Digital Twin: Driving a Simulink Model With GitHub Copilot in Eight Prompts"
+seo_title: "Simulink Digital Twin with GitHub Copilot"
 description: "Driving a Simulink cardiac model from GitHub Copilot in eight prompts, using the MATLAB Simulink Agentic Toolkit MCP server as the bridge."
 date: 2026-07-07
 categories: [github-copilot, ai, healthcare]

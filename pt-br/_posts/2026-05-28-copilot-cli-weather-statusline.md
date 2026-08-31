@@ -3,6 +3,7 @@ lang: pt-br
 permalink: /github-copilot/developer-tools/2026/05/28/copilot-cli-weather-statusline.html
 layout: post
 title: "Adicionando Previsão do Tempo Local à Minha Statusline do GitHub Copilot CLI"
+image: /assets/images/2026-05-28-copilot-cli-weather-statusline/statusline-screenshot.png
 description: "Adicionando a previsão do tempo local à statusline do GitHub Copilot CLI com um script pequeno, e o que isso me ensinou sobre customizar a CLI."
 date: 2026-05-28
 categories: [github-copilot, developer-tools]

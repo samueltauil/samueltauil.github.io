@@ -3,6 +3,7 @@ lang: pt-br
 permalink: /github-copilot/open-source/developer-tools/2026/03/08/skills-hub-updates-security-scan-new-domain-cli-install.html
 layout: post
 title: "Atualizações do Skills Hub: Scanner de Segurança, Instalação via CLI e Lançamento do skillshub.space"
+image: /assets/images/2026-03-08-skills-hub-updates/feature-homepage-hero.png
 description: "O Skills Hub cresceu de 51 para 225 skills, então adicionei varredura de segurança, instalação via CLI e movi o catálogo para skillshub.space."
 date: 2026-03-08
 categories: [github-copilot, open-source, developer-tools]

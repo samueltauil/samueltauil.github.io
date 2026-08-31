@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Adding Local Weather to My GitHub Copilot CLI Statusline"
+image: /assets/images/2026-05-28-copilot-cli-weather-statusline/statusline-screenshot.png
 description: "Adding local weather to the GitHub Copilot CLI statusline with a small script, and what building it taught me about customizing the CLI."
 date: 2026-05-28
 categories: [github-copilot, developer-tools]

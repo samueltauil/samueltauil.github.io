@@ -30,6 +30,12 @@
     {%- assign url_to = '"url":"' | append: lang_root -%}
     {%- assign seo_tags = seo_tags | replace: og_from, og_to | replace: id_from, id_to | replace: url_from, url_to -%}
   {%- endif -%}
+  {%- comment -%} seo_title lets a post keep a narrative headline on the page while sending a keyword-led title to search. {%- endcomment -%}
+  {%- if page.seo_title -%}
+    {%- assign after_title = seo_tags | split: '</title>' -%}
+    {%- assign before_title = after_title[0] | split: '<title>' -%}
+    {%- capture seo_tags -%}{{ before_title[0] }}<title>{{ page.seo_title | escape }} | {{ site.title | escape }}</title>{{ after_title[1] }}{%- endcapture -%}
+  {%- endif -%}
   {{ seo_tags }}
   
   <!-- Multilingual hreflang (canonical comes from jekyll-seo-tag, so polyglot's duplicate is stripped) -->

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Customer Demo: Agentic Workflow Reviewing Next.js Bundle Budgets and Updating PRs"
+seo_title: "Next.js Bundle Budgets in an Agentic Workflow"
 description: "An agentic workflow that watches Next.js bundle budgets, catches regressions in CI, and comments the analysis straight onto the pull request."
 date: 2026-06-17
 categories: [github-copilot, devops]

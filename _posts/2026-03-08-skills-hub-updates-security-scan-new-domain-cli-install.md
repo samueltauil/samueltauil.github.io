@@ -2,6 +2,8 @@
 lang: en
 layout: post
 title: "Skills Hub Updates: Security Scanning, CLI Installation, and skillshub.space Launch"
+image: /assets/images/2026-03-08-skills-hub-updates/feature-homepage-hero.png
+seo_title: "Skills Hub: Security Scanning and CLI Install"
 description: "Skills Hub grew from 51 to 225 skills, so I added security scanning, a CLI installer, and moved the catalog to its own skillshub.space domain."
 date: 2026-03-08
 categories: [github-copilot, open-source, developer-tools]

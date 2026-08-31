@@ -2,6 +2,7 @@
 lang: en
 layout: post
 title: "Building My First Agentic Workflow: A Documentation Sync Agent with GitHub Agentic Workflows"
+seo_title: "GitHub Agentic Workflows: A Docs Sync Agent"
 description: "What I learned building a documentation sync agent with GitHub Agentic Workflows, where the pipeline reasons about changes instead of just running steps."
 date: 2026-02-13
 categories: [github, ai, devops]

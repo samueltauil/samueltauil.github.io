@@ -2,6 +2,7 @@
 lang: en
 layout: post
 title: "Copilot Compass: Navigate Your GitHub Copilot Adoption with Actionable Insights"
+seo_title: "GitHub Copilot Adoption Analytics MCP App"
 description: "Copilot Compass turns the raw GitHub Copilot usage APIs into adoption insights, showing seat activity and engagement trends as an MCP app."
 date: 2026-02-02
 categories: [mcp, github-copilot, analytics, vscode]

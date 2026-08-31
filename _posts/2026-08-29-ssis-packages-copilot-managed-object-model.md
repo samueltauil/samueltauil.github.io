@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "I stopped asking Copilot to write SSIS XML"
+seo_title: "SSIS Package Generation with GitHub Copilot"
 description: "Instead of asking Copilot to write .dtsx XML, I gave it the SSIS managed object model, so it generates packages I can actually validate and review."
 date: 2026-08-29
 categories: [github-copilot, devops]

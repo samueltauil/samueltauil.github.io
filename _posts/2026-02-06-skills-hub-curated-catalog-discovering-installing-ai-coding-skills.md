@@ -2,6 +2,8 @@
 lang: en
 layout: post
 title: "Skills Hub: A Curated Catalog for Discovering and Installing AI Coding Skills"
+image: /assets/images/2026-02-06-skills-hub/homepage.png
+seo_title: "Skills Hub: A GitHub Copilot Skills Catalog"
 description: "Skills Hub is a curated catalog for finding, comparing, and installing GitHub Copilot skills that otherwise stay scattered across repositories."
 date: 2026-02-06
 categories: [github-copilot, open-source, developer-tools]

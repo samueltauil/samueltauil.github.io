@@ -2,6 +2,7 @@
 lang: en
 layout: post
 title: "Oracle to T-SQL Migration Toolkit: Custom Agents, Parallel Pipelines, and a Rubber Duck"
+seo_title: "Oracle to T-SQL Migration with Copilot Agents"
 description: "An open-source Oracle to T-SQL migration toolkit built on GitHub Copilot custom agents, parallel conversion pipelines, and a rubber duck review step."
 date: 2026-04-20
 categories: [github-copilot, open-source, ai]
