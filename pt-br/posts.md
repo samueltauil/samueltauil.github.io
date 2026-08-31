@@ -16,13 +16,14 @@ lang: pt-br
   <li class="card" style="margin-bottom: 1rem;">
     <span class="card-meta">{{ post.date | date: "%B %d, %Y" }}</span>
     <h4 style="margin: 0.5rem 0;"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h4>
-    {% if post.excerpt %}
-    <p style="margin: 0.5rem 0; font-size: 0.9rem; color: #8b949e;">{{ post.excerpt | strip_html | truncate: 160 }}</p>
+    {% assign summary = post.description | default: post.excerpt %}
+    {% if summary %}
+    <p style="margin: 0.5rem 0; font-size: 0.9rem; color: #8b949e;">{{ summary | strip_html | truncate: 160 }}</p>
     {% endif %}
     {% if post.categories.size > 0 %}
     <div style="margin-top: 0.5rem;">
       {% for cat in post.categories %}
-      <span class="badge" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">{{ cat }}</span>
+      <a class="badge" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;" href="{{ '/categories/' | append: cat | append: '/' | relative_url }}">{{ cat }}</a>
       {% endfor %}
     </div>
     {% endif %}

@@ -29,6 +29,16 @@ plugins:
 # SEO
 author:
   name: Samuel Tauil
+twitter:
+  username: samueltauil
+  card: summary_large_image
+
+# Every page gets a social preview image unless it sets its own.
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/og-default.png
 
 # Polyglot i18n
 languages: ["en", "pt-br"]

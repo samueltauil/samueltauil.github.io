@@ -1,0 +1,28 @@
+---
+layout: default
+---
+
+<article class="page">
+  <header class="post-header">
+    <h1>{{ page.title | escape }}</h1>
+    {% if page.description %}<p class="tagline" style="color: #8b949e;">{{ page.description }}</p>{% endif %}
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+
+    {% assign posts = site.categories[page.category] %}
+    <ul class="post-list">
+      {% for post in posts %}
+      <li class="card" style="margin-bottom: 1rem;">
+        <span class="card-meta">{{ post.date | date: "%B %d, %Y" }}</span>
+        <h4 style="margin: 0.5rem 0;"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h4>
+        {% assign summary = post.description | default: post.excerpt %}
+        {% if summary %}<p style="margin: 0.5rem 0; font-size: 0.9rem; color: #8b949e;">{{ summary | strip_html | truncate: 160 }}</p>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+
+    <p><a href="{{ '/categories/' | relative_url }}">{% if site.active_lang == 'pt-br' %}Todos os tópicos{% else %}All topics{% endif %}</a> · <a href="{{ '/posts/' | relative_url }}">{% if site.active_lang == 'pt-br' %}Todos os posts{% else %}All posts{% endif %}</a></p>
+  </div>
+</article>

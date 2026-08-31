@@ -16,11 +16,13 @@
       {% if site.active_lang == "pt-br" %}
       <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Início</a>
       <a href="{{ '/posts/' | relative_url }}" {% if page.url == '/posts/' %}class="active"{% endif %}>Publicações</a>
+      <a href="{{ '/categories/' | relative_url }}" {% if page.url == '/categories/' %}class="active"{% endif %}>Tópicos</a>
       <a href="{{ '/photography/' | relative_url }}" {% if page.url == '/photography/' %}class="active"{% endif %}>Fotografia</a>
       <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}class="active"{% endif %}>Sobre</a>
       {% else %}
       <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
       <a href="{{ '/posts/' | relative_url }}" {% if page.url == '/posts/' %}class="active"{% endif %}>Posts</a>
+      <a href="{{ '/categories/' | relative_url }}" {% if page.url == '/categories/' %}class="active"{% endif %}>Topics</a>
       <a href="{{ '/photography/' | relative_url }}" {% if page.url == '/photography/' %}class="active"{% endif %}>Photography</a>
       <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}class="active"{% endif %}>About</a>
       {% endif %}

@@ -18,7 +18,7 @@ layout: default
       {% if page.categories.size > 0 %}
         • 
         {% for category in page.categories %}
-          <span class="badge">{{ category }}</span>
+          <a class="badge" href="{{ '/categories/' | append: category | append: '/' | relative_url }}">{{ category }}</a>
         {% endfor %}
       {% endif %}
     </p>
@@ -29,6 +29,48 @@ layout: default
   </div>
 
   <footer class="post-footer">
-    <a href="{{ '/' | relative_url }}">&larr; {% if site.active_lang == 'pt-br' %}Voltar ao início{% else %}Back to home{% endif %}</a>
+    {%- comment -%} Related posts need two shared tags; fall back to the newest posts when nothing qualifies. {%- endcomment -%}
+    {%- capture related_items -%}
+      {%- assign related_count = 0 -%}
+      {%- for p in site.posts -%}
+        {%- if p.url != page.url and related_count < 3 -%}
+          {%- assign shared = 0 -%}
+          {%- for tag in p.tags -%}
+            {%- if page.tags contains tag -%}{%- assign shared = shared | plus: 1 -%}{%- endif -%}
+          {%- endfor -%}
+          {%- if shared >= 2 -%}
+            <li><a href="{{ p.url | relative_url }}">{{ p.title | escape }}</a></li>
+            {%- assign related_count = related_count | plus: 1 -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if related_items | strip == '' -%}
+      {%- capture related_items -%}
+        {%- assign fallback_count = 0 -%}
+        {%- for p in site.posts -%}
+          {%- if p.url != page.url and fallback_count < 3 -%}
+            <li><a href="{{ p.url | relative_url }}">{{ p.title | escape }}</a></li>
+            {%- assign fallback_count = fallback_count | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+    {%- endif -%}
+
+    <nav class="post-related">
+      <h2>{% if site.active_lang == 'pt-br' %}Continue lendo{% else %}Keep reading{% endif %}</h2>
+      <ul>{{ related_items }}</ul>
+    </nav>
+
+    <nav class="post-nav">
+      {% if page.previous %}
+        <a class="post-nav-prev" href="{{ page.previous.url | relative_url }}">&larr; {{ page.previous.title | escape }}</a>
+      {% endif %}
+      {% if page.next %}
+        <a class="post-nav-next" href="{{ page.next.url | relative_url }}">{{ page.next.title | escape }} &rarr;</a>
+      {% endif %}
+    </nav>
+
+    <p><a href="{{ '/posts/' | relative_url }}">{% if site.active_lang == 'pt-br' %}Ver todos os posts{% else %}See all posts{% endif %}</a> · <a href="{{ '/' | relative_url }}">{% if site.active_lang == 'pt-br' %}Voltar ao início{% else %}Back to home{% endif %}</a></p>
   </footer>
 </article>
