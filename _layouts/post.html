@@ -6,11 +6,9 @@ layout: default
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {% if site.active_lang == 'pt-br' %}{{ page.date | date: "%d de %B de %Y" }}{% else %}{{ page.date | date: "%B %d, %Y" }}{% endif %}
-      </time>
+      {% include post-date.html date=page.date class="dt-published" itemprop="datePublished" %}
       {%- assign minutes = content | number_of_words | divided_by: 200 | plus: 1 %}
-      • {{ minutes }} {% if site.active_lang == 'pt-br' %}min de leitura{% else %}min read{% endif %}
+      <span class="story-dot" aria-hidden="true">&middot;</span> {{ minutes }} {% if site.active_lang == 'pt-br' %}min de leitura{% else %}min read{% endif %}
       <meta itemprop="inLanguage" content="{{ site.active_lang }}">
       {% if page.author %}
         • <span itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -19,10 +17,15 @@ layout: default
       {% endif %}
       {% if page.categories.size > 0 %}
         • 
-        {%- comment -%} Jekyll infers a "pt-br" category from the pt-br/_posts path, so drop language codes. {%- endcomment -%}
+        {%- comment -%} Jekyll infers a "pt-br" category from the pt-br/_posts path, and not every category has an archive page. {%- endcomment -%}
         {% for category in page.categories %}
           {% unless site.languages contains category %}
-          <a class="badge" href="{{ '/categories/' | append: category | append: '/' | relative_url }}">{{ category }}</a>
+          {% assign cat_page = site.pages | where: "category", category | first %}
+          {% if cat_page %}
+          <a class="badge" href="{{ cat_page.url | relative_url }}">{{ category }}</a>
+          {% else %}
+          <span class="badge">{{ category }}</span>
+          {% endif %}
           {% endunless %}
         {% endfor %}
       {% endif %}
@@ -63,12 +66,12 @@ layout: default
       {%- endcapture -%}
     {%- endif -%}
 
-    <nav class="post-related">
+    <nav class="post-related" aria-label="{% if site.active_lang == 'pt-br' %}Posts relacionados{% else %}Related posts{% endif %}">
       <h2>{% if site.active_lang == 'pt-br' %}Continue lendo{% else %}Keep reading{% endif %}</h2>
       <ul>{{ related_items }}</ul>
     </nav>
 
-    <nav class="post-nav">
+    <nav class="post-nav" aria-label="{% if site.active_lang == 'pt-br' %}Post anterior e próximo{% else %}Previous and next post{% endif %}">
       {% if page.previous %}
         <a class="post-nav-prev" href="{{ page.previous.url | relative_url }}">&larr; {{ page.previous.title | escape }}</a>
       {% endif %}

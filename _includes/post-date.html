@@ -1,0 +1,14 @@
+{%- comment -%}
+Localized date. Jekyll's date filter cannot translate month names, so pt-br
+rendered "29 de August de 2026".
+Usage: {% include post-date.html date=post.date %}
+{%- endcomment -%}
+{%- assign d = include.date -%}
+{%- capture attrs -%}{% if include.class %} class="{{ include.class }}"{% endif %}{% if include.itemprop %} itemprop="{{ include.itemprop }}"{% endif %}{%- endcapture -%}
+{%- if site.active_lang == 'pt-br' -%}
+{%- assign months_pt = "janeiro,fevereiro,março,abril,maio,junho,julho,agosto,setembro,outubro,novembro,dezembro" | split: "," -%}
+{%- assign mi = d | date: "%-m" | plus: 0 | minus: 1 -%}
+<time datetime="{{ d | date_to_xmlschema }}"{{ attrs }}>{{ d | date: "%-d" }} de {{ months_pt[mi] }} de {{ d | date: "%Y" }}</time>
+{%- else -%}
+<time datetime="{{ d | date_to_xmlschema }}"{{ attrs }}>{{ d | date: "%B %-d, %Y" }}</time>
+{%- endif -%}

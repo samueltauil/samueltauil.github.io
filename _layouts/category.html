@@ -14,11 +14,11 @@ layout: default
     {% assign posts = site.categories[page.category] %}
     <ul class="post-list">
       {% for post in posts %}
-      <li class="card" style="margin-bottom: 1rem;">
-        <span class="card-meta">{{ post.date | date: "%B %d, %Y" }}</span>
-        <h4 style="margin: 0.5rem 0;"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h4>
+      <li class="card">
+        {% include post-kicker.html post=post show_reading_time=true %}
+        <h2><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
         {% assign summary = post.description | default: post.excerpt %}
-        {% if summary %}<p style="margin: 0.5rem 0; font-size: 0.9rem; color: #8b949e;">{{ summary | strip_html | truncate: 160 }}</p>{% endif %}
+        {% if summary %}<p>{{ summary | strip_html | truncate: 175 }}</p>{% endif %}
       </li>
       {% endfor %}
     </ul>

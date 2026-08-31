@@ -1,0 +1,30 @@
+{%- comment -%}
+Category, date, and optional reading time. The category only becomes a link when
+an archive page actually exists for it, otherwise it renders as plain text; six
+categories previously linked to 404s.
+Usage: {% include post-kicker.html post=post show_reading_time=true %}
+{%- endcomment -%}
+{%- assign p = include.post -%}
+{%- assign kicker = '' -%}
+{%- for cat in p.categories -%}
+  {%- unless site.languages contains cat -%}
+    {%- if kicker == '' -%}{%- assign kicker = cat -%}{%- endif -%}
+  {%- endunless -%}
+{%- endfor -%}
+{%- assign kicker_page = site.pages | where: "category", kicker | first -%}
+<p class="story-kicker">
+  {%- if kicker != '' -%}
+    {%- if kicker_page -%}
+    <a href="{{ kicker_page.url | relative_url }}">{{ kicker }}</a>
+    {%- else -%}
+    <span>{{ kicker }}</span>
+    {%- endif -%}
+    <span class="story-dot" aria-hidden="true">&middot;</span>
+  {%- endif -%}
+  {% include post-date.html date=p.date %}
+  {%- if include.show_reading_time -%}
+    {%- assign minutes = p.content | number_of_words | divided_by: 200 | plus: 1 -%}
+    <span class="story-dot" aria-hidden="true">&middot;</span>
+    <span>{{ minutes }} {% if site.active_lang == 'pt-br' %}min de leitura{% else %}min read{% endif %}</span>
+  {%- endif -%}
+</p>

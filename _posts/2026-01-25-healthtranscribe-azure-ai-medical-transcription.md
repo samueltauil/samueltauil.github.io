@@ -3,7 +3,7 @@ lang: en
 layout: post
 title: "HealthTranscribe: AI-Powered Medical Transcription with Azure"
 date: 2026-01-25 10:00:00 -0500
-categories: azure ai healthcare
+categories: [azure, ai, healthcare]
 tags: [azure, ai, healthcare, speech-to-text, fhir, text-analytics]
 excerpt: "An enterprise-grade healthcare transcription platform that transforms medical audio into structured clinical data using Azure AI Services."
 ---

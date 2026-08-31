@@ -15,9 +15,9 @@ lang: en
   {% assign posts = category[1] %}
   {% assign cat_page = site.pages | where: "category", name | first %}
   {% if cat_page %}
-  <li class="card" style="margin-bottom: 1rem;">
-    <h4 style="margin: 0.5rem 0;"><a href="{{ cat_page.url | relative_url }}">{{ cat_page.title | escape }}</a></h4>
-    {% if cat_page.description %}<p style="margin: 0.5rem 0; font-size: 0.9rem; color: #8b949e;">{{ cat_page.description }}</p>{% endif %}
+  <li class="card">
+    <h2><a href="{{ cat_page.url | relative_url }}">{{ cat_page.title | escape }}</a></h2>
+    {% if cat_page.description %}<p>{{ cat_page.description }}</p>{% endif %}
     <span class="card-meta">{{ posts.size }} post{% if posts.size != 1 %}s{% endif %}</span>
   </li>
   {% endif %}

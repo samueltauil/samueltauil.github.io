@@ -4,7 +4,7 @@ permalink: /azure/ai/healthcare/2026/01/25/healthtranscribe-azure-ai-medical-tra
 layout: post
 title: "HealthTranscribe: Transcrição Médica Baseada em IA com Azure"
 date: 2026-01-25 10:00:00 -0500
-categories: azure ai healthcare
+categories: [azure, ai, healthcare]
 tags: [azure, ai, healthcare, speech-to-text, fhir, text-analytics]
 excerpt: "Uma plataforma de transcrição para saúde de nível empresarial que transforma áudio médico em dados clínicos estruturados usando Azure AI Services."
 ---

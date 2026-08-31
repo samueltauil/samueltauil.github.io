@@ -9,7 +9,7 @@ $bg-card: #1c2128;
 
 $text-primary: #f0f6fc;
 $text-secondary: #8b949e;
-$text-muted: #6e7681;
+$text-muted: #7d8590;
 
 $accent-purple: #a371f7;
 $accent-blue: #58a6ff;
@@ -1687,4 +1687,122 @@ input:focus-visible {
     max-width: $measure;
     margin: 0;
   }
+}
+
+
+// ---------------------------------------------------------------------------
+// Usability details
+// ---------------------------------------------------------------------------
+
+// Keyboard users previously had to tab the whole nav on every page.
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  padding: 0.75rem 1.25rem;
+  background: $bg-tertiary;
+  border: 1px solid $accent-blue;
+  border-radius: 0 0 8px 0;
+  color: $text-primary;
+  font-size: 0.9375rem;
+
+  &:focus {
+    left: 0;
+  }
+}
+
+// Kicker and section links were 19-22px tall, under the 24px minimum target.
+.story-kicker a,
+.story-kicker span,
+.section-link,
+.home-social a {
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.story-more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+// Certification and link lists are navigation, not prose, so they get a real
+// target height rather than the 22px a bare inline link produced.
+.post-content li > a:only-child {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+// Article footer controls are navigation too.
+.post-related a,
+.post-nav a,
+.post-footer > p a,
+.post-meta .badge {
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+}
+
+// Current page in the main nav needs to be distinguishable by more than colour.
+.site-nav a.active {
+  color: $text-primary;
+  font-weight: 600;
+}
+
+// Archive and story headings share one scale now that they are h2/h3.
+.post-list .card h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin: 0.35rem 0 0.5rem;
+  border-bottom: 0;
+  padding-bottom: 0;
+
+  a {
+    color: $text-primary;
+
+    &:hover {
+      color: $accent-purple;
+    }
+  }
+}
+
+.post-list .card h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0.25rem 0 0;
+
+  a {
+    color: $text-primary;
+
+    &:hover {
+      color: $accent-purple;
+    }
+  }
+}
+
+.story-list h3 {
+  font-size: 1.1875rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.4rem;
+
+  a {
+    color: $text-primary;
+
+    &:hover {
+      color: $accent-purple;
+    }
+  }
+}
+
+.post-list .card .story-kicker,
+.story-list .story-kicker {
+  margin-bottom: 0.25rem;
 }

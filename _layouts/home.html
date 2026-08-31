@@ -41,43 +41,20 @@ layout: default
   </div>
 
   {%- assign lead = site.posts.first -%}
-  {%- assign lead_kicker = '' -%}
-  {%- for cat in lead.categories -%}
-    {%- unless site.languages contains cat -%}
-      {%- if lead_kicker == '' -%}{%- assign lead_kicker = cat -%}{%- endif -%}
-    {%- endunless -%}
-  {%- endfor -%}
-  {%- assign lead_minutes = lead.content | number_of_words | divided_by: 200 | plus: 1 -%}
 
   <article class="lead-story">
-    <p class="story-kicker">
-      {% if lead_kicker != '' %}<a href="{{ '/categories/' | append: lead_kicker | append: '/' | relative_url }}">{{ lead_kicker }}</a>{% endif %}
-      <span class="story-dot">&middot;</span>
-      <time datetime="{{ lead.date | date_to_xmlschema }}">{% if is_pt %}{{ lead.date | date: "%d de %B de %Y" }}{% else %}{{ lead.date | date: "%B %d, %Y" }}{% endif %}</time>
-      <span class="story-dot">&middot;</span>
-      {{ lead_minutes }} {% if is_pt %}min de leitura{% else %}min read{% endif %}
-    </p>
+    {% include post-kicker.html post=lead show_reading_time=true %}
     <h3><a href="{{ lead.url | relative_url }}">{{ lead.title | escape }}</a></h3>
     {% assign lead_summary = lead.description | default: lead.excerpt %}
     {% if lead_summary %}<p class="story-standfirst">{{ lead_summary | strip_html }}</p>{% endif %}
-    <a class="story-more" href="{{ lead.url | relative_url }}">{% if is_pt %}Ler o post{% else %}Read the post{% endif %} &rarr;</a>
+    <a class="story-more" href="{{ lead.url | relative_url }}">{% if is_pt %}Ler o post{% else %}Read the post{% endif %} <span aria-hidden="true">&rarr;</span></a>
   </article>
 
   <ul class="story-list">
     {% for post in site.posts limit: 4 offset: 1 %}
-    {%- assign kicker = '' -%}
-    {%- for cat in post.categories -%}
-      {%- unless site.languages contains cat -%}
-        {%- if kicker == '' -%}{%- assign kicker = cat -%}{%- endif -%}
-      {%- endunless -%}
-    {%- endfor -%}
     <li>
-      <p class="story-kicker">
-        {% if kicker != '' %}<a href="{{ '/categories/' | append: kicker | append: '/' | relative_url }}">{{ kicker }}</a>{% endif %}
-        <span class="story-dot">&middot;</span>
-        <time datetime="{{ post.date | date_to_xmlschema }}">{% if is_pt %}{{ post.date | date: "%d %b %Y" }}{% else %}{{ post.date | date: "%b %d, %Y" }}{% endif %}</time>
-      </p>
-      <h4><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h4>
+      {% include post-kicker.html post=post %}
+      <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
       {% assign summary = post.description | default: post.excerpt %}
       {% if summary %}<p>{{ summary | strip_html | truncate: 120 }}</p>{% endif %}
     </li>

@@ -20,9 +20,9 @@ lang: en
 <h2 id="{{ tag[0] }}">{{ tag[0] }}</h2>
 <ul class="post-list">
   {% for post in tag[1] %}
-  <li class="card" style="margin-bottom: 0.75rem;">
-    <span class="card-meta">{{ post.date | date: "%B %d, %Y" }}</span>
-    <h4 style="margin: 0.5rem 0;"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h4>
+  <li class="card">
+    {% include post-kicker.html post=post %}
+    <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
   </li>
   {% endfor %}
 </ul>
