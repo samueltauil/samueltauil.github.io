@@ -11,21 +11,25 @@ lang: en
 
 <ul class="post-list">
 {% for post in site.posts %}
-  <li class="card" style="margin-bottom: 1rem;">
-    <span class="card-meta">{{ post.date | date: "%B %d, %Y" }}</span>
-    <h4 style="margin: 0.5rem 0;"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h4>
+  {%- assign kicker = '' -%}
+  {%- for cat in post.categories -%}
+    {%- unless site.languages contains cat -%}
+      {%- if kicker == '' -%}{%- assign kicker = cat -%}{%- endif -%}
+    {%- endunless -%}
+  {%- endfor -%}
+  {%- assign minutes = post.content | number_of_words | divided_by: 200 | plus: 1 -%}
+  <li class="card">
+    <p class="story-kicker">
+      {% if kicker != '' %}<a href="{{ '/categories/' | append: kicker | append: '/' | relative_url }}">{{ kicker }}</a>{% endif %}
+      <span class="story-dot">&middot;</span>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
+      <span class="story-dot">&middot;</span>
+      {{ minutes }} min read
+    </p>
+    <h4><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h4>
     {% assign summary = post.description | default: post.excerpt %}
     {% if summary %}
-    <p style="margin: 0.5rem 0; font-size: 0.9rem; color: #8b949e;">{{ summary | strip_html | truncate: 160 }}</p>
-    {% endif %}
-    {% if post.categories.size > 0 %}
-    <div style="margin-top: 0.5rem;">
-      {% for cat in post.categories %}
-      {% unless site.languages contains cat %}
-      <a class="badge" href="{{ '/categories/' | append: cat | append: '/' | relative_url }}">{{ cat }}</a>
-      {% endunless %}
-      {% endfor %}
-    </div>
+    <p>{{ summary | strip_html | truncate: 175 }}</p>
     {% endif %}
   </li>
 {% endfor %}

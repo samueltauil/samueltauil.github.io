@@ -1572,19 +1572,119 @@ input:focus-visible {
   }
 }
 
-.card-tags {
+
+// ---------------------------------------------------------------------------
+// Story components
+// ---------------------------------------------------------------------------
+
+// Newsroom hierarchy: a lead story carries the most weight, secondary items sit
+// below it in a tighter list. The kicker gives the reader a category and a
+// timestamp before they commit to the headline.
+.story-kicker {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $text-muted;
+  margin: 0 0 0.5rem;
+
+  a {
+    color: $accent-purple;
+
+    &:hover {
+      color: $accent-blue;
+    }
+  }
+
+  time {
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: none;
+  }
 }
 
-// The profile card keeps the personality of the agent file without letting it
-// set the length of the page.
-.home-profile .code-window {
+.story-dot {
+  color: $border-highlight;
+}
+
+.lead-story {
+  padding-bottom: 2rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid $border-color;
+
+  h3 {
+    font-size: clamp(1.5rem, 3vw, 1.875rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.75rem;
+
+    a {
+      color: $text-primary;
+
+      &:hover {
+        color: $accent-purple;
+      }
+    }
+  }
+}
+
+.story-standfirst {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: $text-secondary;
+  max-width: $measure;
+  margin: 0 0 1rem;
+}
+
+.story-more {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $accent-blue;
+
+  &:hover {
+    color: $accent-purple;
+  }
+}
+
+.story-list {
+  list-style: none;
+  padding: 0;
   margin: 0;
-}
 
-.home-profile .code-content {
-  max-height: 26rem;
-  overflow-y: auto;
+  li {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid $border-color;
+
+    &:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  h4 {
+    font-size: 1.1875rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.4rem;
+
+    a {
+      color: $text-primary;
+
+      &:hover {
+        color: $accent-purple;
+      }
+    }
+  }
+
+  p {
+    font-size: 0.9375rem;
+    color: $text-muted;
+    max-width: $measure;
+    margin: 0;
+  }
 }

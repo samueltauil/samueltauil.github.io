@@ -9,6 +9,8 @@ layout: default
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {% if site.active_lang == 'pt-br' %}{{ page.date | date: "%d de %B de %Y" }}{% else %}{{ page.date | date: "%B %d, %Y" }}{% endif %}
       </time>
+      {%- assign minutes = content | number_of_words | divided_by: 200 | plus: 1 %}
+      • {{ minutes }} {% if site.active_lang == 'pt-br' %}min de leitura{% else %}min read{% endif %}
       <meta itemprop="inLanguage" content="{{ site.active_lang }}">
       {% if page.author %}
         • <span itemprop="author" itemscope itemtype="http://schema.org/Person">
