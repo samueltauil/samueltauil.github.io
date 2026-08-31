@@ -3,6 +3,7 @@ lang: pt-br
 permalink: /github-copilot/devops/2026/08/29/ssis-packages-copilot-managed-object-model.html
 layout: post
 title: "Parei de pedir ao Copilot para escrever XML do SSIS"
+seo_title: "Geração de Pacotes SSIS com GitHub Copilot"
 description: "Em vez de pedir ao Copilot para escrever XML .dtsx, entreguei o modelo de objetos gerenciado do SSIS, e ele gera pacotes que consigo validar e revisar."
 date: 2026-08-29
 categories: [github-copilot, devops]
