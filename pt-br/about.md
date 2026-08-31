@@ -5,9 +5,7 @@ permalink: /about/
 lang: pt-br
 ---
 
-<h2 style="margin-top: 0; font-size: 1.75rem;">Samuel Tauil</h2>
-
-<p class="tagline" style="font-size: 1.1rem; color: #8b949e; margin-bottom: 1.5rem;">
+<p class="tagline page-intro">
 Senior Solution Engineer • GitHub Copilot • VS Code • Codespaces • Evangelista de Open Source
 </p>
 

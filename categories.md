@@ -17,8 +17,8 @@ lang: en
   {% if cat_page %}
   <li class="card" style="margin-bottom: 1rem;">
     <h4 style="margin: 0.5rem 0;"><a href="{{ cat_page.url | relative_url }}">{{ cat_page.title | escape }}</a></h4>
-    <span class="card-meta">{{ posts.size }} post{% if posts.size != 1 %}s{% endif %}</span>
     {% if cat_page.description %}<p style="margin: 0.5rem 0; font-size: 0.9rem; color: #8b949e;">{{ cat_page.description }}</p>{% endif %}
+    <span class="card-meta">{{ posts.size }} post{% if posts.size != 1 %}s{% endif %}</span>
   </li>
   {% endif %}
 {% endfor %}

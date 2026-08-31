@@ -48,7 +48,8 @@ layout: default
         {%- endif -%}
       {%- endfor -%}
     {%- endcapture -%}
-    {%- if related_items | strip == '' -%}
+    {%- assign related_trimmed = related_items | strip -%}
+    {%- if related_trimmed == '' -%}
       {%- capture related_items -%}
         {%- assign fallback_count = 0 -%}
         {%- for p in site.posts -%}

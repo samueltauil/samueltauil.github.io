@@ -1298,12 +1298,22 @@ h1 {
   -webkit-text-fill-color: transparent;
 }
 
-// Long-form reading: brighter body copy, larger type, and a measure capped
-// near 70 characters. Code, tables, and images keep the full column width.
-.post {
-  max-width: 760px;
+// Long-form reading. $measure is a fixed length rather than `ch` because `ch`
+// resolves against each element's own font size, which made headings and their
+// rules overshoot the body text by ~370px.
+$measure: 42rem;
+$column: 48rem;
+
+.post,
+.page {
+  max-width: $column;
   margin-left: auto;
   margin-right: auto;
+}
+
+// Opt-out for pages that need the full width, such as the photo grid.
+.page--wide {
+  max-width: none;
 }
 
 .post-content {
@@ -1313,14 +1323,28 @@ h1 {
   p,
   ul,
   ol,
-  blockquote {
-    color: $text-primary;
-    max-width: 70ch;
+  blockquote,
+  h2,
+  h3,
+  h4 {
+    max-width: $measure;
   }
 
-  // Card lists are layout, not prose, so they keep the full column width.
+  p,
+  ul,
+  ol,
+  blockquote {
+    color: $text-primary;
+  }
+
+  // Card lists and media are layout, not prose, so they keep the full width.
   .post-list,
-  .post-list li {
+  .post-list li,
+  .photo-gallery,
+  .camera-list,
+  .skills-grid,
+  .cert-grid,
+  table {
     max-width: none;
   }
 
@@ -1331,12 +1355,20 @@ h1 {
   h2,
   h3,
   h4 {
-    max-width: 70ch;
     margin-top: 2.25em;
   }
 
   h2 {
     padding-bottom: 0.3em;
+    border-bottom-color: $border-color;
+  }
+}
+
+// Wide pages keep the reading measure on prose; only their media breaks out.
+.page--wide .post-content {
+  .photo-gallery,
+  .camera-list {
+    max-width: none;
   }
 }
 
@@ -1346,7 +1378,8 @@ h1 {
 
 // Category tags sit next to the date, so they should read as metadata rather
 // than as buttons competing with the headline.
-.post-meta .badge {
+.post-meta .badge,
+.post-list .badge {
   padding: 0.1rem 0.55rem;
   font-size: 0.75rem;
   line-height: 1.5;
@@ -1359,5 +1392,148 @@ h1 {
     color: $accent-blue;
     border-color: $accent-blue;
     background: transparent;
+  }
+}
+
+
+// ---------------------------------------------------------------------------
+// Archive cards
+// ---------------------------------------------------------------------------
+
+// Archive entries were full-width rows with an h4-sized title, so the summary
+// competed with the link. Give the title the weight and let the row breathe.
+.post-list .card {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid $border-color;
+  border-radius: 0;
+  padding: 1.5rem 0;
+  margin-bottom: 0;
+
+  &:hover {
+    transform: none;
+    border-bottom-color: $border-highlight;
+
+    h4 a {
+      color: $accent-purple;
+    }
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  .card-meta {
+    display: block;
+    font-size: 0.8125rem;
+    color: $text-muted;
+    letter-spacing: 0.01em;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    margin: 0.35rem 0 0.5rem;
+
+    a {
+      color: $text-primary;
+
+      &:hover {
+        color: $accent-purple;
+      }
+    }
+  }
+
+  p {
+    color: $text-secondary;
+    max-width: $measure;
+    margin-bottom: 0.75rem;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Accessibility and interaction
+// ---------------------------------------------------------------------------
+
+// Only the language toggle had a focus style, leaving keyboard users without a
+// visible position anywhere else.
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid $accent-blue;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Article footer
+// ---------------------------------------------------------------------------
+
+.post-related h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $text-muted;
+  border-bottom: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+}
+
+.post-related a {
+  color: $text-primary;
+
+  &:hover {
+    color: $accent-purple;
+  }
+}
+
+.post-nav a {
+  display: block;
+  line-height: 1.4;
+}
+
+
+// Intro line under a page title. Replaces the inline styles that were repeated
+// across about.md, posts.md, and their translations.
+.page-intro {
+  font-size: 1.0625rem;
+  color: $text-secondary;
+  max-width: $measure;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+// The page title already names the section, so the leading rule was doing the
+// work twice. Keep the first heading close to the title.
+.post-content > h2:first-child,
+.post-content > .section:first-child + h2 {
+  margin-top: 1rem;
+}
+
+
+// Flex children default to min-width:auto and refuse to shrink below their
+// content, which pushed the mobile home page 4px past the viewport.
+.hero-compact {
+  .hero-info,
+  .hero-badges {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .hero-badges {
+    flex-wrap: wrap;
   }
 }

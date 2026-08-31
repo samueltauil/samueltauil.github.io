@@ -6,10 +6,8 @@ lang: en
 ---
 
 <section class="section">
-  <p class="tagline" style="color: #8b949e;">Technical articles, tutorials, and insights on cloud-native technologies, AI, and developer tools.</p>
+  <p class="tagline page-intro">Technical articles, tutorials, and insights on cloud-native technologies, AI, and developer tools.</p>
 </section>
-
-## All Posts
 
 <ul class="post-list">
 {% for post in site.posts %}
@@ -24,7 +22,7 @@ lang: en
     <div style="margin-top: 0.5rem;">
       {% for cat in post.categories %}
       {% unless site.languages contains cat %}
-      <a class="badge" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;" href="{{ '/categories/' | append: cat | append: '/' | relative_url }}">{{ cat }}</a>
+      <a class="badge" href="{{ '/categories/' | append: cat | append: '/' | relative_url }}">{{ cat }}</a>
       {% endunless %}
       {% endfor %}
     </div>

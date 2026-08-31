@@ -2,6 +2,7 @@
 layout: page
 title: Photography
 permalink: /photography/
+wide: true
 lang: en
 ---
 

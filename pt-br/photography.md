@@ -2,6 +2,7 @@
 layout: page
 title: Fotografia
 permalink: /photography/
+wide: true
 lang: pt-br
 ---
 
