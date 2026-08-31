@@ -1537,3 +1537,58 @@ input:focus-visible {
     flex-wrap: wrap;
   }
 }
+
+
+// ---------------------------------------------------------------------------
+// Tag index
+// ---------------------------------------------------------------------------
+
+// 70 tags rendered as full-size badges took more vertical space than the topic
+// list they sit under. These read as an index instead of a wall of buttons.
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2.5rem;
+  max-width: none;
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    padding: 0.15rem 0.6rem;
+    border: 1px solid $border-color;
+    border-radius: 1rem;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: $text-secondary;
+    white-space: nowrap;
+    transition: color 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+      color: $accent-blue;
+      border-color: $accent-blue;
+    }
+  }
+}
+
+.tag-count {
+  font-size: 0.6875rem;
+  color: $text-muted;
+  font-variant-numeric: tabular-nums;
+}
+
+// Tag sections on the tags page are navigation targets, so keep them tight.
+.tag-cloud + h2,
+.post-content h2[id] {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  padding-bottom: 0.25rem;
+  scroll-margin-top: 5rem;
+}

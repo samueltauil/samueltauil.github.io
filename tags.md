@@ -10,11 +10,11 @@ lang: en
 
 {% assign sorted_tags = site.tags | sort %}
 
-<p style="line-height: 2.2;">
+<ul class="tag-cloud">
 {% for tag in sorted_tags %}
-  <a class="badge" href="#{{ tag[0] }}">{{ tag[0] }} ({{ tag[1].size }})</a>
+  <li><a href="#{{ tag[0] }}">{{ tag[0] }}<span class="tag-count">{{ tag[1].size }}</span></a></li>
 {% endfor %}
-</p>
+</ul>
 
 {% for tag in sorted_tags %}
 <h2 id="{{ tag[0] }}">{{ tag[0] }}</h2>

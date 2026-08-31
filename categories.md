@@ -26,9 +26,9 @@ lang: en
 
 ## Tags
 
-<p style="line-height: 2.2;">
+<ul class="tag-cloud">
 {% assign sorted_tags = site.tags | sort %}
 {% for tag in sorted_tags %}
-  <a class="badge" href="{{ '/tags/#' | append: tag[0] | relative_url }}">{{ tag[0] }} ({{ tag[1].size }})</a>
+  <li><a href="{{ '/tags/#' | append: tag[0] | relative_url }}">{{ tag[0] }}<span class="tag-count">{{ tag[1].size }}</span></a></li>
 {% endfor %}
-</p>
+</ul>
