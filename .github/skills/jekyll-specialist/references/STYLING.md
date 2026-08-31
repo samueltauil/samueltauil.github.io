@@ -31,15 +31,24 @@ $border-color: #30363d;    // Borders
 | Class | Use |
 |-------|-----|
 | `.code-window` | Terminal-style window with colored dots |
-| `.badge` | Pill-shaped links with icons |
-| `.card` | Content cards with hover effects |
+| `.badge` | Pill links; quiet outlined variant inside `.post-meta` and `.post-list` |
+| `.card` | Content cards; inside `.post-list` they render as editorial rows |
+| `.tag-cloud` / `.tag-count` | Compact tag index used on Topics and Tags |
 | `.photo-gallery` | Grid layout for photos |
 | `.camera-list` | Vertical list for cameras |
-| `.sidebar-section` | Sidebar content blocks |
-| `.hero-compact` | Compact hero section |
-| `.home-grid` | Two-column home layout |
-| `.home-main` | Left column (agent file) |
-| `.home-sidebar` | Right column (posts) |
+| `.home-hero` | Home page hero: name, lede, actions |
+| `.home-lede` | Positioning line under the home title |
+| `.home-actions` + `.btn` | Primary and ghost buttons |
+| `.home-social` | Small icon links under the hero |
+| `.home-section` + `.home-section-head` | Home section with heading and "all" link |
+| `.page--wide` | Opt a page out of the reading column (set `wide: true`) |
+
+## Layout Measures
+
+- `$column: 48rem` wraps `.post`, `.page`, and each `.home-section`
+- `$measure: 42rem` caps prose, headings, and lists so they share one edge
+- Use a fixed length, not `ch`: `ch` resolves per element font size, which made
+  headings overshoot body text by ~370px
 
 ## Photo Gallery Styling
 

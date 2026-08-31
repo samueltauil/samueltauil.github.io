@@ -240,142 +240,6 @@ strong {
   }
 }
 
-// Compact hero for two-column layout
-.hero-compact {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding: 1.5rem 0;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid $border-color;
-
-  .hero-info {
-    h1 {
-      font-size: 2rem;
-      margin: 0 0 0.25rem;
-    }
-
-    .tagline {
-      font-size: 1rem;
-      color: $text-secondary;
-      margin: 0;
-    }
-  }
-
-  .hero-badges {
-    display: flex;
-    gap: 0.75rem;
-  }
-}
-
-// Two-column home grid
-.home-grid {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 2rem;
-  align-items: start;
-}
-
-.home-main {
-  min-width: 0;
-
-  .section {
-    margin-bottom: 0;
-  }
-}
-
-.home-sidebar {
-  position: sticky;
-  top: 80px;
-}
-
-.sidebar-section {
-  background: $bg-secondary;
-  border: 1px solid $border-color;
-  border-radius: 12px;
-  padding: 1.25rem;
-
-  h2 {
-    font-size: 1rem;
-    margin: 0 0 1rem;
-    padding: 0;
-    border: none;
-    color: $text-primary;
-  }
-}
-
-.sidebar-posts {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-
-  li {
-    padding: 0.75rem 0;
-    border-bottom: 1px solid $border-color;
-    margin: 0;
-
-    &:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    &:first-child {
-      padding-top: 0;
-    }
-
-    a {
-      display: block;
-      font-size: 0.9375rem;
-      font-weight: 500;
-      color: $text-primary;
-      line-height: 1.4;
-      margin-bottom: 0.25rem;
-
-      &:hover {
-        color: $accent-purple;
-      }
-    }
-
-    .post-date {
-      font-size: 0.8125rem;
-      color: $text-muted;
-    }
-  }
-}
-
-.view-all {
-  display: block;
-  margin-top: 1rem;
-  font-size: 0.875rem;
-  color: $accent-blue;
-  font-weight: 500;
-
-  &:hover {
-    color: $accent-purple;
-  }
-}
-
-@media (max-width: 900px) {
-  .home-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .home-sidebar {
-    position: static;
-  }
-
-  .hero-compact {
-    flex-direction: column;
-    text-align: center;
-
-    .hero-info {
-      text-align: center;
-    }
-  }
-}
-
 // Badges
 .badge {
   display: inline-flex;
@@ -1291,13 +1155,6 @@ h1 {
   letter-spacing: -0.02em;
 }
 
-.hero-compact h1 {
-  background: $accent-gradient;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 // Long-form reading. $measure is a fixed length rather than `ch` because `ch`
 // resolves against each element's own font size, which made headings and their
 // rules overshoot the body text by ~370px.
@@ -1524,19 +1381,7 @@ input:focus-visible {
 }
 
 
-// Flex children default to min-width:auto and refuse to shrink below their
-// content, which pushed the mobile home page 4px past the viewport.
-.hero-compact {
-  .hero-info,
-  .hero-badges {
-    min-width: 0;
-    max-width: 100%;
-  }
 
-  .hero-badges {
-    flex-wrap: wrap;
-  }
-}
 
 
 // ---------------------------------------------------------------------------
@@ -1591,4 +1436,155 @@ input:focus-visible {
   margin-top: 2rem;
   padding-bottom: 0.25rem;
   scroll-margin-top: 5rem;
+}
+
+
+// ---------------------------------------------------------------------------
+// Home page
+// ---------------------------------------------------------------------------
+
+// The home page previously led with a ~1000px block of static config text and
+// pushed the writing into a 320px sidebar with no context. Posts lead now.
+.home-hero {
+  max-width: $column;
+  margin: 0 auto 3.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid $border-color;
+
+  h1 {
+    font-size: clamp(2.25rem, 5vw, 3rem);
+    margin: 0 0 0.75rem;
+    line-height: 1.1;
+  }
+}
+
+.home-lede {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: $text-secondary;
+  max-width: $measure;
+  margin: 0 0 1.75rem;
+}
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.4;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-primary {
+  background: $accent-purple;
+  border-color: $accent-purple;
+  color: #0d1117;
+
+  &:hover {
+    background: #b184f8;
+    border-color: #b184f8;
+    color: #0d1117;
+  }
+}
+
+.btn-ghost {
+  border-color: $border-color;
+  color: $text-primary;
+
+  &:hover {
+    border-color: $accent-blue;
+    color: $accent-blue;
+  }
+}
+
+.home-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8125rem;
+    color: $text-muted;
+
+    &:hover {
+      color: $accent-blue;
+    }
+  }
+
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.home-section {
+  max-width: $column;
+  margin: 0 auto 3.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.home-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid $border-color;
+
+  h2 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $text-muted;
+    margin: 0;
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.section-link {
+  font-size: 0.875rem;
+  color: $text-secondary;
+  white-space: nowrap;
+
+  &:hover {
+    color: $accent-blue;
+  }
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+// The profile card keeps the personality of the agent file without letting it
+// set the length of the page.
+.home-profile .code-window {
+  margin: 0;
+}
+
+.home-profile .code-content {
+  max-height: 26rem;
+  overflow-y: auto;
 }
