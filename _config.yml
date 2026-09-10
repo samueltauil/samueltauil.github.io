@@ -58,3 +58,11 @@ exclude:
   - .github/
   - node_modules/
   - vendor/
+  # Test tooling. Without these the watcher rebuilds the whole site every time
+  # Playwright writes a trace, which starves the dev server during a test run.
+  - package.json
+  - package-lock.json
+  - playwright.config.js
+  - tests/
+  - test-results/
+  - playwright-report/

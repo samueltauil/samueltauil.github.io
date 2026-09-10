@@ -1,0 +1,16 @@
+{
+  "name": "samueltauil-github-io",
+  "private": true,
+  "description": "Layout regression tests for the Jekyll site.",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report",
+    "setup": "playwright install chromium firefox webkit"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "http-server": "^14.1.1",
+    "photoswipe": "^5.4.4"
+  }
+}

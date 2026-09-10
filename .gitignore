@@ -11,8 +11,17 @@ _theme_packages/
 # Ruby
 *.gem
 .bundle/
-vendor/
+# Anchored, so it only matches Bundler's directory at the repo root and not
+# `assets/vendor/`, which holds vendored front-end libraries that must deploy.
+/vendor/
 Gemfile.lock
+
+# Node / Playwright
+node_modules/
+test-results/
+playwright-report/
+blob-report/
+.playwright/
 
 # IDE
 .idea/
