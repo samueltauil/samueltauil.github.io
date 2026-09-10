@@ -22,10 +22,9 @@ $border-color: #30363d;
 $border-highlight: #484f58;
 
 // Outer shell shared by the header, content, and footer so they stay aligned.
-// Sized so the article column below fills it edge to edge once padding is
-// removed, which keeps the header, the title, the text, and the screenshots on
-// one set of margins.
-$shell: 1152px;
+// Fluid rather than a fixed cap: at a fixed width the whole page stopped
+// adapting past ~1200px and sat as a narrow strip on a 1440p or 4K display.
+$shell: #{"min(1700px, 95vw)"};
 
 $link-color: #58a6ff;
 $link-hover: #a371f7;
@@ -1290,14 +1289,19 @@ h1 {
   // `prose` size modifiers. Using their number rather than one of mine means
   // the reading column is a value a design team tuned and maintains. It also
   // matches what measuring this site's own text independently suggested.
+  //
+  // Because the measure is in `ch`, it holds ~80 characters at every size, so
+  // the way to use a large display is to scale the type rather than to run
+  // longer lines. The column grows with the font, and the screenshots grow
+  // faster via --wide-extra.
   --measure: 65ch;
-  --wide-extra: 6rem;
+  --wide-extra: clamp(0rem, 10vw, 18rem);
 
   // The type scale lives on the grid container, not on `.post-content`, because
   // `ch` resolves against the font size of the element declaring the track. The
   // post header and the post body each establish their own grid, so they have
   // to share one font size or they resolve different track widths.
-  font-size: clamp(1.0625rem, 0.9rem + 0.6vw, 1.4375rem);
+  font-size: clamp(1.0625rem, 0.95rem + 0.63vw, 1.75rem);
   line-height: 1.7;
 
   @include content-grid;

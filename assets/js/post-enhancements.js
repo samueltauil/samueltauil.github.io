@@ -23,7 +23,13 @@ async function copyText(text) {
   // for browsers that reject the permission.
   if (navigator.clipboard && window.isSecureContext) {
     try {
-      await navigator.clipboard.writeText(text);
+      // Some browsers leave this promise pending instead of rejecting when
+      // clipboard access is unavailable, which would leave the button with no
+      // feedback at all. Bound the wait so the fallback always gets a turn.
+      await Promise.race([
+        navigator.clipboard.writeText(text),
+        new Promise((_, reject) => setTimeout(reject, 1000)),
+      ]);
       return true;
     } catch {
       /* fall through */
