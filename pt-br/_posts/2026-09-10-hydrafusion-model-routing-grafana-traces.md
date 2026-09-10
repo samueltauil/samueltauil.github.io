@@ -13,7 +13,7 @@ tags: [github-copilot, copilot-cli, hydrafusion, opentelemetry, observability, g
 
 Eu ativei o HydraFusion na semana em que ele foi lançado, dei a ele uma tarefa real em um pequeno projeto Python e esperei cerca de um minuto. Ele voltou com uma boa resposta e um número: 14,72 créditos. Foi aí que fiquei curioso. Um modelo produziu aquilo, ou quatro? Algo foi rascunhado, revisado e melhorado ao longo do caminho? O [anúncio](https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/) diz que um turno pode fazer draft, critique, revise ou escalate, e que o CLI mantém rascunhos intermediários para que trabalho inacabado não pareça final. Essa é uma decisão sensata para quem está codando, porque um rascunho prestes a ser revisado não deveria ser lido como uma resposta. Também significa que a parte interessante da história acontece fora da tela, e eu queria assistir a isso.
 
-Essa é a coceira. O HydraFusion escolhe um de três padrões de execução por requisição: `single`, em que um modelo resolve a tarefa; `cascade`, em que um modelo eficiente rascunha e um quality gate decide se aceita ou escala; e `critique`, em que um modelo rascunha, um critic somente leitura de outra família revisa, e o drafter revisa uma vez. Cascade e critique eram os que eu queria ver, porque em ambos um segundo modelo contribuiu e o resultado ainda chega como uma resposta única e limpa. Eu queria saber qual modelo rascunhou, qual revisou, qual veredito voltou e para onde foram os créditos.
+Era isso que eu queria entender. O HydraFusion escolhe um de três padrões de execução por requisição: `single`, em que um modelo resolve a tarefa; `cascade`, em que um modelo eficiente rascunha e um quality gate decide se aceita ou escala; e `critique`, em que um modelo rascunha, um critic somente leitura de outra família revisa, e o drafter revisa uma vez. Cascade e critique eram os que eu queria ver, porque em ambos um segundo modelo contribuiu e o resultado ainda chega como uma resposta única e limpa. Eu queria saber qual modelo rascunhou, qual revisou, qual veredito voltou e para onde foram os créditos.
 
 Então eu construí o [samueltauil/hydrafusion-traces](https://github.com/samueltauil/hydrafusion-traces): `docker compose up -d`, aponto o CLI para ele, e cada turno aparece no Grafana com um span por fusion leg, nomeado pelo modelo que o executou.
 
@@ -40,7 +40,7 @@ Meu span-metrics generator, se eu o tivesse deixado rodando, teria produzido uma
 
 O CLI já escreve tudo isso, por seus próprios bons motivos.
 
-Toda sessão mantém um arquivo `~/.copilot/session-state/<id>/events.jsonl`, e esse arquivo registra o padrão de routing, o plano de fases, o modelo que serviu cada fase, o veredito do revisor, tokens por fase e créditos por fase. Ele existe para que o CLI possa retomar e rebobinar uma sessão, o que é um recurso genuinamente bom e a razão pela qual esses dados são tão completos. O tailer deste repositório lê o mesmo arquivo para um segundo propósito: ele reconstrói cada turno como um trace com um span filho por leg e conta os mesmos eventos no Prometheus.
+Toda sessão mantém um arquivo `~/.copilot/session-state/<id>/events.jsonl`, e esse arquivo registra o padrão de routing, o plano de fases, o modelo que serviu cada fase, o veredito do revisor, tokens por fase e créditos por fase. Ele existe para que o CLI possa retomar e rebobinar uma sessão, o que é uma feature genuinamente boa e a razão pela qual esses dados são tão completos. O tailer deste repositório lê o mesmo arquivo para um segundo propósito: ele reconstrói cada turno como um trace com um span filho por leg e conta os mesmos eventos no Prometheus.
 
 Esse é todo o truque. Todo o resto no repositório é config provisionada: um collector, Tempo, Prometheus e um dashboard do Grafana que carrega como página inicial sem login e sem configuração de datasource. O tailer é Python puro da stdlib, sem dependências, porque uma coisa que lê o seu session state deveria ser pequena o bastante para você mesmo ler.
 
@@ -80,7 +80,7 @@ O restante da leg carrega o veredito, a divisão de tokens, o custo em créditos
 
 ## A aposta do cascade vai nos dois sentidos
 
-Eu escrevi uma versão inicial do documento de findings quando só tinha quatro turnos, e afirmei com confiança que todo cascade terminava em rejeição. Com 24 turnos, é dois em três, e o terceiro é mais interessante que os dois que confirmaram meu viés.
+Eu escrevi uma versão inicial do documento de findings quando só tinha quatro turnos, e afirmei com confiança que todo cascade terminava em rejeição. Com 24 turnos, são dois em três, e o terceiro é mais interessante que os dois que confirmaram meu viés.
 
 [![Waterfall para um cascade em que o judge aceitou o rascunho](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/cascade-accepted.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/cascade-accepted.png)
 
@@ -94,7 +94,7 @@ Cascade e critique incluem ambos uma fase de revisão, o que torna tentador agru
 
 [![Waterfall para um turno critique: uma leg de rascunho longa seguida de uma leg de critic curta](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/critique-waterfall.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/critique-waterfall.png)
 
-`claude-opus-5` rascunhou por 1 minuto e 46 segundos e 51,11 AIU. `gpt-5.6-sol` fez a critique por 5,7 segundos e 0,69 AIU. Não há campo de veredito, e o rascunho é confirmado.
+`claude-opus-5` rascunhou por 1 minuto e 46 segundos e 51,11 AIU. `gpt-5.6-sol` fez a critique por 5,7 segundos e 0,69 AIU. Não há campo de veredito, e o rascunho é mantido como resultado final.
 
 Então, em uma critique, a revisão é uma passagem barata sobre um trabalho caro. Em um cascade, o judge é um gate que pode disparar uma segunda tentativa completa em um modelo mais forte. Os perfis de custo vão em direções opostas mesmo que ambos os padrões incluam uma fase de revisão. Se você está construindo um modelo de custo para isso, tratar os dois como um único balde de "multi-model" vai esconder exatamente a coisa que você mais quer saber, que é com que frequência o gate dispara.
 
@@ -110,11 +110,11 @@ Cinco modelos distintos apareceram no conjunto.
 
 [![Painel de modelos listando os cinco modelos observados na amostra](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/models.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/models.png)
 
-`gpt-5.6-sol` rodou uma leg em todo turno único. `claude-opus-5` apareceu três vezes, apenas para o trabalho mais pesado: refatorações em múltiplos arquivos e uma passagem de delete-and-verify.
+`gpt-5.6-sol` rodou uma leg em todos os 24 turnos. `claude-opus-5` apareceu três vezes, apenas para o trabalho mais pesado: refactors em múltiplos arquivos e uma passagem de delete-and-verify.
 
 [![Fatia de créditos por modelo, com gpt-5.6-sol e claude-opus-5 dominando](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/aiu-by-model.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/aiu-by-model.png)
 
-Essas três legs de `claude-opus-5` tomaram 42% do gasto total. Trate os identificadores como rótulos de routing observados em um preview em vez de nomes de produto, porque eles vão mudar, e a leitura de leaderboard desse gráfico não tem sentido nesse tamanho de amostra. O ponto é que o pool é heterogêneo entre fornecedores e o router alcança nele por fase, não por sessão.
+Essas três legs de `claude-opus-5` tomaram 42% do gasto total. Trate os identificadores como rótulos de routing observados em um preview em vez de nomes de produto, porque eles vão mudar, e a leitura de leaderboard desse gráfico não tem sentido nesse tamanho de amostra. O ponto é que o pool é heterogêneo entre fornecedores e o router seleciona a partir dele por fase, não por sessão.
 
 Cada leg que o router rodou, colorida por modelo e tipo de fase:
 
@@ -124,7 +124,7 @@ E a resposta para a pergunta que eu realmente queria saber, que é como os créd
 
 [![Créditos por tipo de fase: primary, draft, repair, judge, critic](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/where-credits-went.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/where-credits-went.png)
 
-Uma leg por turno fornece a resposta que você vê. Ao longo dos 24 turnos, as legs que não fizeram isso somaram 2,5% do gasto. Hesito em chamar isso de overhead, porque um rascunho substituído e sua critique ficam no contexto da leg de reparo, então a resposta final pode muito bem ser melhor por causa da existência delas. O que esses 2,5% realmente medem é a fatia da conta que comprou revisão em vez de produto, o que é uma frase mais sem graça, mas mais defensável.
+Uma leg por turno fornece a resposta que você vê. Ao longo dos 24 turnos, as legs que não fizeram isso somaram 2,5% do gasto. Hesito em chamar isso de overhead, porque um rascunho substituído e sua critique ficam no contexto da leg de reparo, então a resposta final pode muito bem ser melhor por causa da existência delas. O que esses 2,5% realmente medem é a fatia da conta que comprou revisão em vez de saída, o que é uma frase mais sem graça, mas mais defensável.
 
 Depois, uma linha por turno, e clicar em qualquer célula carrega o waterfall daquele turno.
 
@@ -144,7 +144,7 @@ Outras duas coisas me surpreenderam. Ao longo de 96 chamadas de inferência, os 
 
 `events.jsonl` é session state, não uma API. Ele existe para que o CLI possa retomar e rebobinar, e não carrega nenhuma promessa de compatibilidade, nem deveria. Tudo aqui foi verificado contra o Copilot CLI 1.0.84-2. Quando o tailer parar de produzir linhas depois de um upgrade do CLI, é por isso, e é o resultado esperado de ler o estado interno de alguém por diversão. Os nomes de atributos também vão se mover, porque as GenAI conventions ainda estão em desenvolvimento e o CLI as acompanha, o que é a coisa certa a fazer.
 
-Nenhum conteúdo de prompt ou resposta é capturado. O tailer lê campos de metadados e descarta corpos de mensagem, e eu deixaria `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` desligado nessa stack, porque minha stack não tem controle de acesso e armazenaria alegremente o seu código-fonte em uma porta local. Toda porta se liga a `127.0.0.1`. Mantenha assim.
+Nenhum conteúdo de prompt ou resposta é capturado. O tailer lê campos de metadados e descarta corpos de mensagem, e eu deixaria `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` desligado nessa stack, porque minha stack não tem controle de acesso e armazenaria alegremente o seu código-fonte em uma porta local. Todas as portas escutam apenas em `127.0.0.1`. Mantenha assim.
 
 Nada disso é um benchmark. Vinte e quatro turnos descrevem o que a telemetria contém e provam que o dashboard funciona. Está longe de ser suficiente para julgar uma política de routing, e os números acima não dizem nada sobre qualidade de modelo.
 
