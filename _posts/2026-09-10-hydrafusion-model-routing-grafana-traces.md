@@ -22,7 +22,7 @@ So I built [samueltauil/hydrafusion-traces](https://github.com/samueltauil/hydra
   </div>
 </div>
 
-![The HydraFusion routing dashboard in Grafana, showing headline stats, phase ledger, and per turn rows](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/dashboard.png)
+[![The HydraFusion routing dashboard in Grafana, showing headline stats, phase ledger, and per turn rows](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/dashboard.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/dashboard.png)
 
 ## I assumed OpenTelemetry would just tell me
 
@@ -62,25 +62,25 @@ INFO fusion fusion-fa51fa07-905f pattern=cascade phases=3 models=gpt-5.6-sol,mai
 
 Here is the turn from the top of this post, as three legs.
 
-![Tempo waterfall for a cascade turn: a draft leg, a judge leg that rejected, and a repair leg](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/cascade-waterfall.png)
+[![Tempo waterfall for a cascade turn: a draft leg, a judge leg that rejected, and a repair leg](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/cascade-waterfall.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/cascade-waterfall.png)
 
 `mai-code-1.1-flash` drafted for 22 seconds and 0.58 AIU, the credit unit the CLI reports. `gpt-5.6-sol` reviewed that draft, returned `reject`, and then redid the work itself in 42 seconds and 11.69 AIU. The judge leg cost 2.46. Three legs, one coherent answer, and now I can see all three.
 
 Open any leg and the whole story sits on two attribute rows.
 
-![Span attributes showing gen_ai.request.model as hydrafusion and gen_ai.response.model as gpt-5.6-sol](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/span-attributes.png)
+[![Span attributes showing gen_ai.request.model as hydrafusion and gen_ai.response.model as gpt-5.6-sol](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/span-attributes.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/span-attributes.png)
 
 `gen_ai.request.model` is `hydrafusion`, per the conventions. `gen_ai.response.model` is `gpt-5.6-sol`, which the tailer added from the session log. Both are true statements. That is the mental model I keep coming back to: the conventions assume one request maps to one model, and a router breaks that assumption without breaking any rule. The model you asked for and the model that answered are now two separate things, and the spec only has a field for the first one.
 
 The rest of the leg carries the verdict, the token split, the credit cost, and a flag for whether this leg produced the answer you actually received.
 
-![Full span detail for a fusion leg, including verdict, tokens, and credits](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/span-detail.png)
+[![Full span detail for a fusion leg, including verdict, tokens, and credits](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/span-detail.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/span-detail.png)
 
 ## The cascade gamble goes both ways
 
 I wrote an early version of the findings doc when I only had four turns, and I confidently claimed every cascade ended in rejection. At 24 turns it is two out of three, and the third one is more interesting than the two that confirmed my bias.
 
-![Waterfall for a cascade where the judge accepted the draft](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/cascade-accepted.png)
+[![Waterfall for a cascade where the judge accepted the draft](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/cascade-accepted.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/cascade-accepted.png)
 
 `mai-code-1.1-flash` answered an open-ended distributed-cache design question for 0.34 AIU. `gpt-5.6-sol` reviewed it and accepted. Total for the turn: 2.39 AIU, against a median of 7.97 for `single` turns in the same sample.
 
@@ -90,7 +90,7 @@ Look at the internal split, though. The review cost 2.05 and the answer cost 0.3
 
 Cascade and critique both include a review phase, which makes it tempting to file them under one heading. The traces say otherwise.
 
-![Waterfall for a critique turn: a long draft leg followed by a short critic leg](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/critique-waterfall.png)
+[![Waterfall for a critique turn: a long draft leg followed by a short critic leg](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/critique-waterfall.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/critique-waterfall.png)
 
 `claude-opus-5` drafted for 1 minute 46 seconds and 51.11 AIU. `gpt-5.6-sol` critiqued it for 5.7 seconds and 0.69 AIU. There is no verdict field, and the draft is committed.
 
@@ -100,33 +100,33 @@ So in a critique the review is a cheap pass over expensive work. In a cascade th
 
 Small sample, one machine, one operator, one little Python project with a seeded off-by-one bug. Read it as a field report, not an evaluation.
 
-![Headline stats: compound workflow rate, judge rejection rate, and overhead share](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/headline-stats.png)
+[![Headline stats: compound workflow rate, judge rejection rate, and overhead share](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/headline-stats.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/headline-stats.png)
 
 Six of 24 turns used more than one model, so a 25% compound rate. Eighteen turns had no second leg at all, which is the router deciding a single model was enough and saving the rest. Judge rejection rate was 67%, though that is two out of three and not a number I would defend anywhere. A rejection is the quality gate doing its job: the draft did not clear the bar, so the turn escalated, which is exactly the behaviour the pattern is there to provide.
 
 Five distinct models showed up across the set.
 
-![Models panel listing the five models observed across the sample](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/models.png)
+[![Models panel listing the five models observed across the sample](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/models.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/models.png)
 
 `gpt-5.6-sol` ran a leg in every single turn. `claude-opus-5` appeared three times, only for the heaviest work: multi-file refactors and a delete-and-verify pass.
 
-![Credit share by model, with gpt-5.6-sol and claude-opus-5 dominating](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/aiu-by-model.png)
+[![Credit share by model, with gpt-5.6-sol and claude-opus-5 dominating](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/aiu-by-model.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/aiu-by-model.png)
 
 Those three `claude-opus-5` legs took 42% of total spend. Treat the identifiers as routing labels observed in a preview rather than product names, because they will change, and the leaderboard reading of that chart is meaningless at this sample size. The point is that the pool is heterogeneous across vendors and the router reaches into it per phase, not per session.
 
 Every leg the router ran, coloured by model and phase kind:
 
-![Phase ledger showing every fusion leg coloured by model and phase kind](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/phase-ledger.png)
+[![Phase ledger showing every fusion leg coloured by model and phase kind](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/phase-ledger.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/phase-ledger.png)
 
 And the answer to the question I actually cared about, which is how the credits split between the leg that answered and the legs that reviewed:
 
-![Credits by phase kind: primary, draft, repair, judge, critic](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/where-credits-went.png)
+[![Credits by phase kind: primary, draft, repair, judge, critic](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/where-credits-went.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/where-credits-went.png)
 
 One leg per turn supplies the answer you see. Across all 24 turns, the legs that did not amounted to 2.5% of spend. I hesitate to call that overhead, because a superseded draft and its critique sit in the repair leg's context, so the final answer may well be better for their existence. What that 2.5% actually measures is the share of the bill that bought review instead of output, which is a duller sentence but a more defensible one.
 
 Then one row per turn, and clicking any cell loads that turn's waterfall.
 
-![Turns table with one row per turn, showing pattern, models, duration, and credits](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/turns.png)
+[![Turns table with one row per turn, showing pattern, models, duration, and credits](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/turns.png)](https://raw.githubusercontent.com/samueltauil/hydrafusion-traces/main/docs/screenshots/turns.png)
 
 ## I guessed the route right once in six tries
 

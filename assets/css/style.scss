@@ -22,7 +22,7 @@ $border-color: #30363d;
 $border-highlight: #484f58;
 
 // Outer shell shared by the header, content, and footer so they stay aligned.
-$shell: 1280px;
+$shell: 1400px;
 
 $link-color: #58a6ff;
 $link-hover: #a371f7;
@@ -488,6 +488,13 @@ code {
   padding: 0.2em 0.4em;
   border-radius: 4px;
   color: $accent-purple;
+}
+
+// Inline code holds long identifiers such as environment variable names, which
+// have no break opportunity and otherwise push the page wider than a phone.
+// Code inside `pre` is excluded so it keeps scrolling horizontally instead.
+:not(pre) > code {
+  overflow-wrap: anywhere;
 }
 
 pre {
@@ -1173,13 +1180,18 @@ h1 {
   letter-spacing: -0.02em;
 }
 
-// Long-form reading. These are fluid so a wide browser gets a wider column
-// instead of a fixed ribbon, while narrow screens simply fill the space.
+// Long-form reading. All three are fluid so a wide browser gets a wider layout
+// while narrow screens simply fill the space.
+//
+// $column is the article frame and sets the width of screenshots and other
+// media. $measure is the shorter line length prose wraps at. Both start at the
+// same left edge, so text and images align down the page instead of each being
+// centred on a different axis.
+//
 // `min()` is a Sass built-in, so interpolate to emit the CSS function rather
 // than asking Sass to compare incompatible units.
-$measure: #{"min(100%, 50rem)"};
-$column: #{"min(100%, 64rem)"};
-$media: #{"min(1216px, 90vw)"};
+$measure: #{"min(100%, 54rem)"};
+$column: #{"min(100%, 80rem)"};
 
 .post,
 .page {
@@ -1194,8 +1206,8 @@ $media: #{"min(1216px, 90vw)"};
 }
 
 .post-content {
-  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
-  line-height: 1.75;
+  font-size: clamp(1.0625rem, 0.95rem + 0.45vw, 1.3125rem);
+  line-height: 1.7;
 
   p,
   ul,
@@ -1225,22 +1237,33 @@ $media: #{"min(1216px, 90vw)"};
     max-width: none;
   }
 
-  // Screenshots carry fine detail, so a standalone image breaks out past the
-  // reading measure to the full shell width.
-  p:has(> img:only-child) {
-    width: calc(100% + 16rem);
-    max-width: $media;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
+  // Screenshots carry fine detail, so a standalone image uses the full article
+  // frame rather than the narrower reading measure. Kramdown wraps a linked
+  // image in an anchor, so match both shapes.
+  p:has(> img:only-child),
+  p:has(> a:only-child > img:only-child) {
+    max-width: none;
+    margin: 2rem 0;
 
     img {
-      // `max-width` rather than `width` so a small screenshot centres at its
+      display: block;
+      // `max-width` rather than `width` so a small screenshot renders at its
       // natural size instead of being upscaled into a blur.
       max-width: 100%;
-      margin: 0 auto;
+      margin: 0;
       border: 1px solid $border-color;
     }
+
+    // A linked screenshot opens the full-resolution file.
+    a {
+      display: block;
+      cursor: zoom-in;
+    }
+  }
+
+  // The callout is prose, so it tracks the reading measure.
+  .post-note {
+    max-width: $measure;
   }
 
   li {
