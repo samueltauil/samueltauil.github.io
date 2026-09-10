@@ -21,6 +21,9 @@ $copilot-gradient: linear-gradient(135deg, #6e40c9 0%, #238636 100%);
 $border-color: #30363d;
 $border-highlight: #484f58;
 
+// Outer shell shared by the header, content, and footer so they stay aligned.
+$shell: 1280px;
+
 $link-color: #58a6ff;
 $link-hover: #a371f7;
 
@@ -113,9 +116,9 @@ strong {
 }
 
 .header-container {
-  max-width: 1200px;
+  max-width: $shell;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 clamp(1rem, 3vw, 2rem);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -194,9 +197,9 @@ strong {
 
 // Main content
 .page-content {
-  max-width: 1100px;
+  max-width: $shell;
   margin: 0 auto;
-  padding: 3rem 2rem;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem);
   min-height: calc(100vh - 200px);
 }
 
@@ -675,7 +678,7 @@ hr {
 }
 
 .footer-container {
-  max-width: 1200px;
+  max-width: $shell;
   margin: 0 auto;
 }
 
@@ -1063,9 +1066,9 @@ img {
 
 // AI Translation Notice
 .ai-translation-notice {
-  max-width: 1100px;
+  max-width: $shell;
   margin: 0 auto;
-  padding: 0.75rem 2rem;
+  padding: 0.75rem clamp(1rem, 3vw, 2rem);
 
   p {
     margin: 0;
@@ -1170,11 +1173,13 @@ h1 {
   letter-spacing: -0.02em;
 }
 
-// Long-form reading. $measure is a fixed length rather than `ch` because `ch`
-// resolves against each element's own font size, which made headings and their
-// rules overshoot the body text by ~370px.
-$measure: 42rem;
-$column: 48rem;
+// Long-form reading. These are fluid so a wide browser gets a wider column
+// instead of a fixed ribbon, while narrow screens simply fill the space.
+// `min()` is a Sass built-in, so interpolate to emit the CSS function rather
+// than asking Sass to compare incompatible units.
+$measure: #{"min(100%, 50rem)"};
+$column: #{"min(100%, 64rem)"};
+$media: #{"min(1216px, 90vw)"};
 
 .post,
 .page {
@@ -1189,7 +1194,7 @@ $column: 48rem;
 }
 
 .post-content {
-  font-size: 1.0625rem;
+  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
   line-height: 1.75;
 
   p,
@@ -1218,6 +1223,24 @@ $column: 48rem;
   .cert-grid,
   table {
     max-width: none;
+  }
+
+  // Screenshots carry fine detail, so a standalone image breaks out past the
+  // reading measure to the full shell width.
+  p:has(> img:only-child) {
+    width: calc(100% + 16rem);
+    max-width: $media;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+
+    img {
+      // `max-width` rather than `width` so a small screenshot centres at its
+      // natural size instead of being upscaled into a blur.
+      max-width: 100%;
+      margin: 0 auto;
+      border: 1px solid $border-color;
+    }
   }
 
   li {
