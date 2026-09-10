@@ -22,9 +22,10 @@ $border-color: #30363d;
 $border-highlight: #484f58;
 
 // Outer shell shared by the header, content, and footer so they stay aligned.
-// Fluid rather than a fixed cap: at a fixed width the whole page stopped
-// adapting past ~1200px and sat as a narrow strip on a 1440p or 4K display.
-$shell: #{"min(1700px, 95vw)"};
+// Fluid, but capped near the width of the widest article element. When the
+// shell was far wider than the column, the nav stretched to the screen edges
+// while the text sat in the middle, which read as stranded rather than centred.
+$shell: #{"min(1400px, 95vw)"};
 
 $link-color: #58a6ff;
 $link-hover: #a371f7;
@@ -39,7 +40,7 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+  font-family: Geist, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
   background: $bg-primary;
   color: $text-primary;
   line-height: 1.6;
@@ -481,7 +482,7 @@ strong {
 
 // Code blocks
 pre, code {
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-family: "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   font-size: 0.875rem;
 }
 
@@ -1285,23 +1286,20 @@ h1 {
 
 .post,
 .page {
-  // 65ch is the measure @tailwindcss/typography ships for every one of its
-  // `prose` size modifiers. Using their number rather than one of mine means
-  // the reading column is a value a design team tuned and maintains. It also
-  // matches what measuring this site's own text independently suggested.
-  //
-  // Because the measure is in `ch`, it holds ~80 characters at every size, so
-  // the way to use a large display is to scale the type rather than to run
-  // longer lines. The column grows with the font, and the screenshots grow
-  // faster via --wide-extra.
-  --measure: 65ch;
+  // Tailwind's `prose` uses 65ch, but `ch` is the width of the `0` glyph and
+  // Geist's zero is narrow relative to its average character, so 65ch bought
+  // 96 characters here rather than the intended ~80. Measured back down to 54ch
+  // for this face. Retune if the typeface ever changes.
+  --measure: 54ch;
   --wide-extra: clamp(0rem, 10vw, 18rem);
 
   // The type scale lives on the grid container, not on `.post-content`, because
   // `ch` resolves against the font size of the element declaring the track. The
   // post header and the post body each establish their own grid, so they have
   // to share one font size or they resolve different track widths.
-  font-size: clamp(1.0625rem, 0.95rem + 0.63vw, 1.75rem);
+  // Geist is a fairly large-looking face at a given size, so the ceiling sits
+  // lower than the previous stack needed.
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.375rem);
   line-height: 1.7;
 
   @include content-grid;
@@ -1351,9 +1349,11 @@ $column: #{"min(100%, 68rem)"};
     img {
       display: block;
       // `max-width` rather than `width` so a small screenshot renders at its
-      // natural size instead of being upscaled into a blur.
+      // natural size instead of being upscaled into a blur, and `auto` margins
+      // so it centres in the track instead of hugging the left edge while the
+      // prose sits inset from it.
       max-width: 100%;
-      margin: 0;
+      margin-inline: auto;
       border: 1px solid $border-color;
     }
 
@@ -1365,8 +1365,8 @@ $column: #{"min(100%, 68rem)"};
     }
   }
 
-  // Galleries and card lists are layout, not prose.
-  .post-list,
+  // Galleries are layout and want the full frame. The archive card list is
+  // text, so it stays on the content track with the heading above it.
   .photo-gallery,
   .camera-list,
   .skills-grid,

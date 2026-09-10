@@ -242,6 +242,32 @@ test.describe('image lightbox', () => {
   });
 });
 
+test.describe('screenshots', () => {
+  test('sit on the same centre axis as the prose', async ({ page }) => {
+    // A screenshot narrower than its track used to pin to the track's left
+    // edge, so it sat outdented from the text while wider ones looked fine.
+    await page.goto(PAGES[0].path, { waitUntil: 'load' });
+    const centres = await page.evaluate(() => {
+      const centre = (el) => {
+        const r = el.getBoundingClientRect();
+        return Math.round(r.left + r.width / 2);
+      };
+      const prose = [...document.querySelectorAll('.post-content > p')]
+        .find((el) => el.innerText.trim().length > 200);
+      return {
+        prose: centre(prose),
+        images: [...document.querySelectorAll('.post-content p img')]
+          .filter((el) => el.getBoundingClientRect().width > 0)
+          .map(centre),
+      };
+    });
+    expect(centres.images.length).toBeGreaterThan(0);
+    for (const c of centres.images) {
+      expect(Math.abs(c - centres.prose)).toBeLessThanOrEqual(1);
+    }
+  });
+});
+
 test.describe('without JavaScript', () => {
   test.use({ javaScriptEnabled: false });
 
