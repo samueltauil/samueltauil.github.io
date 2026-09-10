@@ -22,7 +22,10 @@ $border-color: #30363d;
 $border-highlight: #484f58;
 
 // Outer shell shared by the header, content, and footer so they stay aligned.
-$shell: 1400px;
+// Fluid, but capped near the width of the widest article element. When the
+// shell was far wider than the column, the nav stretched to the screen edges
+// while the text sat in the middle, which read as stranded rather than centred.
+$shell: #{"min(1400px, 95vw)"};
 
 $link-color: #58a6ff;
 $link-hover: #a371f7;
@@ -37,7 +40,7 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+  font-family: Geist, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
   background: $bg-primary;
   color: $text-primary;
   line-height: 1.6;
@@ -479,7 +482,7 @@ strong {
 
 // Code blocks
 pre, code {
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-family: "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   font-size: 0.875rem;
 }
 
@@ -495,6 +498,73 @@ code {
 // Code inside `pre` is excluded so it keeps scrolling horizontally instead.
 :not(pre) > code {
   overflow-wrap: anywhere;
+}
+
+// Wrapper added by the copy-button script. The code block itself scrolls, so
+// the button has to be anchored to a parent that does not.
+.code-block {
+  position: relative;
+
+  &:hover .copy-button,
+  &:focus-within .copy-button {
+    opacity: 1;
+  }
+}
+
+.copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.6rem;
+  font-family: inherit;
+  font-size: 0.75rem;
+  line-height: 1;
+  color: $text-secondary;
+  background: $bg-tertiary;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  cursor: pointer;
+  // Hidden until the block is hovered, but never hidden from keyboard users or
+  // from assistive tech, which is why this is opacity rather than display.
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    color: $text-primary;
+    border-color: $border-highlight;
+  }
+
+  &:focus-visible {
+    opacity: 1;
+    outline: 2px solid $accent-blue;
+    outline-offset: 2px;
+  }
+
+  &.is-copied {
+    color: $accent-green;
+    border-color: $accent-green;
+  }
+
+  &.is-failed {
+    color: $accent-amber;
+    border-color: $accent-amber;
+  }
+}
+
+// Coarse pointers have no hover, so the button must stay visible.
+@media (hover: none) {
+  .copy-button {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copy-button {
+    transition: none;
+  }
 }
 
 pre {
@@ -1180,43 +1250,85 @@ h1 {
   letter-spacing: -0.02em;
 }
 
-// Long-form reading. All three are fluid so a wide browser gets a wider layout
-// while narrow screens simply fill the space.
+// Long-form reading.
 //
-// $column is the article frame and sets the width of screenshots and other
-// media. $measure is the shorter line length prose wraps at. Both start at the
-// same left edge, so text and images align down the page instead of each being
-// centred on a different axis.
+// Layout is a "content grid" rather than a stack of max-widths. Every child of
+// the article lands on the named `content` track by default, so the title, the
+// body text, code blocks, callouts, and screenshots cannot drift out of
+// alignment: they are literally on the same grid lines. Anything that needs
+// more room opts into `wide` or `full`.
 //
-// `min()` is a Sass built-in, so interpolate to emit the CSS function rather
-// than asking Sass to compare incompatible units.
-$measure: #{"min(100%, 54rem)"};
-$column: #{"min(100%, 80rem)"};
+// The reading column is set in `ch`, so it is defined as a number of characters
+// and re-solves itself for any font size, family, or zoom level. Because the
+// track is declared once on the grid container, every child inherits the same
+// resolved width, which avoids the old problem of `ch` re-resolving against each
+// element's own font size.
+//
+// Two custom properties are the only knobs:
+//   --measure     reading column, in characters
+//   --wide-extra  how far media may exceed it on each side
+@mixin content-grid {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(0, 1fr)
+    [wide-start] minmax(0, var(--wide-extra))
+    [content-start] min(100%, var(--measure)) [content-end]
+    minmax(0, var(--wide-extra)) [wide-end]
+    minmax(0, 1fr) [full-end];
+
+  > * {
+    grid-column: content;
+    // Grid items default to min-content width, which would let a long code line
+    // stretch the track instead of scrolling inside it.
+    min-width: 0;
+  }
+}
 
 .post,
 .page {
-  max-width: $column;
-  margin-left: auto;
-  margin-right: auto;
+  // Tailwind's `prose` uses 65ch, but `ch` is the width of the `0` glyph and
+  // Geist's zero is narrow relative to its average character, so 65ch bought
+  // 96 characters here rather than the intended ~80. Measured back down to 54ch
+  // for this face. Retune if the typeface ever changes.
+  --measure: 54ch;
+  --wide-extra: clamp(0rem, 10vw, 18rem);
+
+  // The type scale lives on the grid container, not on `.post-content`, because
+  // `ch` resolves against the font size of the element declaring the track. The
+  // post header and the post body each establish their own grid, so they have
+  // to share one font size or they resolve different track widths.
+  // Geist is a fairly large-looking face at a given size, so the ceiling sits
+  // lower than the previous stack needed.
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.375rem);
+  line-height: 1.7;
+
+  @include content-grid;
 }
+
+// Standalone text blocks outside the article grid (card summaries, page intros,
+// home sections). They cannot inherit a grid track, so they carry their own
+// width. `ch` keeps them font-relative like the article measure.
+$measure: 72ch;
+$column: #{"min(100%, 68rem)"};
 
 // Opt-out for pages that need the full width, such as the photo grid.
 .page--wide {
-  max-width: none;
+  --measure: 100%;
+  --wide-extra: 0px;
 }
 
 .post-content {
-  font-size: clamp(1.0625rem, 0.95rem + 0.45vw, 1.3125rem);
-  line-height: 1.7;
+  // Span the parent grid, then re-establish it so this element's own children
+  // resolve against the same tracks as the post header above them.
+  grid-column: full;
+  @include content-grid;
 
+  // Flush both margins so the column reads as one block rather than a ragged
+  // strip. Hyphenation keeps the word spacing even at this measure.
   p,
-  ul,
-  ol,
-  blockquote,
-  h2,
-  h3,
-  h4 {
-    max-width: $measure;
+  li {
+    text-align: justify;
+    hyphens: auto;
   }
 
   p,
@@ -1226,50 +1338,49 @@ $column: #{"min(100%, 80rem)"};
     color: $text-primary;
   }
 
-  // Card lists and media are layout, not prose, so they keep the full width.
-  .post-list,
-  .post-list li,
-  .photo-gallery,
-  .camera-list,
-  .skills-grid,
-  .cert-grid,
-  table {
-    max-width: none;
-  }
-
-  // Screenshots carry fine detail, so a standalone image uses the full article
-  // frame rather than the narrower reading measure. Kramdown wraps a linked
-  // image in an anchor, so match both shapes.
+  // Screenshots carry fine detail, so they take the wider track. Kramdown wraps
+  // a linked image in an anchor, so match both shapes. Where `:has()` is not
+  // supported the image simply stays on `content`, which is a valid layout.
   p:has(> img:only-child),
   p:has(> a:only-child > img:only-child) {
-    max-width: none;
+    grid-column: wide;
     margin: 2rem 0;
 
     img {
       display: block;
       // `max-width` rather than `width` so a small screenshot renders at its
-      // natural size instead of being upscaled into a blur.
+      // natural size instead of being upscaled into a blur, and `auto` margins
+      // so it centres in the track instead of hugging the left edge while the
+      // prose sits inset from it.
       max-width: 100%;
-      margin: 0;
+      margin-inline: auto;
       border: 1px solid $border-color;
     }
 
-    // A linked screenshot opens the full-resolution file.
+    // A linked screenshot opens the full-resolution file, and the lightbox
+    // upgrades that to a zoomable view once the script loads.
     a {
       display: block;
       cursor: zoom-in;
     }
   }
 
-  // The callout is prose, so it tracks the reading measure.
-  .post-note {
-    max-width: $measure;
+  // Galleries are layout and want the full frame. The archive card list is
+  // text, so it stays on the content track with the heading above it.
+  .photo-gallery,
+  .camera-list,
+  .skills-grid,
+  .cert-grid {
+    grid-column: full;
+  }
+
+  table {
+    grid-column: wide;
   }
 
   li {
     margin-bottom: 0.35em;
   }
-
   h2,
   h3,
   h4 {
