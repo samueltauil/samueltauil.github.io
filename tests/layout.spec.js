@@ -243,27 +243,29 @@ test.describe('image lightbox', () => {
 });
 
 test.describe('screenshots', () => {
-  test('sit on the same centre axis as the prose', async ({ page }) => {
-    // A screenshot narrower than its track used to pin to the track's left
-    // edge, so it sat outdented from the text while wider ones looked fine.
+  test('share the prose edges exactly', async ({ page }) => {
+    // Screenshots sit at the reading width rather than breaking out, since the
+    // lightbox serves the real resolution. So they must match the prose left
+    // edge and width, not merely share a centre axis.
     await page.goto(PAGES[0].path, { waitUntil: 'load' });
-    const centres = await page.evaluate(() => {
-      const centre = (el) => {
+    const box = await page.evaluate(() => {
+      const b = (el) => {
         const r = el.getBoundingClientRect();
-        return Math.round(r.left + r.width / 2);
+        return { left: Math.round(r.left), width: Math.round(r.width) };
       };
       const prose = [...document.querySelectorAll('.post-content > p')]
         .find((el) => el.innerText.trim().length > 200);
       return {
-        prose: centre(prose),
+        prose: b(prose),
         images: [...document.querySelectorAll('.post-content p img')]
           .filter((el) => el.getBoundingClientRect().width > 0)
-          .map(centre),
+          .map(b),
       };
     });
-    expect(centres.images.length).toBeGreaterThan(0);
-    for (const c of centres.images) {
-      expect(Math.abs(c - centres.prose)).toBeLessThanOrEqual(1);
+    expect(box.images.length).toBeGreaterThan(0);
+    for (const img of box.images) {
+      expect(Math.abs(img.left - box.prose.left)).toBeLessThanOrEqual(1);
+      expect(Math.abs(img.width - box.prose.width)).toBeLessThanOrEqual(1);
     }
   });
 });

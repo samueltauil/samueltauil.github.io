@@ -1291,7 +1291,11 @@ h1 {
   // 96 characters here rather than the intended ~80. Measured back down to 54ch
   // for this face. Retune if the typeface ever changes.
   --measure: 54ch;
-  --wide-extra: clamp(0rem, 10vw, 18rem);
+  // Screenshots sit at the reading width rather than breaking out. The lightbox
+  // makes fine detail one click away, so the extra width bought little and cost
+  // alignment: every element on the page now shares one left and right edge.
+  // Raise this to let media overhang the text again.
+  --wide-extra: 0rem;
 
   // The type scale lives on the grid container, not on `.post-content`, because
   // `ch` resolves against the font size of the element declaring the track. The
@@ -1348,12 +1352,12 @@ $column: #{"min(100%, 68rem)"};
 
     img {
       display: block;
-      // `max-width` rather than `width` so a small screenshot renders at its
-      // natural size instead of being upscaled into a blur, and `auto` margins
-      // so it centres in the track instead of hugging the left edge while the
-      // prose sits inset from it.
-      max-width: 100%;
-      margin-inline: auto;
+      // Fill the column so every screenshot shares the text's edges. A slightly
+      // undersized capture is scaled up a few percent rather than sitting inset,
+      // which is a fair trade now that the lightbox serves the real resolution.
+      width: 100%;
+      height: auto;
+      margin: 0;
       border: 1px solid $border-color;
     }
 
