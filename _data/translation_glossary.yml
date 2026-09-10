@@ -13,8 +13,10 @@ terms:
   - GitHub Pages
   - GitHub Enterprise
   - GitHub Codespaces
+  - Copilot CLI
   - VS Code
   - Visual Studio Code
+  - Visual Studio
   - VS Code Insiders
   - Azure
   - Azure AI
@@ -24,6 +26,7 @@ terms:
   - Azure Text Analytics for Health
   - Cosmos DB
   - Microsoft
+  - Intune
   - Red Hat
   - OpenShift
   - JBoss
@@ -36,6 +39,9 @@ terms:
   - Coursera
   - Credly
   - Linux Foundation
+  - Oracle
+  - MATLAB
+  - Simulink
 
   # ─── Frameworks & Libraries ──────────────────────────────────────────
   - Jekyll
@@ -54,6 +60,10 @@ terms:
   - Terraform
   - Ansible
   - Playwright
+  - Next.js
+  - Nextjs
+  - Quarkus
+  - Apache Camel
 
   # ─── Languages & Runtimes ────────────────────────────────────────────
   - Node.js
@@ -61,6 +71,8 @@ terms:
   - JavaScript
   - Python
   - Java
+  - C#
+  - PowerShell
   - Ruby
   - LaTeX
   - Markdown
@@ -70,6 +82,7 @@ terms:
   - CSS
   - HTML
   - SQL
+  - T-SQL
 
   # ─── Protocols & Standards ───────────────────────────────────────────
   - MCP
@@ -78,6 +91,9 @@ terms:
   - MCP Apps SDK
   - FHIR
   - FHIR R4
+  - FHIR bundle
+  - HL7
+  - Fast Healthcare Interoperability Resources
   - REST
   - API
   - SDK
@@ -91,6 +107,10 @@ terms:
   - hreflang
   - OAuth
   - PAT
+  - OpenTelemetry
+  - OTel
+  - OTLP
+  - HIPAA
 
   # ─── DevOps & Infrastructure ─────────────────────────────────────────
   - CI/CD
@@ -122,6 +142,7 @@ terms:
   - cron
   - monorepo
   - Docker
+  - Docker Compose
   - Kubernetes
   - Argo CD
   - ArgoCD
@@ -129,6 +150,8 @@ terms:
   - DevOps
   - DevSecOps
   - MLOps
+  - SSIS
+  - SQL Server Integration Services
 
   # ─── AI & Agent Concepts ─────────────────────────────────────────────
   - skill
@@ -185,6 +208,7 @@ terms:
   - ZIP
   - SVG
   - CSV
+  - .dtsx
 
   # ─── Observability & Monitoring ──────────────────────────────────────
   - Jaeger
@@ -192,6 +216,8 @@ terms:
   - Grafana Tempo
   - Prometheus
   - Kafka
+  - OpenTelemetry traces
+  - OTLP/HTTP
 
   # ─── Skills Hub Specific ─────────────────────────────────────────────
   - Skills Hub
