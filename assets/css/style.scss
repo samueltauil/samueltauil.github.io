@@ -22,7 +22,7 @@ $border-color: #30363d;
 $border-highlight: #484f58;
 
 // Outer shell shared by the header, content, and footer so they stay aligned.
-$shell: 1400px;
+$shell: 1200px;
 
 $link-color: #58a6ff;
 $link-hover: #a371f7;
@@ -1180,18 +1180,18 @@ h1 {
   letter-spacing: -0.02em;
 }
 
-// Long-form reading. All three are fluid so a wide browser gets a wider layout
-// while narrow screens simply fill the space.
+// Long-form reading. Both are fluid so a wide browser gets a wider layout while
+// narrow screens simply fill the space.
 //
-// $column is the article frame and sets the width of screenshots and other
-// media. $measure is the shorter line length prose wraps at. Both start at the
-// same left edge, so text and images align down the page instead of each being
-// centred on a different axis.
+// $column is the article frame and sets the width of screenshots, code blocks,
+// and headings. $measure is the shorter line length prose wraps at, sized for
+// roughly 80 characters. They are centred on the same axis so the narrower text
+// reads as inset within the frame rather than orphaned beside it.
 //
 // `min()` is a Sass built-in, so interpolate to emit the CSS function rather
 // than asking Sass to compare incompatible units.
-$measure: #{"min(100%, 54rem)"};
-$column: #{"min(100%, 80rem)"};
+$measure: #{"min(100%, 45rem)"};
+$column: #{"min(100%, 60rem)"};
 
 .post,
 .page {
@@ -1206,7 +1206,7 @@ $column: #{"min(100%, 80rem)"};
 }
 
 .post-content {
-  font-size: clamp(1.0625rem, 0.95rem + 0.45vw, 1.3125rem);
+  font-size: clamp(1.0625rem, 0.95rem + 0.4vw, 1.25rem);
   line-height: 1.7;
 
   p,
@@ -1215,8 +1215,13 @@ $column: #{"min(100%, 80rem)"};
   blockquote,
   h2,
   h3,
-  h4 {
+  h4,
+  .post-note,
+  div.highlighter-rouge,
+  > pre {
     max-width: $measure;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   p,
@@ -1269,7 +1274,6 @@ $column: #{"min(100%, 80rem)"};
   li {
     margin-bottom: 0.35em;
   }
-
   h2,
   h3,
   h4 {
