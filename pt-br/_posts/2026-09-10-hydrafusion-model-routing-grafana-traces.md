@@ -157,3 +157,11 @@ Esse é o padrão que vale a pena levar com você. Quando uma interface te dá u
 Acertei a rota uma vez em seis tentativas, o que diz muito mais sobre minha regra de bolso do que sobre o router. Esse é o argumento inteiro para ler o log em vez de raciocinar sobre ele.
 
 O repositório é o [samueltauil/hydrafusion-traces](https://github.com/samueltauil/hydrafusion-traces), as notas de campo estão em [docs/FINDINGS.md](https://github.com/samueltauil/hydrafusion-traces/blob/main/docs/FINDINGS.md), e o que o CLI de fato emite está medido em [docs/SPIKE.md](https://github.com/samueltauil/hydrafusion-traces/blob/main/docs/SPIKE.md).
+
+## Atualização: registrei isso upstream
+
+No dia seguinte à publicação deste post, transformei os achados em uma feature request no CLI: [HydraFusion: emit per-phase model, verdict and credit attributes to OpenTelemetry](https://github.com/github/copilot-cli/issues/4825). Fazer o tail no session state de alguém para responder uma pergunta de custo funciona, mas continua sendo um workaround, então escrevi a versão que eu preferiria ter.
+
+O pedido é menor do que parece, porque o trabalho de instrumentação já está praticamente pronto. Todo valor que meu tailer coloca em um span é computado, nomeado e escrito em `events.jsonl` pelo próprio CLI. Só nunca sai do processo por um canal em que alguém possa confiar. O que propus: um child span por fase carregando `gen_ai.response.model`, os campos específicos do router sob um namespace `github.copilot.fusion.*`, o histograma de tokens já existente dimensionado pelo modelo que serviu a resposta, uma métrica de crédito ao lado dele, e algum tipo de detalhamento pós-turno no CLI para quem nunca vai levantar um collector.
+
+O que quero upstream se resume à linha de crédito. A política de routing é servida remotamente, `routeSource` leu `capi_plan` nos 24 turnos, então a mistura pode mudar sem um release do CLI, e quem estiver observando gastos veria o número se mover sem nada para comparar. O tailer responde essa pergunta hoje, e responde bem: quatrocentas linhas de stdlib Python, 24 turns, cada decisão de routing visível. É exatamente o que eu queria dele, e é o argumento mais forte que tenho de que o dado já existe e já está correto. Essa mesma visão merece um lugar onde possa sobreviver a um formato de log e alcançar as pessoas que nunca vão levantar um collector.
