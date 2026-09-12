@@ -155,3 +155,11 @@ That is the pattern worth taking with you. When an interface gives you a summary
 I guessed the route right once in six tries, which says a good deal more about my rule of thumb than it does about the router. That is the entire argument for reading the log instead of reasoning about it.
 
 The repo is [samueltauil/hydrafusion-traces](https://github.com/samueltauil/hydrafusion-traces), the field notes are in [docs/FINDINGS.md](https://github.com/samueltauil/hydrafusion-traces/blob/main/docs/FINDINGS.md), and what the CLI actually emits is measured in [docs/SPIKE.md](https://github.com/samueltauil/hydrafusion-traces/blob/main/docs/SPIKE.md).
+
+## Update: I filed it upstream
+
+The day after publishing this I turned the findings into a feature request on the CLI: [HydraFusion: emit per-phase model, verdict and credit attributes to OpenTelemetry](https://github.com/github/copilot-cli/issues/4825). Tailing someone's session state to answer a cost question works, and it is still a workaround, so I wrote up the version I would rather have.
+
+The ask is smaller than it sounds, because the instrumentation work is mostly done already. Every value my tailer puts on a span is computed, named, and written to `events.jsonl` by the CLI itself. It just never leaves the process through a channel anyone can depend on. What I proposed: one child span per phase carrying `gen_ai.response.model`, the router-specific fields under a `github.copilot.fusion.*` namespace, the existing token histogram dimensioned by serving model, a credit metric alongside it, and some kind of post-turn breakdown in the CLI for people who will never stand up a collector.
+
+What I want upstream comes down to the credit line. Routing policy is served remotely, `routeSource` read `capi_plan` on all 24 turns, so the mix can shift without a CLI release, and anyone watching spend would see the number move with nothing to compare it against. The tailer answers that question today, and it answers it well: four hundred lines of stdlib Python, 24 turns, every routing decision visible. That is exactly what I wanted from it, and it is the strongest argument I have that the data is already there and already correct. The same view deserves a home where it can outlive a log format and reach the people who will never stand up a collector.
