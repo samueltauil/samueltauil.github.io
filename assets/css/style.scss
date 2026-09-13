@@ -58,27 +58,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   line-height: 1.2;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1.75rem;
   border-bottom: 1px solid $border-color;
   padding-bottom: 0.3em;
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: 1.375rem;
   color: $text-secondary;
 }
 
 h4 {
-  font-size: 1.25rem;
+  font-size: 1.1875rem;
 }
 
 h5 {
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
 }
 
 h6 {
@@ -209,35 +209,35 @@ strong {
 
   // Responsive heading sizes for mobile
   h1 {
-    font-size: 1.75rem;
-  }
-
-  h2 {
     font-size: 1.5rem;
   }
 
+  h2 {
+    font-size: 1.375rem;
+  }
+
   h3 {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
   }
 
   h4 {
-    font-size: 1.1rem;
-  }
-
-  h5 {
     font-size: 1rem;
   }
 
+  h5 {
+    font-size: 0.9375rem;
+  }
+
   h6 {
-    font-size: 0.95rem;
+    font-size: 0.875rem;
   }
 
   .hero h1 {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 
   .post-header h1 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -256,7 +256,7 @@ strong {
   margin-bottom: 3rem;
 
   h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
     background: $accent-gradient;
     -webkit-background-clip: text;
@@ -882,7 +882,7 @@ hr {
   margin-bottom: 2rem;
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     line-height: 1.2;
   }
 
