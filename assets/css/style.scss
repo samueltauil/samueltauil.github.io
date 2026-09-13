@@ -63,7 +63,7 @@ h1 {
 }
 
 h2 {
-  font-size: 2.125rem;
+  font-size: 1.75rem;
   border-bottom: 1px solid $border-color;
   padding-bottom: 0.3em;
 }
@@ -88,7 +88,6 @@ h6 {
 p {
   margin-bottom: 1em;
   color: $text-secondary;
-  font-size: 0.95rem;
 }
 
 a {
@@ -205,31 +204,6 @@ strong {
     a {
       padding: 0.75rem 0;
     }
-  }
-
-  // Responsive heading sizes for mobile
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  h2 {
-    font-size: 1.625rem;
-  }
-
-  h3 {
-    font-size: 1.125rem;
-  }
-
-  h4 {
-    font-size: 1rem;
-  }
-
-  h5 {
-    font-size: 0.9375rem;
-  }
-
-  h6 {
-    font-size: 0.875rem;
   }
 
   .hero h1 {
@@ -1440,6 +1414,9 @@ $column: #{"min(100%, 68rem)"};
   li {
     margin-bottom: 0.35em;
   }
+
+  // Sized in `em` so headings track the fluid reading scale set on `.post`/`.page`
+  // instead of falling below the body text at large viewports.
   h2,
   h3,
   h4 {
@@ -1447,8 +1424,21 @@ $column: #{"min(100%, 68rem)"};
   }
 
   h2 {
+    font-size: 1.6em;
     padding-bottom: 0.3em;
     border-bottom-color: $border-color;
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  h4 {
+    font-size: 1.1em;
+  }
+
+  h5 {
+    font-size: 1em;
   }
 }
 
@@ -1661,11 +1651,15 @@ input:focus-visible {
 }
 
 // Tag sections on the tags page are navigation targets, so keep them tight.
-.tag-cloud + h2,
-.post-content h2[id] {
+.tag-cloud + h2 {
   font-size: 1.25rem;
   margin-top: 2rem;
   padding-bottom: 0.25rem;
+}
+
+// Anchored headings only need clearance below the sticky header; their size
+// comes from the article scale above.
+.post-content h2[id] {
   scroll-margin-top: 5rem;
 }
 
