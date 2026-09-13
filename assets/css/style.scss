@@ -362,34 +362,6 @@ strong {
   }
 }
 
-// Skills grid
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-}
-
-.skill-card {
-  background: $bg-tertiary;
-  border: 1px solid $border-color;
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
-
-  h4 {
-    margin: 0 0 0.5rem;
-    font-size: 0.875rem;
-    color: $accent-purple;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  p {
-    margin: 0;
-    color: $text-secondary;
-    font-size: 0.9375rem;
-  }
-}
-
 // Timeline (for experience)
 .timeline {
   position: relative;
@@ -1358,16 +1330,18 @@ $column: #{"min(100%, 68rem)"};
 
   // Flush both margins so the column reads as one block rather than a ragged
   // strip. Hyphenation keeps the word spacing even at this measure.
-  p,
-  li {
+  // Classed lists are components, not prose, so they opt out.
+  > p,
+  > ul:not([class]) > li,
+  > ol:not([class]) > li {
     text-align: justify;
     hyphens: auto;
   }
 
-  p,
-  ul,
-  ol,
-  blockquote {
+  > p,
+  > ul:not([class]),
+  > ol:not([class]),
+  > blockquote {
     color: $text-primary;
   }
 
@@ -1401,9 +1375,7 @@ $column: #{"min(100%, 68rem)"};
   // Galleries are layout and want the full frame. The archive card list is
   // text, so it stays on the content track with the heading above it.
   .photo-gallery,
-  .camera-list,
-  .skills-grid,
-  .cert-grid {
+  .camera-list {
     grid-column: full;
   }
 
@@ -1417,27 +1389,27 @@ $column: #{"min(100%, 68rem)"};
 
   // Sized in `em` so headings track the fluid reading scale set on `.post`/`.page`
   // instead of falling below the body text at large viewports.
-  h2,
-  h3,
-  h4 {
+  > h2,
+  > h3,
+  > h4 {
     margin-top: 2.25em;
   }
 
-  h2 {
+  > h2 {
     font-size: 1.6em;
     padding-bottom: 0.3em;
     border-bottom-color: $border-color;
   }
 
-  h3 {
+  > h3 {
     font-size: 1.3em;
   }
 
-  h4 {
+  > h4 {
     font-size: 1.1em;
   }
 
-  h5 {
+  > h5 {
     font-size: 1em;
   }
 }
@@ -2035,4 +2007,363 @@ input:focus-visible {
 // With no wordmark, the nav is the only thing in the bar and sits to the right.
 .header-container {
   justify-content: flex-end;
+}
+
+
+// ---------------------------------------------------------------------------
+// About page
+// ---------------------------------------------------------------------------
+
+// The sprite is a definitions-only element and must not occupy layout.
+.icon-sprite {
+  display: none;
+}
+
+.about-contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: -0.5rem 0 2.75rem;
+}
+
+// Its own component rather than `.badge`, which is tuned for post metadata and
+// fights back through `a.badge` overrides.
+.about-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.95rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1;
+  color: $text-secondary;
+  background: $bg-tertiary;
+  border: 1px solid $border-color;
+  border-radius: 2rem;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    color: $text-muted;
+    transition: color 0.2s ease;
+  }
+
+  &--muted {
+    background: transparent;
+    color: $text-muted;
+  }
+}
+
+a.about-chip {
+  &:hover {
+    color: $text-primary;
+    background: rgba(163, 113, 247, 0.1);
+    border-color: $accent-purple;
+    text-decoration: none;
+    transform: translateY(-1px);
+
+    svg {
+      color: $accent-purple;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $accent-blue;
+    outline-offset: 2px;
+  }
+}
+
+// Competencies read as a spec sheet: label on the left, stack on the right,
+// separated by rules. Cards turned eight short lists into eight boxes.
+.competencies {
+  margin: 1.25rem 0 0;
+
+  > div {
+    display: grid;
+    grid-template-columns: 10.5rem minmax(0, 1fr);
+    gap: 0.3rem 1.5rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid $border-color;
+  }
+
+  > div:last-child {
+    border-bottom: 1px solid $border-color;
+  }
+
+  dt {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1.7;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: $accent-purple;
+  }
+
+  dd {
+    margin: 0;
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 0.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      margin: 0;
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: $text-secondary;
+    }
+
+    // Separators are decoration, so they live in CSS and stay out of the text.
+    li + li::before {
+      content: '·';
+      margin-right: 0.5rem;
+      color: $border-highlight;
+    }
+  }
+}
+
+// Declared here rather than with the other breakpoints, because a media query
+// adds no specificity and the base rule above would otherwise win.
+@media (max-width: 768px) {
+  .competencies > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.2rem;
+    padding: 0.75rem 0;
+  }
+}
+
+// Career history. The employer mark anchors each entry, so the old dotted rail
+// would have been a second device doing the same job.
+.timeline {
+  margin: 1.5rem 0 0;
+  padding-left: 0;
+
+  &::before {
+    content: none;
+  }
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 1rem;
+  padding-bottom: 2rem;
+
+  &::before {
+    content: none;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  .role {
+    display: block;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  .company {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $text-muted;
+  }
+
+  .period {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.8125rem;
+    color: $text-muted;
+    font-variant-numeric: tabular-nums;
+  }
+
+  ul {
+    margin: 0.6rem 0 0;
+    padding-left: 1.1rem;
+  }
+
+  ul li {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+}
+
+.company-mark {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin-top: 0.1rem;
+  border-radius: 9px;
+  background: $bg-tertiary;
+  border: 1px solid $border-color;
+  color: $text-muted;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  // The hat ships at 192x145, so height follows the width to keep the angle.
+  // Red Hat's standards forbid recolouring, stretching, or adding effects to it,
+  // which is why the tile stays neutral and the asset is used untouched.
+  img {
+    width: 22px;
+    height: auto;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+  }
+}
+
+// Three entries, so they can afford rows with room to breathe.
+.education-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0 0;
+}
+
+.education-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0.15rem 1.25rem;
+  margin: 0;
+  padding: 0.85rem 0 0.85rem 1.1rem;
+  border-left: 2px solid $border-color;
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-left-color: $accent-purple;
+  }
+
+  &__degree {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: $text-primary;
+    line-height: 1.4;
+  }
+
+  &__school {
+    grid-column: 1 / -1;
+    font-size: 0.8125rem;
+    color: $text-secondary;
+  }
+
+  &__note {
+    font-size: 0.75rem;
+    color: $text-muted;
+    white-space: nowrap;
+  }
+}
+
+// Seventeen credentials. As cards they were a wall; as pills they read as an
+// index, and they stay clearly distinct from the education rows above.
+.cert-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+
+  li {
+    margin: 0;
+  }
+}
+
+.cert-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: $text-secondary;
+  background: transparent;
+  border: 1px solid $border-color;
+  border-radius: 2rem;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+
+  .year {
+    flex-shrink: 0;
+    font-size: 0.6875rem;
+    color: $text-muted;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.2s ease;
+  }
+}
+
+a.cert-pill {
+  &:hover {
+    color: $text-primary;
+    background: rgba(163, 113, 247, 0.1);
+    border-color: $accent-purple;
+    text-decoration: none;
+
+    .year {
+      color: $accent-purple;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $accent-blue;
+    outline-offset: 2px;
+  }
+}
+
+// Speaking and program-committee work. Same index treatment, single column
+// because the entries carry a longer trailing description.
+.engagement-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+
+  li {
+    position: relative;
+    padding: 0.5rem 0 0.5rem 1.25rem;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    border-bottom: 1px solid $border-color;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 1.05em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: $accent-purple;
+    }
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  a {
+    color: $text-primary;
+
+    &:hover {
+      color: $accent-purple;
+    }
+  }
+
+  strong {
+    font-weight: 600;
+    color: inherit;
+  }
 }
