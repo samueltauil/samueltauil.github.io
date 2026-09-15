@@ -8,7 +8,7 @@ description: "Aprendi ML no Octave porque não tinha licença do MATLAB. Vinte a
 image: https://raw.githubusercontent.com/samueltauil/octave-care-analytics/main/assets/canvas_capacity.png
 date: 2026-09-15
 categories: [github-copilot, healthcare, open-source]
-tags: [github-copilot, copilot-canvas, octave, matlab, healthcare, synthea, simulation, capacity-planning, news2, open-source]
+tags: [github-copilot, copilot-app, copilot-canvas, octave, matlab, healthcare, synthea, simulation, capacity-planning, news2, open-source]
 ---
 
 O dataset Iris foi onde aprendi PCA, k-means e as três espécies: setosa, versicolor, virginica. Quatro medidas, 150 linhas, e um gráfico que separa quase perfeitamente se você forçar um pouco a vista. É provavelmente onde muita gente viu pela primeira vez a ideia que sustenta machine learning, que não é bem sobre o algoritmo. Você define um objetivo, escreve um custo, e sai procurando os parâmetros que fazem esse custo diminuir.
@@ -30,6 +30,14 @@ Este é, na verdade, a segunda metade de um par, e a primeira metade foi na dire
 Minha primeira tentativa foi uma demo sobre o Octave. Ela renderizava uma figura, a figura aparecia num painel de canvas, você podia mudar um parâmetro e ver o redesenho. Funcionou já na segunda noite e eu não gostei. Respondia a uma pergunta que ninguém está fazendo, que é se o Octave consegue desenhar um gráfico. Reconstruí tudo em torno de duas perguntas hospitalares e não sobrou quase nada daquela versão, exceto o worker process.
 
 A modelagem também teve uma falsa partida, e essa mais interessante. O tempo de internação é o input do qual tudo mais depende, e a tentação é ajustar uma exponencial a ele. Um parâmetro, limpo, fácil de explicar num slide. Só que isso achata a cauda direita, e a cauda direita é o problema inteiro. A maioria dos pacientes vai para casa rápido. Um número pequeno de pacientes complexos fica internado por semanas, e são esses que lotam a ala em fevereiro. Então a simulação reamostra das 1.807 internações reais no extrato do Synthea e reescala essa distribuição empírica para qualquer média que você esteja testando. A forma permanece medida. Só a média vira o cenário.
+
+## Por que ele vive no Copilot app
+
+A coisa toda foi construída para rodar dentro do [GitHub Copilot app](https://github.com/features/ai/github-app), o aplicativo desktop que o GitHub oferece para trabalho conduzido por agents. É uma superfície separada da extensão do editor e do CLI. Você aponta ele para um repositório ou uma pasta local, roda sessões de agent em cima disso, e cuida do pull request resultante sem sair da janela.
+
+O que fez dele o host certo aqui foram as [canvas extensions](https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-canvas-extensions). Um canvas é um painel que o app abre ao lado da conversa, e o próprio repositório declara o que vai dentro dele. O meu tem cerca de 700 linhas de JavaScript em `.github/extensions/octave-canvas/`. Ele sobe o worker do Octave, pede uma renderização e desenha os sliders e a faixa de métricas em volta da figura que volta. Como está commitado junto com os modelos, qualquer pessoa que abrir essa pasta no app recebe o mesmo painel, sem nada para instalar e sem nenhum serviço hospedado em lugar nenhum.
+
+O resto do repositório se apoia na mesma ideia. `.github/skills/octave-portability/` é uma skill que conhece as regras do Octave sem pacotes extras e as restrições de gráficos sem interface gráfica, que são genuinamente difíceis de descobrir sozinho. `.github/agents/octave-reviewer.md` é um custom agent que revisa os números e a portabilidade e deixa a formatação de lado. Nada disso é configuração parada no meu laptop. Está versionado junto com o código que governa, e essa é a parte que eu manteria mesmo se jogasse fora todo o resto.
 
 ## Meio dia de tempo de internação
 

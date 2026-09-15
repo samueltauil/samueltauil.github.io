@@ -82,13 +82,27 @@ Run this **once** at the start before any staleness checks.
 For each English source file, before translating:
 
 1. Check if the corresponding `pt-br/` file exists. If it does **not** exist → add to the **new files** list (full translation needed).
-2. If the `pt-br/` file **does** exist, compare the last-modified commit dates:
-   - Run `git log -1 --format="%H %aI" -- <english-file>` to get the latest commit hash and date for the English source.
-   - Run `git log -1 --format="%H %aI" -- <pt-br-file>` to get the latest commit hash and date for the Portuguese translation.
-   - If the English file's commit date is **newer** than the Portuguese file's commit date → add to the **stale files** list.
-   - If the English file's commit date is **older or equal** → the translation is current, **skip it**.
-   - If both files were last modified by the **same commit hash**, the pair was updated together, so the translation is current, **skip it**.
-   - If either `git log` command returns **empty output**, treat the file as **stale**.
+2. If the `pt-br/` file **does** exist, compare **content provenance**, never commit dates:
+   - Get the commit that last touched the translation:
+     ```bash
+     git log -1 --format="%H" -- <pt-br-file>
+     ```
+   - Ask whether the English source changed between that commit and `HEAD`:
+     ```bash
+     git diff --quiet <pt-br-commit-hash> HEAD -- <english-file>
+     ```
+   - Exit code `0` (no diff) → the translation already reflects the current English source, **skip it**.
+   - Exit code `1` (diff present) → add to the **stale files** list.
+   - Any other exit code, or an empty `git log` result → treat the file as **stale**.
+
+   **Do not compare commit dates.** A translation pull request is generated from the
+   tree as it stood when the run started. If English commits land on `main` after that
+   branch is cut, the merged translation commit carries a *newer* date while its
+   *content* is older. A date comparison then marks the translation as current and the
+   intervening English change becomes invisible permanently, because every later run
+   makes the same wrong call. Diffing the English file against the translation's own
+   base commit catches exactly that case, and it is the same diff the incremental
+   patching step below already relies on.
 3. Collect both lists. If both are empty, call `noop` with a message confirming everything is in sync and **stop**.
 
 ### Incremental translation (MUST follow for stale files)
