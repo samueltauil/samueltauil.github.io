@@ -6,7 +6,7 @@ description: "I learned ML on Octave because I had no MATLAB licence. Twenty yea
 image: https://raw.githubusercontent.com/samueltauil/octave-care-analytics/main/assets/canvas_capacity.png
 date: 2026-09-15
 categories: [github-copilot, healthcare, open-source]
-tags: [github-copilot, copilot-canvas, octave, matlab, healthcare, synthea, simulation, capacity-planning, news2, open-source]
+tags: [github-copilot, copilot-app, copilot-canvas, octave, matlab, healthcare, synthea, simulation, capacity-planning, news2, open-source]
 ---
 
 The Iris dataset is where I first learned PCA, k-means, and the three species: setosa, versicolor, virginica. Four measurements, 150 rows, and a plot that separates almost cleanly if you squint. It is probably where a lot of people first saw the idea sitting underneath machine learning, which is not really about the algorithm. You define an objective, you write down a cost, and you go looking for the parameters that make the cost smaller.
@@ -28,6 +28,14 @@ This is really the second half of a pair, and the first half went the other way 
 My first pass was a demo about Octave. It rendered a figure, the figure showed up in a canvas panel, you could change a parameter and watch it redraw. It worked by the second evening and I did not like it. It answered a question nobody is asking, which is whether Octave can draw a plot. I rebuilt the whole thing around two hospital questions and kept almost nothing from that version except the worker process.
 
 The modelling had a false start too, and a more interesting one. Length of stay is the input everything else hangs off, and the tempting move is to fit an exponential to it. One parameter, clean, easy to explain in a slide. It also flattens the right tail, and the right tail is the entire problem. Most patients go home quickly. A small number of complex patients stay for weeks, and those are the ones who fill the ward in February. So the simulation resamples from the 1,807 real inpatient stays in the Synthea extract and rescales that empirical distribution to whatever mean you are testing. The shape stays measured. Only the mean becomes the scenario.
+
+## Why it lives in the Copilot app
+
+The whole thing is built to run inside the [GitHub Copilot app](https://github.com/features/ai/github-app), the desktop application GitHub ships for agent-driven work. It is a separate surface from the editor extension and from the CLI. You point it at a repository or a local folder, run agent sessions against it, and handle the resulting pull request without leaving the window.
+
+What made it the right host here is [canvas extensions](https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-canvas-extensions). A canvas is a panel the app opens next to the conversation, and the repository itself declares what goes in it. Mine is roughly 700 lines of JavaScript in `.github/extensions/octave-canvas/`. It starts the Octave worker, asks it for a render, and draws the sliders and the metrics strip around the figure that comes back. Because it is committed next to the models, anyone who opens this folder in the app gets the same panel, with nothing to install and no service hosted anywhere.
+
+The rest of the repository leans on the same idea. `.github/skills/octave-portability/` is a skill that knows the core-only Octave rules and the headless graphics constraints, which are genuinely hard to discover on your own. `.github/agents/octave-reviewer.md` is a custom agent that reviews numerics and portability and leaves formatting alone. None of that is configuration sitting on my laptop. It is versioned with the code it governs, and that is the part I would keep even if I threw out everything else.
 
 ## Half a day of length of stay
 
