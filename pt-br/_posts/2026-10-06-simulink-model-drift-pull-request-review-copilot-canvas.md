@@ -4,7 +4,7 @@ permalink: /github-copilot/devops/2026/10/06/simulink-model-drift-pull-request-r
 layout: post
 title: "O que você aprova quando o diff diz binary file not shown?"
 seo_title: "Revisão de Model Drift do Simulink em Pull Requests com GitHub Copilot"
-description: "O GitHub mostra uma mudança em .slx do Simulink como arquivo binário. Criei uma Action e um canvas do Copilot que dizem o que mudou e quando a evidência não basta."
+description: "O GitHub mostra um .slx do Simulink alterado como arquivo binário. Criei uma Action e um canvas do Copilot que dizem o que mudou e quando falta evidência."
 image: https://raw.githubusercontent.com/samueltauil/simulink-model-diff/main/docs/assets/copilot-canvas-review.png
 date: 2026-10-06
 categories: [github-copilot, devops]
